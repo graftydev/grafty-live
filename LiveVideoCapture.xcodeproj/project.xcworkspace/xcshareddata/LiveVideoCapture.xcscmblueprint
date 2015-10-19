@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "F09E4F42E6000D8C5D11EE615718E85FB9CE5F6F",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "9610F28C2A2A5FC50CEC911EDBB4F8DA610918CC" : 0,
+    "F09E4F42E6000D8C5D11EE615718E85FB9CE5F6F" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "CDD1EFD9-6F4F-4B25-815D-263F165E06A6",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "9610F28C2A2A5FC50CEC911EDBB4F8DA610918CC" : "hrios",
+    "F09E4F42E6000D8C5D11EE615718E85FB9CE5F6F" : "LiveVideoCapture"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "LiveVideoCapture",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "LiveVideoCapture.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/graftydev\/hr-framework.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "9610F28C2A2A5FC50CEC911EDBB4F8DA610918CC"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/graftydev\/LiveVideoCapture.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "F09E4F42E6000D8C5D11EE615718E85FB9CE5F6F"
+    }
+  ]
+}
