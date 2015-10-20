@@ -7,9 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		133CB82C1BD422B500FF81EF /* hrios.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 133CB8251BD4228000FF81EF /* hrios.framework */; };
-		133CB82D1BD422C400FF81EF /* hrios.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 133CB8251BD4228000FF81EF /* hrios.framework */; };
-		133CB82E1BD422C400FF81EF /* hrios.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 133CB8251BD4228000FF81EF /* hrios.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		13025D811BD6C8FA00DF3388 /* hrios.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 133CB8251BD4228000FF81EF /* hrios.framework */; };
 		136AFE911B79BBAB008E2953 /* ViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 136AFE901B79BBAB008E2953 /* ViewController.mm */; };
 		136AFE931B79BBDB008E2953 /* GraftyHeaders in Resources */ = {isa = PBXBuildFile; fileRef = 136AFE921B79BBDB008E2953 /* GraftyHeaders */; };
 		136AFE951B79BBEC008E2953 /* GraftyResources in Resources */ = {isa = PBXBuildFile; fileRef = 136AFE941B79BBEC008E2953 /* GraftyResources */; };
@@ -62,13 +60,6 @@
 			remoteGlobalIDString = 13DE8F9E1BAC945100A6CAA9;
 			remoteInfo = hrmacTests;
 		};
-		133CB82F1BD422C400FF81EF /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 133CB81D1BD4227F00FF81EF /* hrios.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 13DE8F721BAC934300A6CAA9;
-			remoteInfo = hrios;
-		};
 		B5AE3D11184E1D0300EA702C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = B5AE3CE3184E1D0300EA702C /* Project object */;
@@ -77,20 +68,6 @@
 			remoteInfo = LiveVideoCapture;
 		};
 /* End PBXContainerItemProxy section */
-
-/* Begin PBXCopyFilesBuildPhase section */
-		133CB8311BD422C500FF81EF /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				133CB82E1BD422C400FF81EF /* hrios.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		133CB81D1BD4227F00FF81EF /* hrios.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = hrios.xcodeproj; path = ../hrios/hrios.xcodeproj; sourceTree = "<group>"; };
@@ -127,10 +104,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				13025D811BD6C8FA00DF3388 /* hrios.framework in Frameworks */,
 				137AB4BC1BACFAEF00A6DC41 /* CoreImage.framework in Frameworks */,
-				133CB82C1BD422B500FF81EF /* hrios.framework in Frameworks */,
 				13DE901B1BACB17F00A6CAA9 /* opencv2.framework in Frameworks */,
-				133CB82D1BD422C400FF81EF /* hrios.framework in Frameworks */,
 				136AFE971B79BC06008E2953 /* AVFoundation.framework in Frameworks */,
 				136AFE9E1B79BDDA008E2953 /* CoreMedia.framework in Frameworks */,
 				B5AE3CF1184E1D0300EA702C /* CoreGraphics.framework in Frameworks */,
@@ -254,12 +230,10 @@
 				B5AE3CE7184E1D0300EA702C /* Sources */,
 				B5AE3CE8184E1D0300EA702C /* Frameworks */,
 				B5AE3CE9184E1D0300EA702C /* Resources */,
-				133CB8311BD422C500FF81EF /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				133CB8301BD422C400FF81EF /* PBXTargetDependency */,
 			);
 			name = LiveVideoCapture;
 			productName = LiveVideoCapture;
@@ -403,11 +377,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		133CB8301BD422C400FF81EF /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = hrios;
-			targetProxy = 133CB82F1BD422C400FF81EF /* PBXContainerItemProxy */;
-		};
 		B5AE3D12184E1D0300EA702C /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = B5AE3CEA184E1D0300EA702C /* LiveVideoCapture */;

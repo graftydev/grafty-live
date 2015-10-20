@@ -58,7 +58,6 @@ dlib::shape_predictor pose_model;
     NSString *shapePredictorPath = [[NSBundle mainBundle] pathForResource:kShapePredictorFileName ofType:@"dat"];
 
     
-    gsys.entry = GRAFTY_IOS;
     std::string faceCascadeFname = [faceCascadePath UTF8String];
     if (!gsys.loadFaceCascade(faceCascadeFname)) {
         NSLog(@"Could not load face cascade: %@", faceCascadePath);
@@ -80,6 +79,11 @@ dlib::shape_predictor pose_model;
     dlib::deserialize((const std::string) *predictor_fname) >> pose_model;
     
     _camera = 1;   //0 = back camera; 1 = front camera
+    
+    // *** these go together ****
+    gsys.imageType = GRAFTY_Y_CB_CR; // or GRAFTY_BGRA
+    _captureGrayscale = true;  // or false
+    // **************************
     [self createCaptureSessionForCamera:_camera qualityPreset:_qualityPreset grayscale:_captureGrayscale];
     [_captureSession startRunning];
 }
@@ -212,6 +216,7 @@ dlib::shape_predictor pose_model;
     // For color mode, BGRA format is used
     OSType format = kCVPixelFormatType_32BGRA;
     
+    
     // Check YUV format is available before selecting it (iPhone 3 does not support it)
     if (grayscale && [_videoOutput.availableVideoCVPixelFormatTypes containsObject:
                       [NSNumber numberWithInt:kCVPixelFormatType_420YpCbCr8BiPlanarFullRange]]) {
@@ -303,14 +308,23 @@ std::deque<float> fpsHist;
 //    float  phiYaw = -0xFFFFFFFF, thetaPitch = -0xFFFFFFFF;
     if (faces.size())
     {
-//        faces[0].getSpm(gsys, spm, motionStrengthX, motionStrengthY);
-//        faces[0].getFacePose(phiYaw, thetaPitch);
-          faces[0].getBpm(gsys, bpm);
+        //        faces[0].getSpm(gsys, spm, motionStrengthX, motionStrengthY);
+        //        faces[0].getFacePose(phiYaw, thetaPitch);
+        faces[0].getBpm(gsys, bpm);
         float avgFps = (float)faces[0].getFPS();
         if (avgFps < 20) {
             bpm = 0;
-        } else {
-          //bpm = bpm * ((float)faces[0].getFPS()/30.0f);
+        } else
+        {
+            if (avgFps > 20 && avgFps <25 ) {
+                bpm = bpm * (25.0f/30.0f);
+            } else {
+                bpm = bpm * ((float)faces[0].getFPS()/30.0f);
+            }
+            
+            if (bpm>1 && bpm < 60) {
+                bpm = 60;
+            }
         }
     }
     
