@@ -4,20 +4,27 @@
 
   },
   "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
-    "52DFED354699D32848450C1903E813C74DEEE18F" : 0,
     "3A7A8B61F27FC3B72FA280A6AF4B7D6AE3B5430B" : 0,
-    "9610F28C2A2A5FC50CEC911EDBB4F8DA610918CC" : 0
+    "9610F28C2A2A5FC50CEC911EDBB4F8DA610918CC" : 0,
+    "52DFED354699D32848450C1903E813C74DEEE18F" : 0,
+    "1F04D265E656B09727D0AD2916E13A8629B5FB07" : 0
   },
   "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "CDD1EFD9-6F4F-4B25-815D-263F165E06A6",
   "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
-    "52DFED354699D32848450C1903E813C74DEEE18F" : "LiveVideoCapture",
     "3A7A8B61F27FC3B72FA280A6AF4B7D6AE3B5430B" : "grafty-hr-ios\/",
-    "9610F28C2A2A5FC50CEC911EDBB4F8DA610918CC" : "hrios"
+    "9610F28C2A2A5FC50CEC911EDBB4F8DA610918CC" : "hrios",
+    "52DFED354699D32848450C1903E813C74DEEE18F" : "LiveVideoCapture",
+    "1F04D265E656B09727D0AD2916E13A8629B5FB07" : "grafty-hr-combo\/"
   },
   "DVTSourceControlWorkspaceBlueprintNameKey" : "LiveVideoCapture",
   "DVTSourceControlWorkspaceBlueprintVersion" : 204,
   "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "LiveVideoCapture.xcodeproj",
   "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/graftydev\/grafty-hr-combo.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "1F04D265E656B09727D0AD2916E13A8629B5FB07"
+    },
     {
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/graftydev\/grafty-hr-ios.git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",

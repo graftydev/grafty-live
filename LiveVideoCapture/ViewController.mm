@@ -332,17 +332,17 @@ std::deque<float> fpsHist;
     tout = tout + clock() - tin;
     double secs_between_frames = (double)(tout)/(CLOCKS_PER_SEC);
     
-    fps = 1.0f/secs_between_frames;
-    if (fps < 100) {
-       fpsHist.push_back(fps);
-    }
-    
-    if (fpsHist.size() > 30) {
-        fpsHist.pop_front();
-    }
-    
-    int fpsAvg = (std::accumulate(fpsHist.begin(), fpsHist.end(), 0))/fpsHist.size();
-
+//    fps = 1.0f/secs_between_frames;
+//    if (fps < 100) {
+//       fpsHist.push_back(fps);
+//    }
+//    
+//    if (fpsHist.size() > 30) {
+//        fpsHist.pop_front();
+//    }
+//    
+//    int fpsAvg = (std::accumulate(fpsHist.begin(), fpsHist.end(), 0))/fpsHist.size();
+    int fpsAvg =0;
     if (faces.size())
     {
         fpsAvg = faces[0].getFPS();
