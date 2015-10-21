@@ -13,9 +13,8 @@
 		136AFE971B79BC06008E2953 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 136AFE961B79BC06008E2953 /* AVFoundation.framework */; };
 		136AFE9E1B79BDDA008E2953 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 136AFE9D1B79BDDA008E2953 /* CoreMedia.framework */; };
 		137AB4BC1BACFAEF00A6DC41 /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 137AB4BB1BACFAEF00A6DC41 /* CoreImage.framework */; };
-		13B3F1641BD740F100E3785D /* hrios.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 13B3F15D1BD740E000E3785D /* hrios.framework */; };
-		13B3F1651BD740FC00E3785D /* hrios.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 13B3F15D1BD740E000E3785D /* hrios.framework */; };
-		13B3F1661BD740FC00E3785D /* hrios.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 13B3F15D1BD740E000E3785D /* hrios.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		139415F51BD777C7006DDDB0 /* hrios.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 139415F21BD777AF006DDDB0 /* hrios.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		139415F81BD777E8006DDDB0 /* hrios.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 139415F71BD777E8006DDDB0 /* hrios.framework */; };
 		13DE8F3A1BA6AE1D00A6CAA9 /* source.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 13DE8F391BA6AE1D00A6CAA9 /* source.cpp */; };
 		13DE901B1BACB17F00A6CAA9 /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 13DE901A1BACB17F00A6CAA9 /* opencv2.framework */; };
 		B5AE3CEF184E1D0300EA702C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5AE3CEE184E1D0300EA702C /* Foundation.framework */; };
@@ -34,41 +33,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		13B3F15C1BD740E000E3785D /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 13B3F1551BD740E000E3785D /* hr-framework.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 13DE8F731BAC934300A6CAA9;
-			remoteInfo = hrios;
-		};
-		13B3F15E1BD740E000E3785D /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 13B3F1551BD740E000E3785D /* hr-framework.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 13DE8F7E1BAC934300A6CAA9;
-			remoteInfo = hriosTests;
-		};
-		13B3F1601BD740E000E3785D /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 13B3F1551BD740E000E3785D /* hr-framework.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 13DE8F941BAC945100A6CAA9;
-			remoteInfo = hrmac;
-		};
-		13B3F1621BD740E000E3785D /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 13B3F1551BD740E000E3785D /* hr-framework.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 13DE8F9E1BAC945100A6CAA9;
-			remoteInfo = hrmacTests;
-		};
-		13B3F1671BD740FC00E3785D /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 13B3F1551BD740E000E3785D /* hr-framework.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 13DE8F721BAC934300A6CAA9;
-			remoteInfo = hrios;
-		};
 		B5AE3D11184E1D0300EA702C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = B5AE3CE3184E1D0300EA702C /* Project object */;
@@ -79,13 +43,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		13B3F1691BD740FC00E3785D /* Embed Frameworks */ = {
+		139415F61BD777C7006DDDB0 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				13B3F1661BD740FC00E3785D /* hrios.framework in Embed Frameworks */,
+				139415F51BD777C7006DDDB0 /* hrios.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -99,7 +63,8 @@
 		136AFE961B79BC06008E2953 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		136AFE9D1B79BDDA008E2953 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		137AB4BB1BACFAEF00A6DC41 /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
-		13B3F1551BD740E000E3785D /* hr-framework.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "hr-framework.xcodeproj"; path = "../grafty-hr-combo/hr-framework.xcodeproj"; sourceTree = "<group>"; };
+		139415F21BD777AF006DDDB0 /* hrios.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = hrios.framework; path = "/Users/manish/Documents/Grafty-Projects/BlueGoji/Code/c++/grafty-live/hrios.framework"; sourceTree = "<absolute>"; };
+		139415F71BD777E8006DDDB0 /* hrios.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = hrios.framework; sourceTree = "<group>"; };
 		13DE8F391BA6AE1D00A6CAA9 /* source.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = source.cpp; path = GraftyHeaders/dlib/all/source.cpp; sourceTree = "<group>"; };
 		13DE901A1BACB17F00A6CAA9 /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = opencv2.framework; path = ../hrios/opencv2.framework; sourceTree = "<group>"; };
 		B5AE3CEB184E1D0300EA702C /* LiveVideoCapture.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LiveVideoCapture.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -127,10 +92,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				139415F81BD777E8006DDDB0 /* hrios.framework in Frameworks */,
 				137AB4BC1BACFAEF00A6DC41 /* CoreImage.framework in Frameworks */,
-				13B3F1641BD740F100E3785D /* hrios.framework in Frameworks */,
 				13DE901B1BACB17F00A6CAA9 /* opencv2.framework in Frameworks */,
-				13B3F1651BD740FC00E3785D /* hrios.framework in Frameworks */,
 				136AFE971B79BC06008E2953 /* AVFoundation.framework in Frameworks */,
 				136AFE9E1B79BDDA008E2953 /* CoreMedia.framework in Frameworks */,
 				B5AE3CF1184E1D0300EA702C /* CoreGraphics.framework in Frameworks */,
@@ -152,21 +116,9 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		13B3F1561BD740E000E3785D /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				13B3F15D1BD740E000E3785D /* hrios.framework */,
-				13B3F15F1BD740E000E3785D /* hriosTests.xctest */,
-				13B3F1611BD740E000E3785D /* hrios.framework */,
-				13B3F1631BD740E000E3785D /* hrmacTests.xctest */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		B5AE3CE2184E1D0300EA702C = {
 			isa = PBXGroup;
 			children = (
-				13B3F1551BD740E000E3785D /* hr-framework.xcodeproj */,
 				13DE8F391BA6AE1D00A6CAA9 /* source.cpp */,
 				136AFE941B79BBEC008E2953 /* GraftyResources */,
 				136AFE921B79BBDB008E2953 /* GraftyHeaders */,
@@ -189,6 +141,7 @@
 		B5AE3CED184E1D0300EA702C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				139415F71BD777E8006DDDB0 /* hrios.framework */,
 				137AB4BB1BACFAEF00A6DC41 /* CoreImage.framework */,
 				13DE901A1BACB17F00A6CAA9 /* opencv2.framework */,
 				136AFE9D1B79BDDA008E2953 /* CoreMedia.framework */,
@@ -254,12 +207,11 @@
 				B5AE3CE7184E1D0300EA702C /* Sources */,
 				B5AE3CE8184E1D0300EA702C /* Frameworks */,
 				B5AE3CE9184E1D0300EA702C /* Resources */,
-				13B3F1691BD740FC00E3785D /* Embed Frameworks */,
+				139415F61BD777C7006DDDB0 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				13B3F1681BD740FC00E3785D /* PBXTargetDependency */,
 			);
 			name = LiveVideoCapture;
 			productName = LiveVideoCapture;
@@ -312,12 +264,6 @@
 			mainGroup = B5AE3CE2184E1D0300EA702C;
 			productRefGroup = B5AE3CEC184E1D0300EA702C /* Products */;
 			projectDirPath = "";
-			projectReferences = (
-				{
-					ProductGroup = 13B3F1561BD740E000E3785D /* Products */;
-					ProjectRef = 13B3F1551BD740E000E3785D /* hr-framework.xcodeproj */;
-				},
-			);
 			projectRoot = "";
 			targets = (
 				B5AE3CEA184E1D0300EA702C /* LiveVideoCapture */,
@@ -325,37 +271,6 @@
 			);
 		};
 /* End PBXProject section */
-
-/* Begin PBXReferenceProxy section */
-		13B3F15D1BD740E000E3785D /* hrios.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = hrios.framework;
-			remoteRef = 13B3F15C1BD740E000E3785D /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		13B3F15F1BD740E000E3785D /* hriosTests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = hriosTests.xctest;
-			remoteRef = 13B3F15E1BD740E000E3785D /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		13B3F1611BD740E000E3785D /* hrios.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = hrios.framework;
-			remoteRef = 13B3F1601BD740E000E3785D /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		13B3F1631BD740E000E3785D /* hrmacTests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = hrmacTests.xctest;
-			remoteRef = 13B3F1621BD740E000E3785D /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		B5AE3CE9184E1D0300EA702C /* Resources */ = {
@@ -403,11 +318,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		13B3F1681BD740FC00E3785D /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = hrios;
-			targetProxy = 13B3F1671BD740FC00E3785D /* PBXContainerItemProxy */;
-		};
 		B5AE3D12184E1D0300EA702C /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = B5AE3CEA184E1D0300EA702C /* LiveVideoCapture */;

@@ -4,9 +4,13 @@
 <dict>
 	<key>files</key>
 	<dict>
+		<key>Headers/grafty-core-buffer-vector.hpp</key>
+		<data>
+		D0ibbuQ/Jdj030KXPasbwo4OsQY=
+		</data>
 		<key>Headers/grafty-core-heart-rate.h</key>
 		<data>
-		eFRpnYiDd9i18rDy1+Cz8wV7EGA=
+		WSOxEgy9G7HHuxkIjT2J4Vn+oIE=
 		</data>
 		<key>Headers/grafty-core-pedometry.h</key>
 		<data>
@@ -14,15 +18,15 @@
 		</data>
 		<key>Headers/grafty-core-utils.h</key>
 		<data>
-		NWyXivyVqbjBwv0rE/jjDXGc+xw=
+		QIMg2Q+dG7Vr6iCx7AiQdQ2O9J8=
 		</data>
 		<key>Headers/grafty-face-class.h</key>
 		<data>
-		rlvwCIYNvJQD1dPSUGxkHN8NcQw=
+		b/sy3Q/A5A7h4ChYdLnyob5yMz0=
 		</data>
 		<key>Headers/grafty-system-settings.h</key>
 		<data>
-		ofkWrhGAmIL/RwPBQuhK1uLsPEw=
+		BMtgWmfvyP1l45+tNWZAQL1qeOc=
 		</data>
 		<key>Headers/grafty-trigger-hr.h</key>
 		<data>
@@ -34,11 +38,11 @@
 		</data>
 		<key>Headers/hrios.h</key>
 		<data>
-		1VdqFTnlj9UrUQdk7ZpPPGj5nm0=
+		Znv3oHh7WQ2uMezP1hlnjo7kwVI=
 		</data>
 		<key>Info.plist</key>
 		<data>
-		1VvcWqADdA19EA1XCzDdfuHsk2c=
+		yKMFBPtCkVlRtd0HSj2gv7oluXI=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -47,9 +51,13 @@
 	</dict>
 	<key>files2</key>
 	<dict>
+		<key>Headers/grafty-core-buffer-vector.hpp</key>
+		<data>
+		D0ibbuQ/Jdj030KXPasbwo4OsQY=
+		</data>
 		<key>Headers/grafty-core-heart-rate.h</key>
 		<data>
-		eFRpnYiDd9i18rDy1+Cz8wV7EGA=
+		WSOxEgy9G7HHuxkIjT2J4Vn+oIE=
 		</data>
 		<key>Headers/grafty-core-pedometry.h</key>
 		<data>
@@ -57,15 +65,15 @@
 		</data>
 		<key>Headers/grafty-core-utils.h</key>
 		<data>
-		NWyXivyVqbjBwv0rE/jjDXGc+xw=
+		QIMg2Q+dG7Vr6iCx7AiQdQ2O9J8=
 		</data>
 		<key>Headers/grafty-face-class.h</key>
 		<data>
-		rlvwCIYNvJQD1dPSUGxkHN8NcQw=
+		b/sy3Q/A5A7h4ChYdLnyob5yMz0=
 		</data>
 		<key>Headers/grafty-system-settings.h</key>
 		<data>
-		ofkWrhGAmIL/RwPBQuhK1uLsPEw=
+		BMtgWmfvyP1l45+tNWZAQL1qeOc=
 		</data>
 		<key>Headers/grafty-trigger-hr.h</key>
 		<data>
@@ -77,7 +85,7 @@
 		</data>
 		<key>Headers/hrios.h</key>
 		<data>
-		1VdqFTnlj9UrUQdk7ZpPPGj5nm0=
+		Znv3oHh7WQ2uMezP1hlnjo7kwVI=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>

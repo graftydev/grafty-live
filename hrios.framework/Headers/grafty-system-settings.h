@@ -20,10 +20,11 @@
 #include <opencv2/video/tracking.hpp>
 #include "grafty-core-utils.h"
 
-enum GraftyEntryPoint
+enum GraftyImageType
 {
-    GRAFTY_IOS = 1,
-    GRAFTY_MAC = 2
+    GRAFTY_BGRA = 1,
+    GRAFTY_BGR = 2,
+    GRAFTY_Y_CB_CR = 3
 };
 class GraftySystem {
 
@@ -33,7 +34,7 @@ private:
     cv::Ptr<cv::CLAHE> clahe;
     
 public:
-    GraftyEntryPoint entry;
+    GraftyImageType imageType;
     float   frameRate;
     size_t  frameCount;
     

@@ -27,88 +27,68 @@
 class Face {
     
 public:
-    cv::Rect2f                iFaceRect;
+        //iFace points
+    cv::Rect_<float>          iFaceRect;
     float                     iFaceRadius;
     std::vector<cv::Point2f>  iFacePoints;
     
     //initialized good feature variables
     std::vector<cv::Point2f>  iGFPoints;
-    std::vector<bool>         iGFPointFlags;
     size_t                    iNumGFPoints;
 
-    
-    cv::Rect2f                iNoseRect;
+    //iNose points
+    cv::Rect_<float>                iNoseRect;
     float                     iNoseRadius;
     
     std::vector<cv::Point2f>  iNosePoints;
     std::vector<bool>         iNosePointFlags;
     size_t                    iNumNosePoints;
     
-    //for upper lip
-    cv::Rect2f                iUpperLipRect;
-    std::vector<bool>         iUpperLipFlags;
-    std::vector <cv::Point2f> iUpperLipPoints;
-    size_t                    iNumUpperLipPoints;
+    //iHR points
+    cv::Rect_<float>          iHRRect;
+    float                     iHRRadius;
     
-    //for lower lip
-    cv::Rect2f                  iLowerLipRect;
-    std::vector<bool>           iLowerLipFlags;
-    std::vector <cv::Point2f>   iLowerLipPoints;
-    size_t                      iNumLowerLipPoints;
-
+    std::vector<cv::Point2f>  iHRPoints;
+    std::vector<bool>         iHRPointFlags;
+    size_t                    iNumHRPoints;
+    
+    //Face tracking points - prev/next
     std::vector<cv::Point2f>  prevPoints;
     std::vector<cv::Point2f>  nextPoints;
-    
-    // previous good feature variables
-    std::vector<bool>         prevGFPointFlags;
+    cv::Rect_<float>                faceRect;
+
+    // good feature tracking points - prev/next
     std::vector<cv::Point2f>  prevGFPoints;
-    // next good feature variables
-    std::vector<bool>         nextGFPointFlags;
     std::vector<cv::Point2f>  nextGFPoints;
     
-    // nose previous
+    // Nose tracking points previous
     std::vector<bool>         prevNosePointFlags;
     std::vector<cv::Point2f>  prevNosePoints;
     size_t                    numPrevNosePoints;
     
-    // nose next
+    // Nose tracking points next
     std::vector<bool>         nextNosePointFlags;
     std::vector<cv::Point2f>  nextNosePoints;
     size_t                    numNextNosePoints;
     
-    
-    // upper lip prev
-    std::vector<bool>         prevUpperLipFlags;
-    std::vector<cv::Point2f>  prevUpperLipPoints;
-    size_t                    numPrevUpperLipPoints;
-    
-    // upper lip next
-    std::vector<bool>         nextUpperLipFlags;
-    std::vector<cv::Point2f>  nextUpperLipPoints;
-    size_t                    numNextUpperLipPoints;
-
-    // lower lip prev
-    std::vector<bool>         prevLowerLipFlags;
-    std::vector<cv::Point2f>  prevLowerLipPoints;
-    size_t                    numPrevLowerLipPoints;
-    
-    // lower lip next
-    std::vector<bool>         nextLowerLipFlags;
-    std::vector<cv::Point2f>  nextLowerLipPoints;
-    size_t                    numNextLowerLipPoints;
+    cv::Rect_<float>          noseRect;
 
     
-    dlib::correlation_tracker       tracker;
+    // HR tracking points previous
+    std::vector<bool>         prevHRPointFlags;
+    std::vector<cv::Point2f>  prevHRPoints;
+    size_t                    numPrevHRPoints;
+    
+    // HR tracking points next
+    std::vector<bool>         nextHRPointFlags;
+    std::vector<cv::Point2f>  nextHRPoints;
+    size_t                    numNextHRPoints;
 
-    cv::Rect2f                faceRect;
-    cv::Rect2f                noseRect;
-    cv::Rect2f                lowerLipRect;
-    cv::Rect2f                upperLipRect;
-
+    cv::Rect_<float>                HRRect;
+    
+    dlib::correlation_tracker tracker;
     int                       isTracking;
     
-    // add isTracking_gf for the good feature tracker
-    int                       isTracking_gf;
 
     // add a pedometer
     Pedometer                 pedometer;
@@ -165,6 +145,18 @@ public:
     int getTrackingThreshold_gf(void);
     void setTrackingTreshold_fg(int);
     void decrementTrackingThreshold_gf(void);
+    
+    inline float getFPS(){
+        return heartRate.getFPS();
+    }
+    inline float getHRTrackingPercentage(){
+        return heartRate.getTrackingPercentage();
+    }
+    
+#if GRAFTY_DEBUG == true
+public:
+    cv::Rect_<float> correlationBox;
+#endif
 };
 
 typedef std::vector<Face> GraftyFaceList;

@@ -19,14 +19,11 @@ FOUNDATION_EXPORT const unsigned char hriosVersionString[];
 
 #import <hrios/grafty-core-utils.h>
 #import <hrios/grafty-system-settings.h>
-
-
 #import <hrios/grafty_core_fft.h>
 #import <hrios/grafty-core-pedometry.h>
 #import <hrios/grafty-core-heart-rate.h>
 #import <hrios/grafty-face-class.h>
-
-
+#import <hrios/grafty-core-buffer-vector.hpp>
 #import <hrios/grafty-trigger-hr.h>
 
 

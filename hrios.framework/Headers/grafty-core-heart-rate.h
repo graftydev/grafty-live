@@ -10,12 +10,14 @@
 #define __grafty_vp__grafty_core_heartrate__
 
 #include <stdio.h>
+#include <chrono>
 #include <opencv2/imgproc/imgproc.hpp>
 #include <opencv2/highgui/highgui.hpp>
 #include <opencv2/objdetect/objdetect.hpp>
 #include <opencv2/video/tracking.hpp>
 #include "grafty-core-utils.h"
 #include "grafty-system-settings.h"
+#include "grafty-core-buffer-vector.hpp"
 
 #define BPM_VALID       1
 #define BPM_NOT_VALID   !BPM_VALID
@@ -28,21 +30,27 @@
 
 #define NUM_OF_FFT_TO_AVERAGE 300
 
+
 class HeartRate {
     
     int                bufferVectorIndex   = 0;
     int                positiveBufferCount = 0;
     int                bufferVectorLength  = 0;
-    int                filterDelay = 224; // 224 for a 2 sec buffer length, and augmented 8 times.
+    int                filterDelay = 644; // 224 for a 2 sec buffer length, and augmented 8 times.
     
     bool               fft_inited = false;
     
     float              HzPerBin    = 0;
     float              frequencyBinIndexes[2];
+    
+    size_t             numFramesPerHeartRate;
+    
+    size_t             numHRCalculationsPerSec = 2;
+    
     std::deque<size_t> bpmHistory;
 
     std::vector<float> fAxis;
-    std::deque<float>  bufferVector;
+    HRBufferVector  bufferVector;
     
     std::vector<std::deque<float>> bufferFeatures;
     
@@ -60,12 +68,15 @@ class HeartRate {
     float              bpm2Hz[2]    = { LOWEST_BPM/60.0f, HIGHEST_BPM/60.0f }; // Define the bandpass frequencies
     float              noMotionThreshold = 0.004;
     
+    std::deque<float>  FPS_30;
+    
 public:
     
     HeartRate(void);
     
     inline void clearBpm(){
         bufferVector.clear();
+        clockVector.clear();
         bpmHistory.clear();
         
         bufferFeatures.clear();
@@ -73,9 +84,15 @@ public:
     }
     
     void    initBpm(GraftySystem& gsys);
-    RStatus findHeartRate(std::deque<float>& bufferVector, size_t& stepBin, float& responseValue);
-    RStatus findHeartRate(std::vector<std::deque<float>>& bufferFeatures, size_t& stepBin, float& responseValue);
+    RStatus findHeartRate(HRBufferVector& bufferVector, size_t& stepBin, float& responseValue);
+    //RStatus findHeartRate(std::vector<std::deque<float>>& bufferFeatures, size_t& stepBin, float& responseValue);
     void    getBpm(std::vector<std::vector<cv::Point2f>>& nosePoints, GraftySystem& gsys, size_t& BPM);
+
+    float getFPS();
+    float getTrackingPercentage();
+    
+private:
+    std::deque<std::chrono::time_point<std::chrono::high_resolution_clock>> clockVector;
 };
 
 
