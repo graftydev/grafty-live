@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <AVFoundation/AVFoundation.h>
 
+#import "TopViewLayer.h"
 
 @interface ViewController : UIViewController <AVCaptureVideoDataOutputSampleBufferDelegate>
 
@@ -18,6 +19,8 @@
 @property (nonatomic, readonly) AVCaptureVideoDataOutput   *videoOutput;
 @property (nonatomic, readonly) AVCaptureVideoPreviewLayer *videoPreviewLayer;
 
+//Top View Layer
+@property (nonatomic, strong) TopViewLayer                 *topViewLayer;
 
 // -1: default, 0: back camera, 1: front camera
 @property (nonatomic, assign) int camera;

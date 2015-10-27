@@ -7,6 +7,8 @@
 //
 
 #import "ViewController.h"
+#import "TopViewLayerSettings.h"
+
 #include "dlib/image_processing/frontal_face_detector.h"
 #include "dlib/image_processing/render_face_detections.h"
 
@@ -33,7 +35,7 @@
 @synthesize captureDevice     = _captureDevice;
 @synthesize videoOutput       = _videoOutput;
 @synthesize videoPreviewLayer = _videoPreviewLayer;
-
+@synthesize topViewLayer      =_topViewLayer;
 cv::VideoCapture   cap;
 dlib::shape_predictor pose_model;
 
@@ -86,6 +88,8 @@ dlib::shape_predictor pose_model;
     // **************************
     [self createCaptureSessionForCamera:_camera qualityPreset:_qualityPreset grayscale:_captureGrayscale];
     [_captureSession startRunning];
+    
+    [self addTopViewLayer];
 }
 
 
@@ -237,8 +241,18 @@ dlib::shape_predictor pose_model;
     
     // Create a video preview layer
     _videoPreviewLayer = [[AVCaptureVideoPreviewLayer alloc] initWithSession:_captureSession];
-    [_videoPreviewLayer setFrame:self.view.bounds];
-    _videoPreviewLayer.videoGravity = AVLayerVideoGravityResizeAspect;
+    _videoPreviewLayer.delegate = self;
+    
+    //[_videoPreviewLayer setFrame:self.view.bounds];
+    //[AN] fixed to take screen bounds
+    [_videoPreviewLayer setFrame:[[UIScreen mainScreen] bounds]];
+    
+    //[AN] change from Aspect to AspectFill
+    _videoPreviewLayer.videoGravity = AVLayerVideoGravityResizeAspectFill;
+    // AVLayerVideoGravityResizeAspect;
+    
+    
+    
     [self.view.layer insertSublayer:_videoPreviewLayer atIndex:0];
     
     //create a text preview layer
@@ -486,6 +500,12 @@ std::deque<float> fpsHist;
     if (faces.size())
     {
         float trackingPercentage = faces[0].getHRTrackingPercentage()*100;
+        if(trackingPercentage <100)
+        {
+            //[_topViewLayer updateCircleLabel:@""];
+            _topViewLayer.updateLabel.text =  @"HOLD POSITION";
+        }
+        
         if ( trackingPercentage < 20) {
             progressString = ".....";
         }
@@ -503,11 +523,26 @@ std::deque<float> fpsHist;
         }
         else{
             progressString = "*****";
+            
+            //[_topViewLayer updateCircleLabel:[NSString stringWithFormat:@"%zu",(size_t) (bpm)]];
+            _topViewLayer.updateLabel.text =  [NSString stringWithFormat:@"CURRENT HEARTRATE \n♥\n%zu\nBPM",(size_t)(bpm)];
         }
+        _topViewLayer.circleProgressWithLabel.progressColor = [UIColor greenColor];
+        _topViewLayer.circleProgressWithLabel.progress = trackingPercentage/100.0;
+        
     }
+    
+   
     
     if (gsys.getProgramState() == 3 || gsys.getProgramState() == 1) {
         progressString = "Hold Still";
+        _topViewLayer.circleProgressWithLabel.progressColor = [UIColor orangeColor];
+        _topViewLayer.circleProgressWithLabel.progress = 1;
+        
+        _topViewLayer.infoLabel.text =  @"POSITION FACE IN THE CIRCLE";
+        _topViewLayer.updateLabel.text =  @"HOLD STILL";
+        
+         //[_topViewLayer updateCircleLabel:@""];
     }
 
     NSString *label = [NSString stringWithFormat:@"BPM = %zu, FPS = %zu, %s",
@@ -557,5 +592,25 @@ std::deque<float> fpsHist;
     
     return t;
 }
+
+
+
+-(void)addTopViewLayer
+{
+    CGRect screenFrame = [[UIScreen mainScreen] bounds];
+    
+    
+    if(nil == _topViewLayer)
+    {
+        _topViewLayer = [[TopViewLayer alloc] initWithFrame:screenFrame];
+        //_topViewLayer.backgroundColor   =[TopViewLayerSettings backGroundColor];
+        
+        [self.view addSubview:_topViewLayer];
+        [self.view bringSubviewToFront:_topViewLayer];
+        
+    }
+    
+}
+
 
 @end

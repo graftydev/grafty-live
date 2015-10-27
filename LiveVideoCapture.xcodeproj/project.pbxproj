@@ -7,16 +7,20 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		10C9CA971BDF81FD00A80DE6 /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10C9CA961BDF81FD00A80DE6 /* opencv2.framework */; };
+		10C9CA991BDF82EE00A80DE6 /* hrios.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10C9CA981BDF82EE00A80DE6 /* hrios.framework */; };
+		10C9CA9A1BDF82EE00A80DE6 /* hrios.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 10C9CA981BDF82EE00A80DE6 /* hrios.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		10C9CAA71BDF83D200A80DE6 /* KAProgressLabel.mm in Sources */ = {isa = PBXBuildFile; fileRef = 10C9CAA01BDF83D200A80DE6 /* KAProgressLabel.mm */; settings = {ASSET_TAGS = (); }; };
+		10C9CAA81BDF83D200A80DE6 /* TPPropertyAnimation.mm in Sources */ = {isa = PBXBuildFile; fileRef = 10C9CAA21BDF83D200A80DE6 /* TPPropertyAnimation.mm */; settings = {ASSET_TAGS = (); }; };
+		10C9CAA91BDF83D200A80DE6 /* TopViewLayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 10C9CAA41BDF83D200A80DE6 /* TopViewLayer.mm */; settings = {ASSET_TAGS = (); }; };
+		10C9CAAA1BDF83D200A80DE6 /* TopViewLayerSettings.mm in Sources */ = {isa = PBXBuildFile; fileRef = 10C9CAA61BDF83D200A80DE6 /* TopViewLayerSettings.mm */; settings = {ASSET_TAGS = (); }; };
 		136AFE911B79BBAB008E2953 /* ViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 136AFE901B79BBAB008E2953 /* ViewController.mm */; };
 		136AFE931B79BBDB008E2953 /* GraftyHeaders in Resources */ = {isa = PBXBuildFile; fileRef = 136AFE921B79BBDB008E2953 /* GraftyHeaders */; };
 		136AFE951B79BBEC008E2953 /* GraftyResources in Resources */ = {isa = PBXBuildFile; fileRef = 136AFE941B79BBEC008E2953 /* GraftyResources */; };
 		136AFE971B79BC06008E2953 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 136AFE961B79BC06008E2953 /* AVFoundation.framework */; };
 		136AFE9E1B79BDDA008E2953 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 136AFE9D1B79BDDA008E2953 /* CoreMedia.framework */; };
 		137AB4BC1BACFAEF00A6DC41 /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 137AB4BB1BACFAEF00A6DC41 /* CoreImage.framework */; };
-		139415F51BD777C7006DDDB0 /* hrios.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 139415F21BD777AF006DDDB0 /* hrios.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		139415F81BD777E8006DDDB0 /* hrios.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 139415F71BD777E8006DDDB0 /* hrios.framework */; };
 		13DE8F3A1BA6AE1D00A6CAA9 /* source.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 13DE8F391BA6AE1D00A6CAA9 /* source.cpp */; };
-		13DE901B1BACB17F00A6CAA9 /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 13DE901A1BACB17F00A6CAA9 /* opencv2.framework */; };
 		B5AE3CEF184E1D0300EA702C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5AE3CEE184E1D0300EA702C /* Foundation.framework */; };
 		B5AE3CF1184E1D0300EA702C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5AE3CF0184E1D0300EA702C /* CoreGraphics.framework */; };
 		B5AE3CF3184E1D0300EA702C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5AE3CF2184E1D0300EA702C /* UIKit.framework */; };
@@ -43,13 +47,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		139415F61BD777C7006DDDB0 /* Embed Frameworks */ = {
+		10C9CA9B1BDF82EF00A80DE6 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				139415F51BD777C7006DDDB0 /* hrios.framework in Embed Frameworks */,
+				10C9CA9A1BDF82EE00A80DE6 /* hrios.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -57,13 +61,23 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		10C9CA921BDF81EC00A80DE6 /* hrios.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = hrios.framework; sourceTree = "<group>"; };
+		10C9CA961BDF81FD00A80DE6 /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = opencv2.framework; sourceTree = "<group>"; };
+		10C9CA981BDF82EE00A80DE6 /* hrios.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = hrios.framework; sourceTree = "<group>"; };
+		10C9CA9F1BDF83D200A80DE6 /* KAProgressLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KAProgressLabel.h; sourceTree = "<group>"; };
+		10C9CAA01BDF83D200A80DE6 /* KAProgressLabel.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = KAProgressLabel.mm; sourceTree = "<group>"; };
+		10C9CAA11BDF83D200A80DE6 /* TPPropertyAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPPropertyAnimation.h; sourceTree = "<group>"; };
+		10C9CAA21BDF83D200A80DE6 /* TPPropertyAnimation.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TPPropertyAnimation.mm; sourceTree = "<group>"; };
+		10C9CAA31BDF83D200A80DE6 /* TopViewLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TopViewLayer.h; sourceTree = "<group>"; };
+		10C9CAA41BDF83D200A80DE6 /* TopViewLayer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TopViewLayer.mm; sourceTree = "<group>"; };
+		10C9CAA51BDF83D200A80DE6 /* TopViewLayerSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TopViewLayerSettings.h; sourceTree = "<group>"; };
+		10C9CAA61BDF83D200A80DE6 /* TopViewLayerSettings.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TopViewLayerSettings.mm; sourceTree = "<group>"; };
 		136AFE901B79BBAB008E2953 /* ViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ViewController.mm; sourceTree = "<group>"; };
 		136AFE921B79BBDB008E2953 /* GraftyHeaders */ = {isa = PBXFileReference; lastKnownFileType = folder; path = GraftyHeaders; sourceTree = "<group>"; };
 		136AFE941B79BBEC008E2953 /* GraftyResources */ = {isa = PBXFileReference; lastKnownFileType = folder; path = GraftyResources; sourceTree = "<group>"; };
 		136AFE961B79BC06008E2953 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		136AFE9D1B79BDDA008E2953 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		137AB4BB1BACFAEF00A6DC41 /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
-		139415F21BD777AF006DDDB0 /* hrios.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = hrios.framework; path = "/Users/manish/Documents/Grafty-Projects/BlueGoji/Code/c++/grafty-live/hrios.framework"; sourceTree = "<absolute>"; };
 		139415F71BD777E8006DDDB0 /* hrios.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = hrios.framework; sourceTree = "<group>"; };
 		13DE8F391BA6AE1D00A6CAA9 /* source.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = source.cpp; path = GraftyHeaders/dlib/all/source.cpp; sourceTree = "<group>"; };
 		13DE901A1BACB17F00A6CAA9 /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = opencv2.framework; path = ../hrios/opencv2.framework; sourceTree = "<group>"; };
@@ -92,9 +106,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				139415F81BD777E8006DDDB0 /* hrios.framework in Frameworks */,
+				10C9CA991BDF82EE00A80DE6 /* hrios.framework in Frameworks */,
+				10C9CA971BDF81FD00A80DE6 /* opencv2.framework in Frameworks */,
 				137AB4BC1BACFAEF00A6DC41 /* CoreImage.framework in Frameworks */,
-				13DE901B1BACB17F00A6CAA9 /* opencv2.framework in Frameworks */,
 				136AFE971B79BC06008E2953 /* AVFoundation.framework in Frameworks */,
 				136AFE9E1B79BDDA008E2953 /* CoreMedia.framework in Frameworks */,
 				B5AE3CF1184E1D0300EA702C /* CoreGraphics.framework in Frameworks */,
@@ -116,9 +130,42 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		10C9CA9C1BDF83D200A80DE6 /* TopViewLayer */ = {
+			isa = PBXGroup;
+			children = (
+				10C9CA9D1BDF83D200A80DE6 /* Libraries */,
+				10C9CAA31BDF83D200A80DE6 /* TopViewLayer.h */,
+				10C9CAA41BDF83D200A80DE6 /* TopViewLayer.mm */,
+				10C9CAA51BDF83D200A80DE6 /* TopViewLayerSettings.h */,
+				10C9CAA61BDF83D200A80DE6 /* TopViewLayerSettings.mm */,
+			);
+			path = TopViewLayer;
+			sourceTree = "<group>";
+		};
+		10C9CA9D1BDF83D200A80DE6 /* Libraries */ = {
+			isa = PBXGroup;
+			children = (
+				10C9CA9E1BDF83D200A80DE6 /* KAProgressLabel */,
+			);
+			path = Libraries;
+			sourceTree = "<group>";
+		};
+		10C9CA9E1BDF83D200A80DE6 /* KAProgressLabel */ = {
+			isa = PBXGroup;
+			children = (
+				10C9CA9F1BDF83D200A80DE6 /* KAProgressLabel.h */,
+				10C9CAA01BDF83D200A80DE6 /* KAProgressLabel.mm */,
+				10C9CAA11BDF83D200A80DE6 /* TPPropertyAnimation.h */,
+				10C9CAA21BDF83D200A80DE6 /* TPPropertyAnimation.mm */,
+			);
+			path = KAProgressLabel;
+			sourceTree = "<group>";
+		};
 		B5AE3CE2184E1D0300EA702C = {
 			isa = PBXGroup;
 			children = (
+				10C9CA981BDF82EE00A80DE6 /* hrios.framework */,
+				10C9CA921BDF81EC00A80DE6 /* hrios.framework */,
 				13DE8F391BA6AE1D00A6CAA9 /* source.cpp */,
 				136AFE941B79BBEC008E2953 /* GraftyResources */,
 				136AFE921B79BBDB008E2953 /* GraftyHeaders */,
@@ -141,6 +188,7 @@
 		B5AE3CED184E1D0300EA702C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				10C9CA961BDF81FD00A80DE6 /* opencv2.framework */,
 				139415F71BD777E8006DDDB0 /* hrios.framework */,
 				137AB4BB1BACFAEF00A6DC41 /* CoreImage.framework */,
 				13DE901A1BACB17F00A6CAA9 /* opencv2.framework */,
@@ -157,6 +205,7 @@
 		B5AE3CF4184E1D0300EA702C /* LiveVideoCapture */ = {
 			isa = PBXGroup;
 			children = (
+				10C9CA9C1BDF83D200A80DE6 /* TopViewLayer */,
 				136AFE901B79BBAB008E2953 /* ViewController.mm */,
 				B5AE3CFD184E1D0300EA702C /* AppDelegate.h */,
 				B5AE3CFE184E1D0300EA702C /* AppDelegate.m */,
@@ -207,7 +256,7 @@
 				B5AE3CE7184E1D0300EA702C /* Sources */,
 				B5AE3CE8184E1D0300EA702C /* Frameworks */,
 				B5AE3CE9184E1D0300EA702C /* Resources */,
-				139415F61BD777C7006DDDB0 /* Embed Frameworks */,
+				10C9CA9B1BDF82EF00A80DE6 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -246,7 +295,7 @@
 				ORGANIZATIONNAME = Grafty;
 				TargetAttributes = {
 					B5AE3CEA184E1D0300EA702C = {
-						DevelopmentTeam = BYR9KF79WW;
+						DevelopmentTeam = TYUT8V5JX8;
 					};
 					B5AE3D0B184E1D0300EA702C = {
 						TestTargetID = B5AE3CEA184E1D0300EA702C;
@@ -301,9 +350,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				13DE8F3A1BA6AE1D00A6CAA9 /* source.cpp in Sources */,
+				10C9CAA81BDF83D200A80DE6 /* TPPropertyAnimation.mm in Sources */,
 				B5AE3CFF184E1D0300EA702C /* AppDelegate.m in Sources */,
+				10C9CAAA1BDF83D200A80DE6 /* TopViewLayerSettings.mm in Sources */,
+				10C9CAA91BDF83D200A80DE6 /* TopViewLayer.mm in Sources */,
 				B5AE3CFB184E1D0300EA702C /* main.m in Sources */,
 				136AFE911B79BBAB008E2953 /* ViewController.mm in Sources */,
+				10C9CAA71BDF83D200A80DE6 /* KAProgressLabel.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
