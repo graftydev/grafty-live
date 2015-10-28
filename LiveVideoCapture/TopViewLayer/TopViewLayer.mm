@@ -91,15 +91,16 @@
         
         //set updateLabel
         //calculating y possition based on circle width
-        y= centerAdjusted.y + self.circleProgressWithLabel.frame.size.height/2.0 +10 ;
+        y= centerAdjusted.y + self.circleProgressWithLabel.frame.size.height/2.0 +5 ;
         if(y>self.frame.size.height)
-            y= self.frame.size.height- 40;
-        self.updateLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, y, self.frame.size.width, 40)];
+            y= self.frame.size.height- 80;
+        self.updateLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, y, self.frame.size.width, 80)];
         self.updateLabel.text = @"DETECTING...";//default value
         self.updateLabel.textAlignment = NSTextAlignmentCenter;
-        self.updateLabel.font = [TopViewLayerSettings labelFontWithSize:35.0F];
+        self.updateLabel.font = [TopViewLayerSettings labelFontWithSize:37.0F];
+        self.updateLabel.numberOfLines =2;
         self.updateLabel.textColor =[TopViewLayerSettings labelColor];
-        self.updateLabel.numberOfLines = 4;
+       
         
         
         //add to view
@@ -108,7 +109,7 @@
         //add close button
         CGRect bounds = [[UIScreen mainScreen] bounds];
         y=bounds.size.height -  self.updateLabel.frame.origin.y + self.updateLabel.frame.size.height;
-        y= y/2.0 -20;
+        y= y/2.0 -120;
         
         UIButton * closeButton =[[UIButton alloc] initWithFrame:CGRectMake(bounds.size.width/4.0, y/2.0 +self.updateLabel.frame.origin.y + self.updateLabel.frame.size.height , bounds.size.width/2.0 , 40 )];
         
@@ -142,6 +143,7 @@
     theAnimation.timingFunction=[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseIn];
     [self.updateLabel.layer addAnimation:theAnimation forKey:@"animateOpacity"];
 }
+
 -(void)stopBeatAnimation
 {
     [self.updateLabel.layer removeAllAnimations];

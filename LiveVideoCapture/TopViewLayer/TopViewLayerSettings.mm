@@ -26,6 +26,6 @@
     return [UIFont fontWithName:@"HelveticaNeue-Bold" size:20.0F];
 }
 +(UIFont*)labelFontWithSize:(float)size{
-     return [UIFont fontWithName:@"HelveticaNeue-Bold" size:size];
+     return [UIFont fontWithName:@"Helvetica-Bold" size:size];
 }
 @end

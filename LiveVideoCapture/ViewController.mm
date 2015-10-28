@@ -27,7 +27,9 @@
 @end
 
 @implementation ViewController
-
+{
+    size_t oldbpm;
+}
 @synthesize camera            = _camera;
 @synthesize captureGrayscale  = _captureGrayscale;
 @synthesize qualityPreset     = _qualityPreset;
@@ -325,6 +327,8 @@ std::deque<float> fpsHist;
         //        faces[0].getSpm(gsys, spm, motionStrengthX, motionStrengthY);
         //        faces[0].getFacePose(phiYaw, thetaPitch);
         faces[0].getBpm(gsys, bpm);
+        //saving last bpm
+        oldbpm =  bpm;
         float avgFps = (float)faces[0].getFPS();
         if (avgFps < 20) {
             bpm = 0;
@@ -341,7 +345,9 @@ std::deque<float> fpsHist;
             }
         }
     }
-    
+    //updating oldbpm
+    if(bpm>0)
+        oldbpm = bpm;
     
     tout = tout + clock() - tin;
     double secs_between_frames = (double)(tout)/(CLOCKS_PER_SEC);
@@ -504,6 +510,11 @@ std::deque<float> fpsHist;
         {
             //[_topViewLayer updateCircleLabel:@""];
             _topViewLayer.updateLabel.text =  @"HOLD POSITION";
+            if(oldbpm>0)
+            {
+                _topViewLayer.updateLabel.text =  [NSString stringWithFormat:@"HOLD POSITION\n♥ %zu BPM",(size_t)(bpm)];
+            }
+            
         }
         
         if ( trackingPercentage < 20) {
@@ -525,7 +536,14 @@ std::deque<float> fpsHist;
             progressString = "*****";
             
             //[_topViewLayer updateCircleLabel:[NSString stringWithFormat:@"%zu",(size_t) (bpm)]];
-            _topViewLayer.updateLabel.text =  [NSString stringWithFormat:@"♥ %zu BPM",(size_t)(bpm)];
+            if(bpm<=0)//we don't need to show zero BPM for user so instead we will say Still Calculating
+            {
+                _topViewLayer.updateLabel.text = @"CALCULATING...";
+            }
+            else
+            {
+                _topViewLayer.updateLabel.text =  [NSString stringWithFormat:@"♥ %zu BPM",(size_t)(bpm)];
+            }
         }
         _topViewLayer.circleProgressWithLabel.progressColor = [UIColor greenColor];
         _topViewLayer.circleProgressWithLabel.progress = trackingPercentage/100.0;
@@ -541,7 +559,10 @@ std::deque<float> fpsHist;
         
         _topViewLayer.infoLabel.text =  @"POSITION FACE IN THE CIRCLE";
         _topViewLayer.updateLabel.text =  @"HOLD STILL";
-        
+        if(oldbpm>0)//we don't need to show zero BPM for user so instead we will say Still Calculating
+        {
+            _topViewLayer.updateLabel.text =  [NSString stringWithFormat:@"HOLD STILL\n♥ %zu BPM",(size_t)(bpm)];
+        }
          //[_topViewLayer updateCircleLabel:@""];
     }
 
