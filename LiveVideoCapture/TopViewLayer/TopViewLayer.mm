@@ -32,7 +32,7 @@
         
         centerAdjusted = CGPointMake(self.center.x, self.center.y-40);
         
-        self.circleProgressWithLabel = [[KAProgressLabel alloc] initWithFrame:CGRectMake(0, 0, 300, 300)];
+        self.circleProgressWithLabel = [[KAProgressLabel alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width-20, self.frame.size.width-20)];
         
         self.circleProgressWithLabel.center = centerAdjusted;
         
@@ -69,7 +69,7 @@
            if( label.progress>0)
            {
                
-               __self.infoLabel.text = [NSString stringWithFormat:@"TRACKING %.0f%%", (label.progress * 100)];
+               __self.infoLabel.text = @"";//[NSString stringWithFormat:@"TRACKING %.0f%%", (label.progress * 100)];
            }
             
         };
@@ -91,35 +91,64 @@
         
         //set updateLabel
         //calculating y possition based on circle width
-        y= centerAdjusted.y + self.circleProgressWithLabel.frame.size.height/2.0 ;
+        y= centerAdjusted.y + self.circleProgressWithLabel.frame.size.height/2.0 +10 ;
         if(y>self.frame.size.height)
             y= self.frame.size.height- 40;
-        self.updateLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, y, self.frame.size.width, 120)];
+        self.updateLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, y, self.frame.size.width, 40)];
         self.updateLabel.text = @"DETECTING...";//default value
         self.updateLabel.textAlignment = NSTextAlignmentCenter;
-        self.updateLabel.font = [TopViewLayerSettings labelFont];
+        self.updateLabel.font = [TopViewLayerSettings labelFontWithSize:35.0F];
         self.updateLabel.textColor =[TopViewLayerSettings labelColor];
         self.updateLabel.numberOfLines = 4;
+        
+        
         //add to view
         [self addSubview:self.updateLabel];
         
+        //add close button
+        CGRect bounds = [[UIScreen mainScreen] bounds];
+        y=bounds.size.height -  self.updateLabel.frame.origin.y + self.updateLabel.frame.size.height;
+        y= y/2.0 -20;
+        
+        UIButton * closeButton =[[UIButton alloc] initWithFrame:CGRectMake(bounds.size.width/4.0, y/2.0 +self.updateLabel.frame.origin.y + self.updateLabel.frame.size.height , bounds.size.width/2.0 , 40 )];
+        
+        [closeButton setTitle:@"CLOSE" forState:UIControlStateNormal];
+        [closeButton addTarget:self action:@selector(closeAction:) forControlEvents:UIControlEventTouchUpInside];
+        [closeButton setBackgroundColor:[UIColor redColor]];
+        closeButton.layer.cornerRadius = 5.0F;
+        closeButton.layer.borderColor = [[TopViewLayerSettings labelColor] CGColor];
+        closeButton.layer.borderWidth = 1.0F;
+        
+        
+        
+        [self addSubview:closeButton];
+        
         self.alpha = 1;
+        //[self startBeatAnimation];
+        
     }
     return self;
 }
 
--(void)updateCircleLabel:(NSString*)value{
-    __weak TopViewLayer * __self=self;
-    self.circleProgressWithLabel.labelVCBlock = ^(KAProgressLabel *label) {
-        label.text= value;
-        if( label.progress>0)
-        {
-            
-            __self.infoLabel.text = [NSString stringWithFormat:@"TRACKING %.0f%%", (label.progress * 100)];
-        }
-
-    };
-
+-(void)startBeatAnimation{
     
+    CABasicAnimation *theAnimation;
+    theAnimation=[CABasicAnimation animationWithKeyPath:@"transform.scale"];
+    theAnimation.duration=0.7;
+    theAnimation.repeatCount=HUGE_VALF;
+    theAnimation.autoreverses=YES;
+    theAnimation.fromValue=[NSNumber numberWithFloat:1.0];
+    theAnimation.toValue=[NSNumber numberWithFloat:0.7];
+    theAnimation.timingFunction=[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseIn];
+    [self.updateLabel.layer addAnimation:theAnimation forKey:@"animateOpacity"];
+}
+-(void)stopBeatAnimation
+{
+    [self.updateLabel.layer removeAllAnimations];
+}
+
+-(void)closeAction:(id)sender
+{
+    exit(0);
 }
 @end

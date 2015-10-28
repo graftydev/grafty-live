@@ -20,8 +20,12 @@
     //R: 66 G: 182 B: 255
     return [UIColor colorWithRed:66/255.0 green:182/255.0 blue:255/255.0 alpha:1.0];
 }
+
 +(UIFont*)labelFont
 {
-    return [UIFont fontWithName:@"HelveticaNeue-Bold" size:18.0F];
+    return [UIFont fontWithName:@"HelveticaNeue-Bold" size:20.0F];
+}
++(UIFont*)labelFontWithSize:(float)size{
+     return [UIFont fontWithName:@"HelveticaNeue-Bold" size:size];
 }
 @end

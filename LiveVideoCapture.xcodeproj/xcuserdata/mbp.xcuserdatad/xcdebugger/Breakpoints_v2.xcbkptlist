@@ -180,54 +180,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "LiveVideoCapture/TopViewLayer/TopViewLayer.mm"
-            timestampString = "467649391.097244"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "113"
-            endingLineNumber = "113"
-            landmarkName = "-updateCircleLabel:"
-            landmarkType = "5">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[TopViewLayer updateCircleLabel:]"
-                  moduleName = "LiveVideoCapture"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mbp/workspace/grafty-live/LiveVideoCapture/TopViewLayer/TopViewLayer.mm"
-                  timestampString = "467648889.829215"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "112"
-                  endingLineNumber = "112"
-                  offsetFromSymbolStart = "68">
-               </Location>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__34-[TopViewLayer updateCircleLabel:]_block_invoke"
-                  moduleName = "LiveVideoCapture"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mbp/workspace/grafty-live/LiveVideoCapture/TopViewLayer/TopViewLayer.mm"
-                  timestampString = "467648889.829489"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "112"
-                  endingLineNumber = "112"
-                  offsetFromSymbolStart = "40">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
@@ -238,22 +190,6 @@
             startingLineNumber = "527"
             endingLineNumber = "527"
             landmarkName = "-displayFace:forVideoRect:videoOrientation:displayBpm:displayFps:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "LiveVideoCapture/TopViewLayer/TopViewLayer.mm"
-            timestampString = "467649391.097244"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "114"
-            endingLineNumber = "114"
-            landmarkName = "-updateCircleLabel:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

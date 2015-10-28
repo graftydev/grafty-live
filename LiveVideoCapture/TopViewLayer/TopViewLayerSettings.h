@@ -13,6 +13,8 @@
 //Colors
 +(UIColor*)backGroundColor;
 +(UIColor*)labelColor;
+
 //Fonts
 +(UIFont*)labelFont;
++(UIFont*)labelFontWithSize:(float)size;
 @end

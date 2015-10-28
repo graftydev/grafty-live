@@ -474,7 +474,7 @@ std::deque<float> fpsHist;
             [self.view.layer addSublayer:featureLayer];
         }
         featureLayer.frame = faceRect;
-        [featureLayer setHidden:NO];
+        [featureLayer setHidden:YES];//[AN] set to hide
 
     }
     
@@ -525,7 +525,7 @@ std::deque<float> fpsHist;
             progressString = "*****";
             
             //[_topViewLayer updateCircleLabel:[NSString stringWithFormat:@"%zu",(size_t) (bpm)]];
-            _topViewLayer.updateLabel.text =  [NSString stringWithFormat:@"CURRENT HEARTRATE \n♥\n%zu\nBPM",(size_t)(bpm)];
+            _topViewLayer.updateLabel.text =  [NSString stringWithFormat:@"♥ %zu BPM",(size_t)(bpm)];
         }
         _topViewLayer.circleProgressWithLabel.progressColor = [UIColor greenColor];
         _topViewLayer.circleProgressWithLabel.progress = trackingPercentage/100.0;
@@ -548,11 +548,12 @@ std::deque<float> fpsHist;
     NSString *label = [NSString stringWithFormat:@"BPM = %zu, FPS = %zu, %s",
                        (size_t) (bpm), (size_t) fps, progressString.c_str()];
     tLayer.string = label;
-    [tLayer setHidden:NO];
+    [tLayer setHidden:YES];//[AN] set to hide
 
     
     [CATransaction commit];
 }
+
 
 - (CGAffineTransform)affineTransformForVideoFrame:(CGRect)videoFrame orientation:(AVCaptureVideoOrientation)videoOrientation
 {

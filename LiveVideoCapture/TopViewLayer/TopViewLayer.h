@@ -16,5 +16,5 @@
 @property (nonatomic, strong) UILabel           *bpmLabel;
 
 -(id)initWithFrame:(CGRect)frame;
--(void)updateCircleLabel:(NSString*)value;
+-(void)startBeatAnimation;
 @end
