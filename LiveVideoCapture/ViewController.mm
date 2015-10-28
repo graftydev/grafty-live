@@ -512,7 +512,7 @@ std::deque<float> fpsHist;
             _topViewLayer.updateLabel.text =  @"HOLD POSITION";
             if(oldbpm>0)
             {
-                _topViewLayer.updateLabel.text =  [NSString stringWithFormat:@"HOLD POSITION\n♥ %zu BPM",(size_t)(bpm)];
+                _topViewLayer.updateLabel.text =  [NSString stringWithFormat:@"HOLD POSITION\n♥ %zu BPM",(size_t)(oldbpm)];
             }
             
         }
@@ -539,6 +539,10 @@ std::deque<float> fpsHist;
             if(bpm<=0)//we don't need to show zero BPM for user so instead we will say Still Calculating
             {
                 _topViewLayer.updateLabel.text = @"CALCULATING...";
+                if(oldbpm>0)
+                {
+                    _topViewLayer.updateLabel.text =  [NSString stringWithFormat:@"CALCULATING...\n♥ %zu BPM",(size_t)(oldbpm)];
+                }
             }
             else
             {
@@ -561,7 +565,7 @@ std::deque<float> fpsHist;
         _topViewLayer.updateLabel.text =  @"HOLD STILL";
         if(oldbpm>0)//we don't need to show zero BPM for user so instead we will say Still Calculating
         {
-            _topViewLayer.updateLabel.text =  [NSString stringWithFormat:@"HOLD STILL\n♥ %zu BPM",(size_t)(bpm)];
+            _topViewLayer.updateLabel.text =  [NSString stringWithFormat:@"HOLD STILL\n♥ %zu BPM",(size_t)(oldbpm)];
         }
          //[_topViewLayer updateCircleLabel:@""];
     }

@@ -93,8 +93,8 @@
         //calculating y possition based on circle width
         y= centerAdjusted.y + self.circleProgressWithLabel.frame.size.height/2.0 +5 ;
         if(y>self.frame.size.height)
-            y= self.frame.size.height- 80;
-        self.updateLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, y, self.frame.size.width, 80)];
+            y= self.frame.size.height- 120;
+        self.updateLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, y, self.frame.size.width, 120)];
         self.updateLabel.text = @"DETECTING...";//default value
         self.updateLabel.textAlignment = NSTextAlignmentCenter;
         self.updateLabel.font = [TopViewLayerSettings labelFontWithSize:37.0F];
@@ -109,7 +109,7 @@
         //add close button
         CGRect bounds = [[UIScreen mainScreen] bounds];
         y=bounds.size.height -  self.updateLabel.frame.origin.y + self.updateLabel.frame.size.height;
-        y= y/2.0 -120;
+        y= y/2.0 -160;
         
         UIButton * closeButton =[[UIButton alloc] initWithFrame:CGRectMake(bounds.size.width/4.0, y/2.0 +self.updateLabel.frame.origin.y + self.updateLabel.frame.size.height , bounds.size.width/2.0 , 40 )];
         
