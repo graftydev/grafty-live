@@ -50,15 +50,11 @@ dlib::shape_predictor pose_model;
     
     NSString * const kFaceCascadeFilename = @"GraftyResources/haarcascade_frontalface_alt2";
     NSString * const kNoseCascadeFilename = @"GraftyResources/haarcascade_mcs_nose";
-    //NSString * const kVideoFileName       = @"GraftyResources/IMG_0024";
-    //NSString * const kVideoFileName         = @"HR_003_1_4_(127,153)_40";
-    
     NSString * const kShapePredictorFileName = @"GraftyResources/shape_predictor_68_face_landmarks";
 
     
     NSString *faceCascadePath = [[NSBundle mainBundle] pathForResource:kFaceCascadeFilename ofType:@"xml"];
     NSString *noseCascadePath = [[NSBundle mainBundle] pathForResource:kNoseCascadeFilename ofType:@"xml"];
-    // *videoPath = [[NSBundle mainBundle] pathForResource:kVideoFileName ofType:@"MOV"];
     NSString *shapePredictorPath = [[NSBundle mainBundle] pathForResource:kShapePredictorFileName ofType:@"dat"];
 
     
@@ -72,27 +68,21 @@ dlib::shape_predictor pose_model;
         NSLog(@"Could not load nose cascade: %@", noseCascadePath);
     }
     
-    //cap = cv::VideoCapture ([videoPath UTF8String]);
-    //if (!cap.isOpened()) { return; }
+    std::string *predictor_fname = new std::string([shapePredictorPath UTF8String]);
+    dlib::deserialize((const std::string) *predictor_fname) >> pose_model;
+    
 
     gsys.setFrameRate(30);
     gsys.setProgramState(DETECT);
-    
-    std::string *predictor_fname = new std::string([shapePredictorPath UTF8String]);
-
-    dlib::deserialize((const std::string) *predictor_fname) >> pose_model;
-    
     _camera = 1;   //0 = back camera; 1 = front camera
     
-    // *** these go together ****
-    gsys.imageType = GRAFTY_Y_CB_CR; // or GRAFTY_BGRA
-    _captureGrayscale = true;  // or false
+    // **************************
+    // these go together ****
+    gsys.imageType = GRAFTY_Y_CB_CR; // GRAFTY_BGRA, GRAFTY_Y_CB_CR;
+    _captureGrayscale = true;        //   false for GRAFTY_BGRA; true to GRAFTY_Y_CB_CR
     // **************************
     [self createCaptureSessionForCamera:_camera qualityPreset:_qualityPreset grayscale:_captureGrayscale];
     [_captureSession startRunning];
-    
-    
-    
     
     //track device orientation
     [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
@@ -122,10 +112,7 @@ dlib::shape_predictor pose_model;
     CVPixelBufferRef pixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer);
     OSType format = CVPixelBufferGetPixelFormatType(pixelBuffer);
     CGRect videoRect = CGRectMake(0.0f, 0.0f, CVPixelBufferGetWidth(pixelBuffer), CVPixelBufferGetHeight(pixelBuffer));
-    //AVCaptureVideoOrientation videoOrientation = [[[_videoOutput connections] objectAtIndex:0] videoOrientation];
     AVCaptureVideoOrientation videoOrientation = (AVCaptureVideoOrientation)[UIDevice currentDevice].orientation;
-    
-    //    NSLog(@"Orientation = %d", (int) videoOrientation);
     
     if (format == kCVPixelFormatType_420YpCbCr8BiPlanarFullRange) {
         // For grayscale mode, the luminance channel of the YUV data is used
@@ -254,49 +241,26 @@ dlib::shape_predictor pose_model;
     _videoPreviewLayer = [[AVCaptureVideoPreviewLayer alloc] initWithSession:_captureSession];
     _videoPreviewLayer.delegate = self;
     
-    //[_videoPreviewLayer setFrame:self.view.bounds];
     //[AN] fixed to take screen bounds
     [_videoPreviewLayer setFrame:[[UIScreen mainScreen] bounds]];
     
     //[AN] change from Aspect to AspectFill
-    _videoPreviewLayer.videoGravity = AVLayerVideoGravityResizeAspectFill;
     // AVLayerVideoGravityResizeAspect;
-    
-    
+
+    _videoPreviewLayer.videoGravity = AVLayerVideoGravityResizeAspectFill;
     
     [self.view.layer insertSublayer:_videoPreviewLayer atIndex:0];
-    
-    //create a text preview layer
-    CATextLayer *tLayer = nil;
-    tLayer = [[CATextLayer alloc] init];
-    tLayer.name = @"spm";
-    tLayer.string = @"";
-    tLayer.backgroundColor  = [UIColor blackColor].CGColor;
-    tLayer.foregroundColor  = [UIColor yellowColor].CGColor;
-    tLayer.frame = CGRectMake(self.view.bounds.origin.x,self.view.bounds.origin.y+20,self.view.bounds.size.width,20);
-    tLayer.font = (__bridge CFTypeRef)@"AmericanTypewriter-CondensedLight";
-    tLayer.fontSize = 20;
-    tLayer.alignmentMode = kCAAlignmentCenter;
-    tLayer.contentsScale = [[UIScreen mainScreen] scale];
-    [self.view.layer insertSublayer:tLayer above:_videoPreviewLayer];
-    
     return YES;
 }
 
 GraftySystem       gsys;
 GraftyFaceList     faces;
-clock_t tin, tout = 0;
-float fps =0;
 std::deque<float> fpsHist;
-//std::deque<std::chrono::time_point<std::chrono::high_resolution_clock>> clockVector;
-
+clock_t tin, tout = 0;
+float fps = 0;
 
 - (void)processFrame:(cv::Mat &)mat videoRect:(CGRect)rect videoOrientation:(AVCaptureVideoOrientation)videoOrientation
 {
-    
-    //cap >> mat;
-
-    
     switch (videoOrientation) {
         case AVCaptureVideoOrientationPortrait:
         {
@@ -321,20 +285,14 @@ std::deque<float> fpsHist;
             
     }
    
-    //******
+    //******    Call into Library to get BPM ****
     gsys.setCurrentFrame(mat);
-    tin = clock();
     trigger_hr(gsys, faces, pose_model);
+    //******    Done                         ****
 
-//    size_t spm = 0.0f;
     size_t bpm = 0;
-
-//    float  motionStrengthX = 0.0f, motionStrengthY = 0.0f;
-//    float  phiYaw = -0xFFFFFFFF, thetaPitch = -0xFFFFFFFF;
     if (faces.size())
     {
-        //        faces[0].getSpm(gsys, spm, motionStrengthX, motionStrengthY);
-        //        faces[0].getFacePose(phiYaw, thetaPitch);
         faces[0].getBpm(gsys, bpm);
         //saving last bpm
         oldbpm =  bpm;
@@ -358,19 +316,6 @@ std::deque<float> fpsHist;
     if(bpm>0)
         oldbpm = bpm;
     
-    tout = tout + clock() - tin;
-    double secs_between_frames = (double)(tout)/(CLOCKS_PER_SEC);
-    
-//    fps = 1.0f/secs_between_frames;
-//    if (fps < 100) {
-//       fpsHist.push_back(fps);
-//    }
-//    
-//    if (fpsHist.size() > 30) {
-//        fpsHist.pop_front();
-//    }
-//    
-//    int fpsAvg = (std::accumulate(fpsHist.begin(), fpsHist.end(), 0))/fpsHist.size();
     int fpsAvg =0;
     if (faces.size())
     {
@@ -378,17 +323,9 @@ std::deque<float> fpsHist;
     }
     
     tout = 0;
-    
-    //NSLog(@"fps=%zu", (size_t) fps);
-    
-    //NSLog(@"fps=%f, spm = %d, bpm = %d, phiYaw = %f, theta = %f, motionX = %f, motionY = %f", fps, (int) spm, (int) bpm, phiYaw, thetaPitch, motionStrengthX, motionStrengthY);
-    //******
-    
     cv::Rect2f bbox;
     if (gsys.getProgramState() == TRACK_UPDATE) {
-//        create_bounding_box_from_points(faces[0].nextGFPoints, bbox);
         create_bounding_box_from_points(faces[0].nextPoints, bbox);
-       // bbox = faces[0].noseRect;
     }
     else {
         bbox.x = bbox.y = 0;
@@ -401,13 +338,8 @@ std::deque<float> fpsHist;
         [self displayFace:bbox
              forVideoRect:rect
          videoOrientation:videoOrientation
-//               displaySpm:0 //spm
                displayBpm:bpm
                displayFps: (size_t) fpsAvg
-//               displayPhi:0 //phiYaw
-//             displayTheta:0 //thetaPitch
-//           displayMotionX:0 //motionStrengthX
-//           displayMotionY:0 //motionStrengthY
          ];
     });
 }
@@ -416,14 +348,8 @@ std::deque<float> fpsHist;
 - (void)displayFace:(const cv::Rect &)bbox
        forVideoRect:(CGRect)rect
    videoOrientation:(AVCaptureVideoOrientation)videoOrientation
-//         displaySpm:(size_t)spm
          displayBpm:(size_t)bpm
          displayFps:(float)fps
-//         displayPhi:(float)phi
-//       displayTheta:(float)theta
-//     displayMotionX:(float)motionStrengthX
-//     displayMotionY:(float)motionStrengthY
-
 {
     NSArray *sublayers = [NSArray arrayWithArray:[self.view.layer sublayers]];
     int sublayersCount = [sublayers count];
@@ -437,9 +363,6 @@ std::deque<float> fpsHist;
         NSString *layerName = [layer name];
         if ([layerName isEqualToString:@"FaceLayer"])
             [layer setHidden:YES];
-        
-        //       if ([layerName isEqualToString:@"spm"])
-        //           [layer setHidden:YES];
     }
     
     CALayer     *featureLayer = nil;
@@ -493,31 +416,13 @@ std::deque<float> fpsHist;
 
     }
     
-    if (!tLayer) {
-        // Create a new spm marker layer
-        tLayer = [[CATextLayer alloc] init];
-        tLayer.name = @"spm";
-        tLayer.backgroundColor  = [UIColor blackColor].CGColor;
-        tLayer.foregroundColor  = [UIColor yellowColor].CGColor;
-        tLayer.frame = CGRectMake(self.view.bounds.origin.x,self.view.bounds.origin.y+20,self.view.bounds.size.width,40);
-        tLayer.font = (__bridge CFTypeRef)@"AmericanTypewriter-CondensedLight";
-        tLayer.fontSize = 12;
-        tLayer.alignmentMode = kCAAlignmentLeft;
-        tLayer.contentsScale = [[UIScreen mainScreen] scale];
-        [self.view.layer insertSublayer:tLayer above:_videoPreviewLayer];
-    }
-//    NSString *label = [NSString stringWithFormat:@"FPS: %5.2f SPM: %zu BPM: %zu Yaw: %5.2f Pitch: %5.2f MotionX: %5.2f MotionY: %5.2f",
-    
     std::string progressString;
-    float trackingPercentage = 0.0f;
-    progressString = ".....";
 
     if (faces.size())
     {
         float trackingPercentage = faces[0].getHRTrackingPercentage()*100;
-        if(trackingPercentage <100)
+        if(trackingPercentage < 100)
         {
-            
             _topViewLayer.updateLabel.text =  @"HOLD POSITION";
             if(oldbpm>0)
             {
@@ -533,25 +438,7 @@ std::deque<float> fpsHist;
             }
             
         }
-        
-        if ( trackingPercentage < 20) {
-            progressString = ".....";
-        }
-        else if (trackingPercentage>=20 && trackingPercentage < 40){
-            progressString = "*....";
-        }
-        else if (trackingPercentage>=40 && trackingPercentage < 60){
-            progressString = "**...";
-        }
-        else if (trackingPercentage>=60 && trackingPercentage < 80){
-            progressString = "***..";
-        }
-        else if (trackingPercentage>=80 && trackingPercentage < 100){
-            progressString = "****.";
-        }
         else{
-            progressString = "*****";
-            
             //[_topViewLayer updateCircleLabel:[NSString stringWithFormat:@"%zu",(size_t) (bpm)]];
             if(bpm<=0)//we don't need to show zero BPM for user so instead we will say Still Calculating
             {
@@ -588,8 +475,6 @@ std::deque<float> fpsHist;
         
     }
     
-   
-    
     if (gsys.getProgramState() == 3 || gsys.getProgramState() == 1) {
         progressString = "Hold Still";
         _topViewLayer.circleProgressWithLabel.progressColor = [UIColor orangeColor];
@@ -612,13 +497,6 @@ std::deque<float> fpsHist;
         }
          //[_topViewLayer updateCircleLabel:@""];
     }
-
-    NSString *label = [NSString stringWithFormat:@"BPM = %zu, FPS = %zu, %s",
-                       (size_t) (bpm), (size_t) fps, progressString.c_str()];
-    tLayer.string = label;
-    [tLayer setHidden:YES];//[AN] set to hide
-
-    
     [CATransaction commit];
 }
 
@@ -684,23 +562,14 @@ std::deque<float> fpsHist;
         {
         _topViewLayer = [[TopViewLayerLandScapeLeft alloc] initWithFrame:screenFrame];
         
-        
-        
         }
         else if ([[UIDevice currentDevice] orientation] == UIDeviceOrientationLandscapeRight)
         {
             _topViewLayer = [[TopViewLayerLandScapeRight alloc] initWithFrame:screenFrame];
-            
-            
-            
         }
-        
     }
-    
     [self.view addSubview:_topViewLayer];
     [self.view bringSubviewToFront:_topViewLayer];
-    
-    
 }
 
 -(void)orientationChanged:(NSNotification*)notification
@@ -715,7 +584,6 @@ std::deque<float> fpsHist;
             
         case UIDeviceOrientationPortraitUpsideDown:
             /* start special animation */
-           
             NSLog(@"UIDeviceOrientationPortraitUpsideDown");
             break;
         case UIDeviceOrientationLandscapeLeft:

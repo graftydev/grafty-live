@@ -7,15 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		10115C421BE21C7400F6E8F9 /* TopViewLayerLadScapeLeft.mm in Sources */ = {isa = PBXBuildFile; fileRef = 10115C411BE21C7400F6E8F9 /* TopViewLayerLadScapeLeft.mm */; settings = {ASSET_TAGS = (); }; };
-		10115C451BE2716200F6E8F9 /* TopViewLayerLadScapeRight.mm in Sources */ = {isa = PBXBuildFile; fileRef = 10115C441BE2716200F6E8F9 /* TopViewLayerLadScapeRight.mm */; settings = {ASSET_TAGS = (); }; };
+		10115C421BE21C7400F6E8F9 /* TopViewLayerLadScapeLeft.mm in Sources */ = {isa = PBXBuildFile; fileRef = 10115C411BE21C7400F6E8F9 /* TopViewLayerLadScapeLeft.mm */; };
+		10115C451BE2716200F6E8F9 /* TopViewLayerLadScapeRight.mm in Sources */ = {isa = PBXBuildFile; fileRef = 10115C441BE2716200F6E8F9 /* TopViewLayerLadScapeRight.mm */; };
 		10C9CA971BDF81FD00A80DE6 /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10C9CA961BDF81FD00A80DE6 /* opencv2.framework */; };
 		10C9CA991BDF82EE00A80DE6 /* hrios.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10C9CA981BDF82EE00A80DE6 /* hrios.framework */; };
 		10C9CA9A1BDF82EE00A80DE6 /* hrios.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 10C9CA981BDF82EE00A80DE6 /* hrios.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		10C9CAA71BDF83D200A80DE6 /* KAProgressLabel.mm in Sources */ = {isa = PBXBuildFile; fileRef = 10C9CAA01BDF83D200A80DE6 /* KAProgressLabel.mm */; settings = {ASSET_TAGS = (); }; };
-		10C9CAA81BDF83D200A80DE6 /* TPPropertyAnimation.mm in Sources */ = {isa = PBXBuildFile; fileRef = 10C9CAA21BDF83D200A80DE6 /* TPPropertyAnimation.mm */; settings = {ASSET_TAGS = (); }; };
-		10C9CAA91BDF83D200A80DE6 /* TopViewLayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 10C9CAA41BDF83D200A80DE6 /* TopViewLayer.mm */; settings = {ASSET_TAGS = (); }; };
-		10C9CAAA1BDF83D200A80DE6 /* TopViewLayerSettings.mm in Sources */ = {isa = PBXBuildFile; fileRef = 10C9CAA61BDF83D200A80DE6 /* TopViewLayerSettings.mm */; settings = {ASSET_TAGS = (); }; };
+		10C9CAA71BDF83D200A80DE6 /* KAProgressLabel.mm in Sources */ = {isa = PBXBuildFile; fileRef = 10C9CAA01BDF83D200A80DE6 /* KAProgressLabel.mm */; };
+		10C9CAA81BDF83D200A80DE6 /* TPPropertyAnimation.mm in Sources */ = {isa = PBXBuildFile; fileRef = 10C9CAA21BDF83D200A80DE6 /* TPPropertyAnimation.mm */; };
+		10C9CAA91BDF83D200A80DE6 /* TopViewLayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 10C9CAA41BDF83D200A80DE6 /* TopViewLayer.mm */; };
+		10C9CAAA1BDF83D200A80DE6 /* TopViewLayerSettings.mm in Sources */ = {isa = PBXBuildFile; fileRef = 10C9CAA61BDF83D200A80DE6 /* TopViewLayerSettings.mm */; };
 		136AFE911B79BBAB008E2953 /* ViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 136AFE901B79BBAB008E2953 /* ViewController.mm */; };
 		136AFE931B79BBDB008E2953 /* GraftyHeaders in Resources */ = {isa = PBXBuildFile; fileRef = 136AFE921B79BBDB008E2953 /* GraftyHeaders */; };
 		136AFE951B79BBEC008E2953 /* GraftyResources in Resources */ = {isa = PBXBuildFile; fileRef = 136AFE941B79BBEC008E2953 /* GraftyResources */; };
@@ -305,7 +305,7 @@
 				ORGANIZATIONNAME = Grafty;
 				TargetAttributes = {
 					B5AE3CEA184E1D0300EA702C = {
-						DevelopmentTeam = TYUT8V5JX8;
+						DevelopmentTeam = BYR9KF79WW;
 					};
 					B5AE3D0B184E1D0300EA702C = {
 						TestTargetID = B5AE3CEA184E1D0300EA702C;

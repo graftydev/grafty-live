@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "LiveVideoCapture/ViewController.mm"
-            timestampString = "467057525.634489"
+            timestampString = "467851354.934798"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "432"
-            endingLineNumber = "432"
+            startingLineNumber = "358"
+            endingLineNumber = "358"
             landmarkName = "-displayFace:forVideoRect:videoOrientation:displayBpm:displayFps:"
             landmarkType = "5">
          </BreakpointContent>

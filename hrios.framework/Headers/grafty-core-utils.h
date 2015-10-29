@@ -17,15 +17,15 @@
 #include <opencv2/video/tracking.hpp>
 
 
-#define GRAFTY_DISPLAY_68            false
-#define  GRAFTY_DEBUG                false
+#define GRAFTY_DISPLAY_68            false // true
+#define  GRAFTY_DEBUG                false //true
 #define GRAFTY_DISPLAY_RAW           false
-#define GRAFTY_DISPLAY_AUG           false
+#define GRAFTY_DISPLAY_AUG           false //true
 #define GRAFTY_DISPLAY_FILTERED      false
-#define GRAFTY_DISPLAY_FFT           false
 
 #define TIME_BUFFER_INTERVAL   5 //5
 
+static bool Camera = true;
 
 extern void create_bounding_box_from_points(std::vector<cv::Point2f>& in, cv::Rect_<float>& out);
 //extern void cleansePoints(const std::vector<cv::Point2f>& points, std::vector<cv::Point2f> filtered);
@@ -109,4 +109,5 @@ std::vector<cv::Point2f> goodFeaturesAroundPoints(cv::Mat& Img, std::vector<cv::
 bool filter(const std::vector<float>& b, const std::vector<float>& a, std::vector<float>& X, std::vector<float> & Y);
 std::vector<float> augmentSignalForFFT(std::vector<float>& S, size_t filterDelay, size_t NFFT);
 float mean(std::deque<float> X);
+float mean(std::vector<float> X);
 #endif /* defined(__grafty_vp__grafty_core_utils__) */

@@ -140,7 +140,6 @@ public:
     
     
     void getSpm_gf(GraftySystem& gsys, size_t& spm, float& motionStrengthX, float& motionStrengthY);
-    void getBPM_gf(GraftySystem& gsys, size_t& bpm);
     bool isTracked_gf(void);
     int getTrackingThreshold_gf(void);
     void setTrackingTreshold_fg(int);
@@ -153,6 +152,8 @@ public:
         return heartRate.getTrackingPercentage();
     }
     
+    bool getFaceBox(cv::Rect2f &rect);
+    
 #if GRAFTY_DEBUG == true
 public:
     cv::Rect_<float> correlationBox;
@@ -160,6 +161,7 @@ public:
 };
 
 typedef std::vector<Face> GraftyFaceList;
+
 
 
 
