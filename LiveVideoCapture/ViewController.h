@@ -10,6 +10,8 @@
 #import <AVFoundation/AVFoundation.h>
 
 #import "TopViewLayer.h"
+#import "TopViewLayerLandScapeLeft.h"
+#import "TopViewLayerLandScapeRight.h"
 
 @interface ViewController : UIViewController <AVCaptureVideoDataOutputSampleBufferDelegate>
 

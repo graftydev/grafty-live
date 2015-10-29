@@ -91,7 +91,16 @@ dlib::shape_predictor pose_model;
     [self createCaptureSessionForCamera:_camera qualityPreset:_qualityPreset grayscale:_captureGrayscale];
     [_captureSession startRunning];
     
-    [self addTopViewLayer];
+    
+    
+    
+    //track device orientation
+    [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
+    [[NSNotificationCenter defaultCenter]
+     addObserver:self selector:@selector(orientationChanged:)
+     name:UIDeviceOrientationDidChangeNotification
+     object:[UIDevice currentDevice]];
+    
 }
 
 
@@ -508,11 +517,19 @@ std::deque<float> fpsHist;
         float trackingPercentage = faces[0].getHRTrackingPercentage()*100;
         if(trackingPercentage <100)
         {
-            //[_topViewLayer updateCircleLabel:@""];
+            
             _topViewLayer.updateLabel.text =  @"HOLD POSITION";
             if(oldbpm>0)
             {
+                if(nil == _topViewLayer.heart)
+                {
                 _topViewLayer.updateLabel.text =  [NSString stringWithFormat:@"HOLD POSITION\n♥ %zu BPM",(size_t)(oldbpm)];
+                }
+                else {
+                    _topViewLayer.heart.text = @"♥";
+                    _topViewLayer.bPMResult.text =  [NSString stringWithFormat:@"%zu\nBPM",(size_t)(oldbpm)];
+                    _topViewLayer.updateLabel.text =  @"HOLD POSITION";
+                }
             }
             
         }
@@ -541,12 +558,29 @@ std::deque<float> fpsHist;
                 _topViewLayer.updateLabel.text = @"CALCULATING...";
                 if(oldbpm>0)
                 {
-                    _topViewLayer.updateLabel.text =  [NSString stringWithFormat:@"CALCULATING...\n♥ %zu BPM",(size_t)(oldbpm)];
+                    if(nil == _topViewLayer.heart)
+                    {
+                        _topViewLayer.updateLabel.text =  [NSString stringWithFormat:@"CALCULATING...\n♥ %zu BPM",(size_t)(oldbpm)];
+                    }
+                    else {
+                        _topViewLayer.heart.text = @"♥";
+                        _topViewLayer.bPMResult.text =  [NSString stringWithFormat:@"%zu\nBPM",(size_t)(oldbpm)];
+                        _topViewLayer.updateLabel.text = @"CALCULATING...";
+                    }
                 }
             }
             else
             {
-                _topViewLayer.updateLabel.text =  [NSString stringWithFormat:@"♥ %zu BPM",(size_t)(bpm)];
+                oldbpm = bpm;
+                //_topViewLayer.updateLabel.text =  [NSString stringWithFormat:@"♥ %zu BPM",(size_t)(bpm)];
+                if(nil == _topViewLayer.heart)
+                {
+                    _topViewLayer.updateLabel.text =  [NSString stringWithFormat:@"♥ %zu BPM",(size_t)(bpm)];
+                }
+                else {
+                    _topViewLayer.heart.text = @"♥";
+                    _topViewLayer.bPMResult.text =  [NSString stringWithFormat:@"%zu\nBPM",(size_t)(bpm)];
+                }
             }
         }
         _topViewLayer.circleProgressWithLabel.progressColor = [UIColor greenColor];
@@ -566,6 +600,15 @@ std::deque<float> fpsHist;
         if(oldbpm>0)//we don't need to show zero BPM for user so instead we will say Still Calculating
         {
             _topViewLayer.updateLabel.text =  [NSString stringWithFormat:@"HOLD STILL\n♥ %zu BPM",(size_t)(oldbpm)];
+            if(nil == _topViewLayer.heart)
+            {
+                _topViewLayer.updateLabel.text =  [NSString stringWithFormat:@"HOLD STILL\n♥ %zu BPM",(size_t)(oldbpm)];
+            }
+            else {
+                _topViewLayer.heart.text = @"♥";
+                _topViewLayer.bPMResult.text =  [NSString stringWithFormat:@"%zu\nBPM",(size_t)(oldbpm)];
+                _topViewLayer.updateLabel.text = @"HOLD STILL";
+            }
         }
          //[_topViewLayer updateCircleLabel:@""];
     }
@@ -625,17 +668,67 @@ std::deque<float> fpsHist;
 {
     CGRect screenFrame = [[UIScreen mainScreen] bounds];
     
+    if( nil != _topViewLayer)
+    {
+        [_topViewLayer removeFromSuperview];
+        _topViewLayer = nil;
+    }
     
     if(nil == _topViewLayer)
     {
-        _topViewLayer = [[TopViewLayer alloc] initWithFrame:screenFrame];
-        //_topViewLayer.backgroundColor   =[TopViewLayerSettings backGroundColor];
+        if ([[UIDevice currentDevice] orientation] == UIDeviceOrientationPortrait)
+        {
+            _topViewLayer = [[TopViewLayer alloc] init];
+        }
+        else if ([[UIDevice currentDevice] orientation] == UIDeviceOrientationLandscapeLeft)
+        {
+        _topViewLayer = [[TopViewLayerLandScapeLeft alloc] initWithFrame:screenFrame];
         
-        [self.view addSubview:_topViewLayer];
-        [self.view bringSubviewToFront:_topViewLayer];
+        
+        
+        }
+        else if ([[UIDevice currentDevice] orientation] == UIDeviceOrientationLandscapeRight)
+        {
+            _topViewLayer = [[TopViewLayerLandScapeRight alloc] initWithFrame:screenFrame];
+            
+            
+            
+        }
         
     }
     
+    [self.view addSubview:_topViewLayer];
+    [self.view bringSubviewToFront:_topViewLayer];
+    
+    
+}
+
+-(void)orientationChanged:(NSNotification*)notification
+{
+    UIDevice * device = notification.object;
+    switch(device.orientation)
+    {
+        case UIDeviceOrientationPortrait:
+            /* start special animation */
+            [self addTopViewLayer];
+            break;
+            
+        case UIDeviceOrientationPortraitUpsideDown:
+            /* start special animation */
+           
+            NSLog(@"UIDeviceOrientationPortraitUpsideDown");
+            break;
+        case UIDeviceOrientationLandscapeLeft:
+            NSLog(@"UIDeviceOrientationLandscapeLeft");
+             [self addTopViewLayer];
+            break;
+        case UIDeviceOrientationLandscapeRight:
+            NSLog(@"UIDeviceOrientationLandscapeRight");
+             [self addTopViewLayer];
+            break;
+        default:
+            break;
+    };
 }
 
 

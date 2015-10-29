@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		10115C421BE21C7400F6E8F9 /* TopViewLayerLadScapeLeft.mm in Sources */ = {isa = PBXBuildFile; fileRef = 10115C411BE21C7400F6E8F9 /* TopViewLayerLadScapeLeft.mm */; settings = {ASSET_TAGS = (); }; };
+		10115C451BE2716200F6E8F9 /* TopViewLayerLadScapeRight.mm in Sources */ = {isa = PBXBuildFile; fileRef = 10115C441BE2716200F6E8F9 /* TopViewLayerLadScapeRight.mm */; settings = {ASSET_TAGS = (); }; };
 		10C9CA971BDF81FD00A80DE6 /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10C9CA961BDF81FD00A80DE6 /* opencv2.framework */; };
 		10C9CA991BDF82EE00A80DE6 /* hrios.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10C9CA981BDF82EE00A80DE6 /* hrios.framework */; };
 		10C9CA9A1BDF82EE00A80DE6 /* hrios.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 10C9CA981BDF82EE00A80DE6 /* hrios.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -61,6 +63,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		10115C401BE21C6400F6E8F9 /* TopViewLayerLandScapeLeft.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TopViewLayerLandScapeLeft.h; sourceTree = "<group>"; };
+		10115C411BE21C7400F6E8F9 /* TopViewLayerLadScapeLeft.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TopViewLayerLadScapeLeft.mm; sourceTree = "<group>"; };
+		10115C431BE2714A00F6E8F9 /* TopViewLayerLandScapeRight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TopViewLayerLandScapeRight.h; sourceTree = "<group>"; };
+		10115C441BE2716200F6E8F9 /* TopViewLayerLadScapeRight.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TopViewLayerLadScapeRight.mm; sourceTree = "<group>"; };
 		10C9CA921BDF81EC00A80DE6 /* hrios.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = hrios.framework; sourceTree = "<group>"; };
 		10C9CA961BDF81FD00A80DE6 /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = opencv2.framework; sourceTree = "<group>"; };
 		10C9CA981BDF82EE00A80DE6 /* hrios.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = hrios.framework; sourceTree = "<group>"; };
@@ -136,6 +142,10 @@
 				10C9CA9D1BDF83D200A80DE6 /* Libraries */,
 				10C9CAA31BDF83D200A80DE6 /* TopViewLayer.h */,
 				10C9CAA41BDF83D200A80DE6 /* TopViewLayer.mm */,
+				10115C401BE21C6400F6E8F9 /* TopViewLayerLandScapeLeft.h */,
+				10115C431BE2714A00F6E8F9 /* TopViewLayerLandScapeRight.h */,
+				10115C411BE21C7400F6E8F9 /* TopViewLayerLadScapeLeft.mm */,
+				10115C441BE2716200F6E8F9 /* TopViewLayerLadScapeRight.mm */,
 				10C9CAA51BDF83D200A80DE6 /* TopViewLayerSettings.h */,
 				10C9CAA61BDF83D200A80DE6 /* TopViewLayerSettings.mm */,
 			);
@@ -349,12 +359,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				10115C451BE2716200F6E8F9 /* TopViewLayerLadScapeRight.mm in Sources */,
 				13DE8F3A1BA6AE1D00A6CAA9 /* source.cpp in Sources */,
 				10C9CAA81BDF83D200A80DE6 /* TPPropertyAnimation.mm in Sources */,
 				B5AE3CFF184E1D0300EA702C /* AppDelegate.m in Sources */,
 				10C9CAAA1BDF83D200A80DE6 /* TopViewLayerSettings.mm in Sources */,
 				10C9CAA91BDF83D200A80DE6 /* TopViewLayer.mm in Sources */,
 				B5AE3CFB184E1D0300EA702C /* main.m in Sources */,
+				10115C421BE21C7400F6E8F9 /* TopViewLayerLadScapeLeft.mm in Sources */,
 				136AFE911B79BBAB008E2953 /* ViewController.mm in Sources */,
 				10C9CAA71BDF83D200A80DE6 /* KAProgressLabel.mm in Sources */,
 			);
@@ -509,7 +521,7 @@
 					"$(PROJECT_DIR)/",
 				);
 				INFOPLIST_FILE = "LiveVideoCapture/LiveVideoCapture-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -551,7 +563,7 @@
 					"$(PROJECT_DIR)/GraftyHeaders",
 				);
 				INFOPLIST_FILE = "LiveVideoCapture/LiveVideoCapture-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
