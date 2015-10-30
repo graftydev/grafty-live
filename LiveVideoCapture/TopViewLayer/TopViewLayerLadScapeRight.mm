@@ -141,7 +141,7 @@
     
     self.updateLabel.text = @"...";//default value
     self.updateLabel.textAlignment = NSTextAlignmentCenter;
-    self.updateLabel.font = [TopViewLayerSettings labelFontWithSize:36.0F];
+    self.updateLabel.font = [TopViewLayerSettings labelFontWithSize:25.0F];
     self.updateLabel.numberOfLines =1;
     self.updateLabel.textColor =[TopViewLayerSettings labelColor];
     self.updateLabel.transform= CGAffineTransformMakeRotation(DEGREES_TO_RADIANS(270));
@@ -160,7 +160,7 @@
     [self.closeButton setBackgroundColor:[UIColor redColor]];
     self.closeButton.layer.cornerRadius = 5.0F;
     self.closeButton.layer.borderColor = [[TopViewLayerSettings labelColor] CGColor];
-    self.closeButton.layer.borderWidth = 1.0F;
+    self.closeButton.layer.borderWidth = 0.0F;
     
     //make the close button circle
     self.closeButton.layer.cornerRadius = self.closeButton.frame.size.width/2;
@@ -175,7 +175,7 @@
     self.heart=[[UILabel alloc] initWithFrame:CGRectMake(bounds.size.width/2.0-80,  self.circleProgressWithLabel.frame.origin.y/2.0-30,  80, 40 )];
     self.heart.text= @"";//@"♥";
     self.heart.textAlignment = NSTextAlignmentCenter;
-    self.heart.font = [TopViewLayerSettings labelFontWithSize:46.0F];
+    self.heart.font = [TopViewLayerSettings labelFontWithSize:30.0F];
     self.heart.transform= CGAffineTransformMakeRotation(DEGREES_TO_RADIANS(270));
     [self addSubview:self.heart];
     
@@ -185,7 +185,7 @@
     
     self.bPMResult.text = @"";//@"60\nBPM";//default value
     self.bPMResult.textAlignment = NSTextAlignmentCenter;
-    self.bPMResult.font = [TopViewLayerSettings labelFontWithSize:36.0F];
+    self.bPMResult.font = [TopViewLayerSettings labelFontWithSize:30.0F];
     self.bPMResult.numberOfLines =3;
     self.bPMResult.textColor =[TopViewLayerSettings labelColor];
     self.bPMResult.transform= CGAffineTransformMakeRotation(DEGREES_TO_RADIANS(270));

@@ -90,7 +90,6 @@
         label.text = @"";//[NSString stringWithFormat:@"TRACKING %.0f%%", (label.progress * 100)];
         if( label.progress>0)
         {
-            
             __self.infoLabel.text = @"";//[NSString stringWithFormat:@"TRACKING %.0f%%", (label.progress * 100)];
         }
         
@@ -119,11 +118,9 @@
     self.updateLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, y, self.frame.size.width, 120)];
     self.updateLabel.text = @"...";//default value
     self.updateLabel.textAlignment = NSTextAlignmentCenter;
-    self.updateLabel.font = [TopViewLayerSettings labelFontWithSize:37.0F];
+    self.updateLabel.font = [TopViewLayerSettings labelFontWithSize:30.0F];
     self.updateLabel.numberOfLines =2;
     self.updateLabel.textColor =[TopViewLayerSettings labelColor];
-    
-    
     
     //add to view
     [self addSubview:self.updateLabel];
@@ -141,8 +138,6 @@
     self.closeButton.layer.cornerRadius = 5.0F;
     self.closeButton.layer.borderColor = [[TopViewLayerSettings labelColor] CGColor];
     self.closeButton.layer.borderWidth = 0.0F;
-    
-    
     
     [self addSubview:self.closeButton];
 }
@@ -170,9 +165,6 @@
    [fillLayer didChangeValueForKey:@"path"];
    
     self.backgroundColor    =[UIColor clearColor];
-    
-    
-    
     
     //set infoLabel
     //calculating y possition based on circle width
@@ -225,10 +217,6 @@
     [fillLayer removeFromSuperlayer];
     
     self.backgroundColor    =[UIColor clearColor];
-
-    
-    
-    
     
     //set infoLabel
     //calculating y possition based on circle width
@@ -238,18 +226,12 @@
     
     [self.infoLabel setFrame:CGRectMake(0,y, self.frame.size.width, 40)];
     
-    
-    
     //set updateLabel
     //calculating y possition based on circle width
     y= centerAdjusted.y + self.circleProgressWithLabel.frame.size.height/2.0 +5 ;
     if(y>self.frame.size.height)
         y= self.frame.size.height- 120;
     [self.updateLabel setFrame:CGRectMake(0, y, self.frame.size.width, 120)];
-    
-    
-    
-    
     
     
     //add close button

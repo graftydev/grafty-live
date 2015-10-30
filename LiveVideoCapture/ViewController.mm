@@ -450,7 +450,7 @@ float fps = 0;
             //[_topViewLayer updateCircleLabel:[NSString stringWithFormat:@"%zu",(size_t) (bpm)]];
             if(bpm <= 0)//we don't need to show zero bpm for user so instead we will say Still Calculating
             {
-                _topViewLayer.updateLabel.text = @"CALCULATING...";
+                //_topViewLayer.updateLabel.text = @"CALCULATING...";
                 if(oldbpm > 0)
                 {
                     if(nil == _topViewLayer.heart)
@@ -467,7 +467,7 @@ float fps = 0;
             else
             {
                 oldbpm = bpm;
-                _topViewLayer.updateLabel.text =  [NSString stringWithFormat:@"♥ %zu bpm",(size_t)(bpm)];
+                //_topViewLayer.updateLabel.text =  [NSString stringWithFormat:@"♥ %zu bpm",(size_t)(bpm)];
                 if(nil == _topViewLayer.heart)
                 {
                     _topViewLayer.updateLabel.text =  [NSString stringWithFormat:@"♥ %zu bpm",(size_t)(bpm)];
@@ -475,6 +475,7 @@ float fps = 0;
                 else {
                     _topViewLayer.heart.text = @"♥";
                     _topViewLayer.bPMResult.text =  [NSString stringWithFormat:@"%zu\nbpm",(size_t)(bpm)];
+                    _topViewLayer.updateLabel.text = @"CALCULATING...";
                 }
             }
         }
