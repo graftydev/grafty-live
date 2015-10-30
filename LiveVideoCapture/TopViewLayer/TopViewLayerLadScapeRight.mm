@@ -139,7 +139,7 @@
     
     self.updateLabel = [[UILabel alloc] initWithFrame:CGRectMake(x ,bounds.size.height/2.0-20, bounds.size.height, 40)];
     
-    self.updateLabel.text = @"DETECTING...";//default value
+    self.updateLabel.text = @"...";//default value
     self.updateLabel.textAlignment = NSTextAlignmentCenter;
     self.updateLabel.font = [TopViewLayerSettings labelFontWithSize:36.0F];
     self.updateLabel.numberOfLines =1;

@@ -26,10 +26,9 @@
 #define LOWEST_BPM      55.0f //40.0f
 #define HIGHEST_BPM     200.0f
 
-
 #define NUM_OF_FEATURES 3  //7
 
-#define NUM_OF_FFT_TO_AVERAGE 300 //90 //300
+#define NUM_OF_SAMPLE_TO_AVERAGE 300 //90 //300
 
 extern bool Camera;
 
@@ -52,7 +51,7 @@ class HeartRate {
     
     //thresholds
     float rejection_threshold = 10;
-    float std_coefficient = 0.3; //0.2;  //0.075; //0.2
+    float std_coefficient = 0.4; //0.8; //0.6; //0.3; //0.2;  //0.075; //0.2
     
     
     std::deque<size_t> bpmHistory;
@@ -71,7 +70,7 @@ class HeartRate {
 //    std::vector<float> variance;
     std::vector<size_t> sorted_variance_idx;
     
-    size_t numOfFFTToAverage = NUM_OF_FFT_TO_AVERAGE;
+    size_t numOfSampleToAverage = NUM_OF_SAMPLE_TO_AVERAGE;
 
     
     

@@ -285,7 +285,7 @@ float fps = 0;
             
     }
    
-    //******    Call into Library to get BPM ****
+    //******    Call into Library to get bpm ****
     gsys.setCurrentFrame(mat);
     trigger_hr(gsys, faces, pose_model);
     //******    Done                         ****
@@ -294,8 +294,6 @@ float fps = 0;
     if (faces.size())
     {
         faces[0].getBpm(gsys, bpm);
-        //saving last bpm
-        oldbpm =  bpm;
         float avgFps = (float)faces[0].getFPS();
         if (avgFps < 20) {
             bpm = 0;
@@ -307,16 +305,13 @@ float fps = 0;
                 bpm = bpm * ((float)faces[0].getFPS()/30.0f);
             }
             
-            if (bpm>1 && bpm < 60) {
-                bpm = 60;
+            if (bpm>1 && bpm < 55) {
+                bpm = 55;
             }
         }
     }
-    //updating oldbpm
-    if(bpm>0)
-        oldbpm = bpm;
     
-    int fpsAvg =0;
+    int fpsAvg = 0;
     if (faces.size())
     {
         fpsAvg = faces[0].getFPS();
@@ -416,42 +411,55 @@ float fps = 0;
 
     }
     
-    std::string progressString;
-
+    if (gsys.getProgramState() == DETECT) {
+        _topViewLayer.circleProgressWithLabel.progressColor = [UIColor orangeColor];
+        _topViewLayer.circleProgressWithLabel.progress = 1;
+        
+        _topViewLayer.infoLabel.text =  @"POSITION FACE IN THE CIRCLE";
+        _topViewLayer.updateLabel.text =  @"";
+        if(oldbpm > 0)
+        {
+            //_topViewLayer.updateLabel.text =  [NSString stringWithFormat:@"HOLD STILL\n♥ %zu bpm",(size_t)(oldbpm)];
+            if(nil == _topViewLayer.heart)
+            {
+                _topViewLayer.updateLabel.text =  [NSString stringWithFormat:@"♥ %zu bpm (last)",(size_t)(oldbpm)];
+            }
+            else {
+                _topViewLayer.heart.text = @"♥";
+                _topViewLayer.bPMResult.text =  [NSString stringWithFormat:@"%zu\nbpm (last)",(size_t)(oldbpm)];
+                _topViewLayer.updateLabel.text = @"";
+            }
+        }
+        //[_topViewLayer updateCircleLabel:@""];
+    } else if (gsys.getProgramState() == TRACK_MAINTAIN ) {
+        _topViewLayer.circleProgressWithLabel.progressColor = [UIColor orangeColor];
+        _topViewLayer.circleProgressWithLabel.progress = 1;
+        
+        _topViewLayer.infoLabel.text =  @"";
+        _topViewLayer.updateLabel.text =  @"HOLD STILL";
+    }
+    
     if (faces.size())
     {
         float trackingPercentage = faces[0].getHRTrackingPercentage()*100;
         if(trackingPercentage < 100)
         {
-            _topViewLayer.updateLabel.text =  @"HOLD POSITION";
-            if(oldbpm>0)
-            {
-                if(nil == _topViewLayer.heart)
-                {
-                _topViewLayer.updateLabel.text =  [NSString stringWithFormat:@"HOLD POSITION\n♥ %zu BPM",(size_t)(oldbpm)];
-                }
-                else {
-                    _topViewLayer.heart.text = @"♥";
-                    _topViewLayer.bPMResult.text =  [NSString stringWithFormat:@"%zu\nBPM",(size_t)(oldbpm)];
-                    _topViewLayer.updateLabel.text =  @"HOLD POSITION";
-                }
-            }
-            
+            _topViewLayer.updateLabel.text =  @"HOLD STILL";
         }
         else{
             //[_topViewLayer updateCircleLabel:[NSString stringWithFormat:@"%zu",(size_t) (bpm)]];
-            if(bpm<=0)//we don't need to show zero BPM for user so instead we will say Still Calculating
+            if(bpm <= 0)//we don't need to show zero bpm for user so instead we will say Still Calculating
             {
                 _topViewLayer.updateLabel.text = @"CALCULATING...";
-                if(oldbpm>0)
+                if(oldbpm > 0)
                 {
                     if(nil == _topViewLayer.heart)
                     {
-                        _topViewLayer.updateLabel.text =  [NSString stringWithFormat:@"CALCULATING...\n♥ %zu BPM",(size_t)(oldbpm)];
+                        _topViewLayer.updateLabel.text =  [NSString stringWithFormat:@"CALCULATING..."];
                     }
                     else {
                         _topViewLayer.heart.text = @"♥";
-                        _topViewLayer.bPMResult.text =  [NSString stringWithFormat:@"%zu\nBPM",(size_t)(oldbpm)];
+                        _topViewLayer.bPMResult.text =  [NSString stringWithFormat:@""];
                         _topViewLayer.updateLabel.text = @"CALCULATING...";
                     }
                 }
@@ -459,44 +467,22 @@ float fps = 0;
             else
             {
                 oldbpm = bpm;
-                //_topViewLayer.updateLabel.text =  [NSString stringWithFormat:@"♥ %zu BPM",(size_t)(bpm)];
+                _topViewLayer.updateLabel.text =  [NSString stringWithFormat:@"♥ %zu bpm",(size_t)(bpm)];
                 if(nil == _topViewLayer.heart)
                 {
-                    _topViewLayer.updateLabel.text =  [NSString stringWithFormat:@"♥ %zu BPM",(size_t)(bpm)];
+                    _topViewLayer.updateLabel.text =  [NSString stringWithFormat:@"♥ %zu bpm",(size_t)(bpm)];
                 }
                 else {
                     _topViewLayer.heart.text = @"♥";
-                    _topViewLayer.bPMResult.text =  [NSString stringWithFormat:@"%zu\nBPM",(size_t)(bpm)];
+                    _topViewLayer.bPMResult.text =  [NSString stringWithFormat:@"%zu\nbpm",(size_t)(bpm)];
                 }
             }
         }
         _topViewLayer.circleProgressWithLabel.progressColor = [UIColor greenColor];
         _topViewLayer.circleProgressWithLabel.progress = trackingPercentage/100.0;
-        
     }
     
-    if (gsys.getProgramState() == 3 || gsys.getProgramState() == 1) {
-        progressString = "Hold Still";
-        _topViewLayer.circleProgressWithLabel.progressColor = [UIColor orangeColor];
-        _topViewLayer.circleProgressWithLabel.progress = 1;
-        
-        _topViewLayer.infoLabel.text =  @"POSITION FACE IN THE CIRCLE";
-        _topViewLayer.updateLabel.text =  @"HOLD STILL";
-        if(oldbpm>0)//we don't need to show zero BPM for user so instead we will say Still Calculating
-        {
-            _topViewLayer.updateLabel.text =  [NSString stringWithFormat:@"HOLD STILL\n♥ %zu BPM",(size_t)(oldbpm)];
-            if(nil == _topViewLayer.heart)
-            {
-                _topViewLayer.updateLabel.text =  [NSString stringWithFormat:@"HOLD STILL\n♥ %zu BPM",(size_t)(oldbpm)];
-            }
-            else {
-                _topViewLayer.heart.text = @"♥";
-                _topViewLayer.bPMResult.text =  [NSString stringWithFormat:@"%zu\nBPM",(size_t)(oldbpm)];
-                _topViewLayer.updateLabel.text = @"HOLD STILL";
-            }
-        }
-         //[_topViewLayer updateCircleLabel:@""];
-    }
+
     [CATransaction commit];
 }
 

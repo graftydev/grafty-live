@@ -17,6 +17,7 @@
 #include <opencv2/video/tracking.hpp>
 #include "grafty-core-pedometry.h"
 #include "grafty-core-heart-rate.h"
+#include "grafty-core-breath-rate.h"
 
 #include "dlib/image_processing.h"
 #include "dlib/dir_nav.h"
@@ -100,6 +101,9 @@ public:
     HeartRate                 heartRate;
     size_t                    bpm;
     
+    BreathRate                breathRate;
+    size_t                    rpm;
+    
 
     // include all the methods
     Face (void);
@@ -120,6 +124,7 @@ public:
     
     void getSpm(GraftySystem& gsys, size_t& spm, float& motionStrengthX, float& motionStrengthY);
     void getBpm(GraftySystem& gsys, size_t& bpm);
+    void getRPM(GraftySystem& gsys, size_t& rpm);
     void getFacePose(float& phiYaw, float& thetaPitch);
     bool isTracked(void);
     int  getTrackingThreshold(void);

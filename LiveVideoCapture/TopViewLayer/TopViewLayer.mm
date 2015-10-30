@@ -117,7 +117,7 @@
     if(y>self.frame.size.height)
         y= self.frame.size.height- 120;
     self.updateLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, y, self.frame.size.width, 120)];
-    self.updateLabel.text = @"DETECTING...";//default value
+    self.updateLabel.text = @"...";//default value
     self.updateLabel.textAlignment = NSTextAlignmentCenter;
     self.updateLabel.font = [TopViewLayerSettings labelFontWithSize:37.0F];
     self.updateLabel.numberOfLines =2;
@@ -140,7 +140,7 @@
     [self.closeButton setBackgroundColor:[UIColor redColor]];
     self.closeButton.layer.cornerRadius = 5.0F;
     self.closeButton.layer.borderColor = [[TopViewLayerSettings labelColor] CGColor];
-    self.closeButton.layer.borderWidth = 1.0F;
+    self.closeButton.layer.borderWidth = 0.0F;
     
     
     

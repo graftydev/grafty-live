@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "LiveVideoCapture/ViewController.mm"
-            timestampString = "467851354.934798"
+            timestampString = "467874740.726348"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "358"
-            endingLineNumber = "358"
+            startingLineNumber = "353"
+            endingLineNumber = "353"
             landmarkName = "-displayFace:forVideoRect:videoOrientation:displayBpm:displayFps:"
             landmarkType = "5">
          </BreakpointContent>
@@ -94,6 +94,22 @@
             startingLineNumber = "200"
             endingLineNumber = "200"
             landmarkName = "HeartRate::findHeartRate(HRBufferVector&amp; bufferVector, size_t&amp; heartRateBin, float&amp; responseValue)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "LiveVideoCapture/ViewController.mm"
+            timestampString = "467874740.726348"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "417"
+            endingLineNumber = "417"
+            landmarkName = "-displayFace:forVideoRect:videoOrientation:displayBpm:displayFps:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
