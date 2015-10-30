@@ -437,6 +437,12 @@ float fps = 0;
         
         _topViewLayer.infoLabel.text =  @"";
         _topViewLayer.updateLabel.text =  @"HOLD STILL";
+        
+        if(nil != _topViewLayer.heart)
+        {
+            _topViewLayer.heart.text = @"";
+            _topViewLayer.bPMResult.text =  [NSString stringWithFormat:@""];
+        }
     }
     
     if (faces.size())
@@ -445,20 +451,23 @@ float fps = 0;
         if(trackingPercentage < 100)
         {
             _topViewLayer.updateLabel.text =  @"HOLD STILL";
+            
+            if(nil != _topViewLayer.heart)
+            {
+                _topViewLayer.heart.text = @"";
+                _topViewLayer.bPMResult.text =  [NSString stringWithFormat:@""];
+            }
         }
         else{
             //[_topViewLayer updateCircleLabel:[NSString stringWithFormat:@"%zu",(size_t) (bpm)]];
             if(bpm <= 0)//we don't need to show zero bpm for user so instead we will say Still Calculating
             {
-                //_topViewLayer.updateLabel.text = @"CALCULATING...";
+                _topViewLayer.updateLabel.text = @"CALCULATING...";
                 if(oldbpm > 0)
                 {
-                    if(nil == _topViewLayer.heart)
+                    if(nil != _topViewLayer.heart)
                     {
-                        _topViewLayer.updateLabel.text =  [NSString stringWithFormat:@"CALCULATING..."];
-                    }
-                    else {
-                        _topViewLayer.heart.text = @"♥";
+                        //_topViewLayer.heart.text = @"♥";
                         _topViewLayer.bPMResult.text =  [NSString stringWithFormat:@""];
                         _topViewLayer.updateLabel.text = @"CALCULATING...";
                     }
@@ -467,7 +476,6 @@ float fps = 0;
             else
             {
                 oldbpm = bpm;
-                //_topViewLayer.updateLabel.text =  [NSString stringWithFormat:@"♥ %zu bpm",(size_t)(bpm)];
                 if(nil == _topViewLayer.heart)
                 {
                     _topViewLayer.updateLabel.text =  [NSString stringWithFormat:@"♥ %zu bpm",(size_t)(bpm)];
@@ -475,15 +483,13 @@ float fps = 0;
                 else {
                     _topViewLayer.heart.text = @"♥";
                     _topViewLayer.bPMResult.text =  [NSString stringWithFormat:@"%zu\nbpm",(size_t)(bpm)];
-                    _topViewLayer.updateLabel.text = @"CALCULATING...";
+                   _topViewLayer.updateLabel.text = @"";
                 }
             }
         }
         _topViewLayer.circleProgressWithLabel.progressColor = [UIColor greenColor];
         _topViewLayer.circleProgressWithLabel.progress = trackingPercentage/100.0;
     }
-    
-
     [CATransaction commit];
 }
 
