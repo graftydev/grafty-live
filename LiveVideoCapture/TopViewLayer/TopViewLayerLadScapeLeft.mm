@@ -108,7 +108,13 @@
     self.infoLabel = [[UILabel alloc] initWithFrame:CGRectMake(x ,bounds.size.height/2.0-20, bounds.size.height, 40)];
     self.infoLabel.text = @"POSITION FACE IN THE CIRCLE"; //default value
     self.infoLabel.textAlignment = NSTextAlignmentCenter;
-    self.infoLabel.font = [TopViewLayerSettings labelFont];
+    
+    float fsize = 23.0F;
+    if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad )
+    {
+        fsize = 30.0F;
+    }
+    self.infoLabel.font = [TopViewLayerSettings labelFontWithSize:fsize];
     self.infoLabel.textColor =[TopViewLayerSettings labelColor];
     self.infoLabel.transform= CGAffineTransformMakeRotation(DEGREES_TO_RADIANS(-270));
     //self.infoLabel.backgroundColor=[UIColor redColor];
@@ -130,7 +136,12 @@
     self.updateLabel = [[UILabel alloc] initWithFrame:CGRectMake(x, y, self.frame.size.height, 40)];
     self.updateLabel.text = @"...";//default value
     self.updateLabel.textAlignment = NSTextAlignmentCenter;
-    self.updateLabel.font = [TopViewLayerSettings labelFontWithSize:23.0F];
+     fsize = 23.0F;
+    if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad )
+    {
+        fsize = 30.0F;
+    }
+    self.updateLabel.font = [TopViewLayerSettings labelFontWithSize:fsize];
     self.updateLabel.numberOfLines =1;
     self.updateLabel.textColor =[TopViewLayerSettings labelColor];
     self.updateLabel.transform= CGAffineTransformMakeRotation(DEGREES_TO_RADIANS(-270));

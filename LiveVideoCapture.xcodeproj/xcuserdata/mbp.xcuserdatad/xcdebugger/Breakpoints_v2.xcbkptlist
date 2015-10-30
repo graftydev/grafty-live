@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "LiveVideoCapture/ViewController.mm"
-            timestampString = "467899797.750958"
+            timestampString = "467901632.126381"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "582"
-            endingLineNumber = "582"
+            startingLineNumber = "581"
+            endingLineNumber = "581"
             landmarkName = "-addTopViewLayer"
             landmarkType = "5">
          </BreakpointContent>
@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "LiveVideoCapture/ViewController.mm"
-            timestampString = "467899797.750958"
+            timestampString = "467901632.126381"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "750"
-            endingLineNumber = "750">
+            startingLineNumber = "749"
+            endingLineNumber = "749">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -40,11 +40,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "LiveVideoCapture/ViewController.mm"
-            timestampString = "467899797.750958"
+            timestampString = "467901632.126381"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "743"
-            endingLineNumber = "743">
+            startingLineNumber = "742"
+            endingLineNumber = "742">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -54,11 +54,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "LiveVideoCapture/ViewController.mm"
-            timestampString = "467899797.750958"
+            timestampString = "467901632.126381"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "753"
-            endingLineNumber = "753">
+            startingLineNumber = "752"
+            endingLineNumber = "752">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -68,11 +68,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "LiveVideoCapture/ViewController.mm"
-            timestampString = "467899797.750958"
+            timestampString = "467901632.126381"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "757"
-            endingLineNumber = "757">
+            startingLineNumber = "756"
+            endingLineNumber = "756">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -82,11 +82,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "LiveVideoCapture/ViewController.mm"
-            timestampString = "467899797.750958"
+            timestampString = "467901632.126381"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "716"
-            endingLineNumber = "716">
+            startingLineNumber = "715"
+            endingLineNumber = "715">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -96,11 +96,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "LiveVideoCapture/ViewController.mm"
-            timestampString = "467899797.750958"
+            timestampString = "467901632.126381"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "712"
-            endingLineNumber = "712">
+            startingLineNumber = "711"
+            endingLineNumber = "711">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -110,11 +110,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "LiveVideoCapture/ViewController.mm"
-            timestampString = "467899797.750958"
+            timestampString = "467901632.126381"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "708"
-            endingLineNumber = "708">
+            startingLineNumber = "707"
+            endingLineNumber = "707">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -124,11 +124,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "LiveVideoCapture/ViewController.mm"
-            timestampString = "467899797.750958"
+            timestampString = "467901632.126381"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "710"
-            endingLineNumber = "710">
+            startingLineNumber = "709"
+            endingLineNumber = "709">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -138,11 +138,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "LiveVideoCapture/ViewController.mm"
-            timestampString = "467899797.750958"
+            timestampString = "467901632.126381"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "740"
-            endingLineNumber = "740">
+            startingLineNumber = "739"
+            endingLineNumber = "739">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -152,11 +152,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "LiveVideoCapture/TopViewLayer/TopViewLayerLadScapeLeft.mm"
-            timestampString = "467824637.105461"
+            timestampString = "467901632.126381"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "129"
-            endingLineNumber = "129"
+            startingLineNumber = "135"
+            endingLineNumber = "135"
             landmarkName = "-setupView"
             landmarkType = "5">
          </BreakpointContent>
@@ -206,6 +206,38 @@
             startingLineNumber = "467"
             endingLineNumber = "467"
             landmarkName = "-displayFace:forVideoRect:videoOrientation:displayBpm:displayFps:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "LiveVideoCapture/TopViewLayer/TopViewLayerPortraitUpSideDown.mm"
+            timestampString = "467902970.698933"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "101"
+            endingLineNumber = "101"
+            landmarkName = "-setupView"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "LiveVideoCapture/TopViewLayer/TopViewLayerPortraitUpSideDown.mm"
+            timestampString = "467902970.698933"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "126"
+            endingLineNumber = "126"
+            landmarkName = "-setupView"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
