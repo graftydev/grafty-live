@@ -4,29 +4,25 @@
 <dict>
 	<key>files</key>
 	<dict>
-		<key>Headers/grafty-core-breath-rate.h</key>
-		<data>
-		HDF0UiqWbbOss/kpcIM5IbLo5qQ=
-		</data>
 		<key>Headers/grafty-core-buffer-vector.hpp</key>
 		<data>
-		igH6XrUCqXM57otVsV3tURucg08=
+		D0ibbuQ/Jdj030KXPasbwo4OsQY=
 		</data>
 		<key>Headers/grafty-core-heart-rate.h</key>
 		<data>
-		rDvayJmuKdtMRcQP4msMhSuHnK4=
+		WSOxEgy9G7HHuxkIjT2J4Vn+oIE=
 		</data>
 		<key>Headers/grafty-core-pedometry.h</key>
 		<data>
-		ocg3nATecF+yB5JCLOM+ikJcXqw=
+		6Gmi1LqXHqhRvfmm9h1A02R0Fk8=
 		</data>
 		<key>Headers/grafty-core-utils.h</key>
 		<data>
-		4oNSyEQwWncXFqufM0F61VmxGa4=
+		QIMg2Q+dG7Vr6iCx7AiQdQ2O9J8=
 		</data>
 		<key>Headers/grafty-face-class.h</key>
 		<data>
-		lhMwG22s/oPq167pcydFV0gKt94=
+		b/sy3Q/A5A7h4ChYdLnyob5yMz0=
 		</data>
 		<key>Headers/grafty-system-settings.h</key>
 		<data>
@@ -42,11 +38,11 @@
 		</data>
 		<key>Headers/hrios.h</key>
 		<data>
-		TueKZgvPrT96kuPdzKjmWph7oh4=
+		Znv3oHh7WQ2uMezP1hlnjo7kwVI=
 		</data>
 		<key>Info.plist</key>
 		<data>
-		89j3XtLcAkzvhmXs/R3rh0kBeB0=
+		yKMFBPtCkVlRtd0HSj2gv7oluXI=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -55,29 +51,25 @@
 	</dict>
 	<key>files2</key>
 	<dict>
-		<key>Headers/grafty-core-breath-rate.h</key>
-		<data>
-		HDF0UiqWbbOss/kpcIM5IbLo5qQ=
-		</data>
 		<key>Headers/grafty-core-buffer-vector.hpp</key>
 		<data>
-		igH6XrUCqXM57otVsV3tURucg08=
+		D0ibbuQ/Jdj030KXPasbwo4OsQY=
 		</data>
 		<key>Headers/grafty-core-heart-rate.h</key>
 		<data>
-		rDvayJmuKdtMRcQP4msMhSuHnK4=
+		WSOxEgy9G7HHuxkIjT2J4Vn+oIE=
 		</data>
 		<key>Headers/grafty-core-pedometry.h</key>
 		<data>
-		ocg3nATecF+yB5JCLOM+ikJcXqw=
+		6Gmi1LqXHqhRvfmm9h1A02R0Fk8=
 		</data>
 		<key>Headers/grafty-core-utils.h</key>
 		<data>
-		4oNSyEQwWncXFqufM0F61VmxGa4=
+		QIMg2Q+dG7Vr6iCx7AiQdQ2O9J8=
 		</data>
 		<key>Headers/grafty-face-class.h</key>
 		<data>
-		lhMwG22s/oPq167pcydFV0gKt94=
+		b/sy3Q/A5A7h4ChYdLnyob5yMz0=
 		</data>
 		<key>Headers/grafty-system-settings.h</key>
 		<data>
@@ -93,7 +85,7 @@
 		</data>
 		<key>Headers/hrios.h</key>
 		<data>
-		TueKZgvPrT96kuPdzKjmWph7oh4=
+		Znv3oHh7WQ2uMezP1hlnjo7kwVI=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>

@@ -9,9 +9,11 @@
 /* Begin PBXBuildFile section */
 		10115C421BE21C7400F6E8F9 /* TopViewLayerLadScapeLeft.mm in Sources */ = {isa = PBXBuildFile; fileRef = 10115C411BE21C7400F6E8F9 /* TopViewLayerLadScapeLeft.mm */; };
 		10115C451BE2716200F6E8F9 /* TopViewLayerLadScapeRight.mm in Sources */ = {isa = PBXBuildFile; fileRef = 10115C441BE2716200F6E8F9 /* TopViewLayerLadScapeRight.mm */; };
+		103D62821BE348AB000ED117 /* TopViewLayerPortraitUpSideDown.mm in Sources */ = {isa = PBXBuildFile; fileRef = 103D62811BE348AB000ED117 /* TopViewLayerPortraitUpSideDown.mm */; settings = {ASSET_TAGS = (); }; };
+		103D62891BE35638000ED117 /* hrios.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 103D62881BE35638000ED117 /* hrios.framework */; };
+		103D628A1BE35638000ED117 /* hrios.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 103D62881BE35638000ED117 /* hrios.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		103D628E1BE38783000ED117 /* HeartLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 103D628D1BE38783000ED117 /* HeartLabel.m */; settings = {ASSET_TAGS = (); }; };
 		10C9CA971BDF81FD00A80DE6 /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10C9CA961BDF81FD00A80DE6 /* opencv2.framework */; };
-		10C9CA991BDF82EE00A80DE6 /* hrios.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10C9CA981BDF82EE00A80DE6 /* hrios.framework */; };
-		10C9CA9A1BDF82EE00A80DE6 /* hrios.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 10C9CA981BDF82EE00A80DE6 /* hrios.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		10C9CAA71BDF83D200A80DE6 /* KAProgressLabel.mm in Sources */ = {isa = PBXBuildFile; fileRef = 10C9CAA01BDF83D200A80DE6 /* KAProgressLabel.mm */; };
 		10C9CAA81BDF83D200A80DE6 /* TPPropertyAnimation.mm in Sources */ = {isa = PBXBuildFile; fileRef = 10C9CAA21BDF83D200A80DE6 /* TPPropertyAnimation.mm */; };
 		10C9CAA91BDF83D200A80DE6 /* TopViewLayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 10C9CAA41BDF83D200A80DE6 /* TopViewLayer.mm */; };
@@ -49,13 +51,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		10C9CA9B1BDF82EF00A80DE6 /* Embed Frameworks */ = {
+		103D628B1BE35638000ED117 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				10C9CA9A1BDF82EE00A80DE6 /* hrios.framework in Embed Frameworks */,
+				103D628A1BE35638000ED117 /* hrios.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -67,9 +69,12 @@
 		10115C411BE21C7400F6E8F9 /* TopViewLayerLadScapeLeft.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TopViewLayerLadScapeLeft.mm; sourceTree = "<group>"; };
 		10115C431BE2714A00F6E8F9 /* TopViewLayerLandScapeRight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TopViewLayerLandScapeRight.h; sourceTree = "<group>"; };
 		10115C441BE2716200F6E8F9 /* TopViewLayerLadScapeRight.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TopViewLayerLadScapeRight.mm; sourceTree = "<group>"; };
-		10C9CA921BDF81EC00A80DE6 /* hrios.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = hrios.framework; sourceTree = "<group>"; };
+		103D62801BE3488F000ED117 /* TopViewLayerPortraitUpSideDown.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TopViewLayerPortraitUpSideDown.h; sourceTree = "<group>"; };
+		103D62811BE348AB000ED117 /* TopViewLayerPortraitUpSideDown.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TopViewLayerPortraitUpSideDown.mm; sourceTree = "<group>"; };
+		103D62881BE35638000ED117 /* hrios.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = hrios.framework; sourceTree = "<group>"; };
+		103D628C1BE38783000ED117 /* HeartLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeartLabel.h; sourceTree = "<group>"; };
+		103D628D1BE38783000ED117 /* HeartLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HeartLabel.m; sourceTree = "<group>"; };
 		10C9CA961BDF81FD00A80DE6 /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = opencv2.framework; sourceTree = "<group>"; };
-		10C9CA981BDF82EE00A80DE6 /* hrios.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = hrios.framework; sourceTree = "<group>"; };
 		10C9CA9F1BDF83D200A80DE6 /* KAProgressLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KAProgressLabel.h; sourceTree = "<group>"; };
 		10C9CAA01BDF83D200A80DE6 /* KAProgressLabel.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = KAProgressLabel.mm; sourceTree = "<group>"; };
 		10C9CAA11BDF83D200A80DE6 /* TPPropertyAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPPropertyAnimation.h; sourceTree = "<group>"; };
@@ -112,7 +117,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				10C9CA991BDF82EE00A80DE6 /* hrios.framework in Frameworks */,
+				103D62891BE35638000ED117 /* hrios.framework in Frameworks */,
 				10C9CA971BDF81FD00A80DE6 /* opencv2.framework in Frameworks */,
 				137AB4BC1BACFAEF00A6DC41 /* CoreImage.framework in Frameworks */,
 				136AFE971B79BC06008E2953 /* AVFoundation.framework in Frameworks */,
@@ -143,11 +148,15 @@
 				10C9CAA31BDF83D200A80DE6 /* TopViewLayer.h */,
 				10C9CAA41BDF83D200A80DE6 /* TopViewLayer.mm */,
 				10115C401BE21C6400F6E8F9 /* TopViewLayerLandScapeLeft.h */,
-				10115C431BE2714A00F6E8F9 /* TopViewLayerLandScapeRight.h */,
 				10115C411BE21C7400F6E8F9 /* TopViewLayerLadScapeLeft.mm */,
+				103D62801BE3488F000ED117 /* TopViewLayerPortraitUpSideDown.h */,
+				103D62811BE348AB000ED117 /* TopViewLayerPortraitUpSideDown.mm */,
+				10115C431BE2714A00F6E8F9 /* TopViewLayerLandScapeRight.h */,
 				10115C441BE2716200F6E8F9 /* TopViewLayerLadScapeRight.mm */,
 				10C9CAA51BDF83D200A80DE6 /* TopViewLayerSettings.h */,
 				10C9CAA61BDF83D200A80DE6 /* TopViewLayerSettings.mm */,
+				103D628C1BE38783000ED117 /* HeartLabel.h */,
+				103D628D1BE38783000ED117 /* HeartLabel.m */,
 			);
 			path = TopViewLayer;
 			sourceTree = "<group>";
@@ -174,8 +183,7 @@
 		B5AE3CE2184E1D0300EA702C = {
 			isa = PBXGroup;
 			children = (
-				10C9CA981BDF82EE00A80DE6 /* hrios.framework */,
-				10C9CA921BDF81EC00A80DE6 /* hrios.framework */,
+				103D62881BE35638000ED117 /* hrios.framework */,
 				13DE8F391BA6AE1D00A6CAA9 /* source.cpp */,
 				136AFE941B79BBEC008E2953 /* GraftyResources */,
 				136AFE921B79BBDB008E2953 /* GraftyHeaders */,
@@ -266,7 +274,7 @@
 				B5AE3CE7184E1D0300EA702C /* Sources */,
 				B5AE3CE8184E1D0300EA702C /* Frameworks */,
 				B5AE3CE9184E1D0300EA702C /* Resources */,
-				10C9CA9B1BDF82EF00A80DE6 /* Embed Frameworks */,
+				103D628B1BE35638000ED117 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -305,7 +313,7 @@
 				ORGANIZATIONNAME = Grafty;
 				TargetAttributes = {
 					B5AE3CEA184E1D0300EA702C = {
-						DevelopmentTeam = BYR9KF79WW;
+						DevelopmentTeam = TYUT8V5JX8;
 					};
 					B5AE3D0B184E1D0300EA702C = {
 						TestTargetID = B5AE3CEA184E1D0300EA702C;
@@ -362,11 +370,13 @@
 				10115C451BE2716200F6E8F9 /* TopViewLayerLadScapeRight.mm in Sources */,
 				13DE8F3A1BA6AE1D00A6CAA9 /* source.cpp in Sources */,
 				10C9CAA81BDF83D200A80DE6 /* TPPropertyAnimation.mm in Sources */,
+				103D628E1BE38783000ED117 /* HeartLabel.m in Sources */,
 				B5AE3CFF184E1D0300EA702C /* AppDelegate.m in Sources */,
 				10C9CAAA1BDF83D200A80DE6 /* TopViewLayerSettings.mm in Sources */,
 				10C9CAA91BDF83D200A80DE6 /* TopViewLayer.mm in Sources */,
 				B5AE3CFB184E1D0300EA702C /* main.m in Sources */,
 				10115C421BE21C7400F6E8F9 /* TopViewLayerLadScapeLeft.mm in Sources */,
+				103D62821BE348AB000ED117 /* TopViewLayerPortraitUpSideDown.mm in Sources */,
 				136AFE911B79BBAB008E2953 /* ViewController.mm in Sources */,
 				10C9CAA71BDF83D200A80DE6 /* KAProgressLabel.mm in Sources */,
 			);

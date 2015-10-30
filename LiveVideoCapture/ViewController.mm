@@ -416,18 +416,22 @@ float fps = 0;
         _topViewLayer.circleProgressWithLabel.progress = 1;
         
         _topViewLayer.infoLabel.text =  @"POSITION FACE IN THE CIRCLE";
-        _topViewLayer.updateLabel.text =  @"";
+        
+        
+        [self updateUpdateLabel:@"" showHeart:NO];
+        
         if(oldbpm > 0)
         {
             //_topViewLayer.updateLabel.text =  [NSString stringWithFormat:@"HOLD STILL\n♥ %zu bpm",(size_t)(oldbpm)];
             if(nil == _topViewLayer.heart)
             {
-                _topViewLayer.updateLabel.text =  [NSString stringWithFormat:@"♥ %zu bpm (last)",(size_t)(oldbpm)];
+                
+                [self updateUpdateLabel:[NSString stringWithFormat:@"%zu bpm (last)",(size_t)(oldbpm)] showHeart:YES];
             }
             else {
                 _topViewLayer.heart.text = @"♥";
                 _topViewLayer.bPMResult.text =  [NSString stringWithFormat:@"%zu\nbpm (last)",(size_t)(oldbpm)];
-                _topViewLayer.updateLabel.text = @"";
+               [self updateUpdateLabel:@""  showHeart:NO];
             }
         }
         //[_topViewLayer updateCircleLabel:@""];
@@ -436,7 +440,7 @@ float fps = 0;
         _topViewLayer.circleProgressWithLabel.progress = 1;
         
         _topViewLayer.infoLabel.text =  @"";
-        _topViewLayer.updateLabel.text =  @"HOLD STILL";
+        [self updateUpdateLabel:@"HOLD STILL"  showHeart:NO];
         
         if(nil != _topViewLayer.heart)
         {
@@ -450,8 +454,8 @@ float fps = 0;
         float trackingPercentage = faces[0].getHRTrackingPercentage()*100;
         if(trackingPercentage < 100)
         {
-            _topViewLayer.updateLabel.text =  @"HOLD STILL";
             
+            [self updateUpdateLabel:@"HOLD STILL"  showHeart:NO];
             if(nil != _topViewLayer.heart)
             {
                 _topViewLayer.heart.text = @"";
@@ -462,14 +466,15 @@ float fps = 0;
             //[_topViewLayer updateCircleLabel:[NSString stringWithFormat:@"%zu",(size_t) (bpm)]];
             if(bpm <= 0)//we don't need to show zero bpm for user so instead we will say Still Calculating
             {
-                _topViewLayer.updateLabel.text = @"CALCULATING...";
+                [self updateUpdateLabel:@"CALCULATING..."  showHeart:NO];
+                
                 if(oldbpm > 0)
                 {
                     if(nil != _topViewLayer.heart)
                     {
                         //_topViewLayer.heart.text = @"♥";
                         _topViewLayer.bPMResult.text =  [NSString stringWithFormat:@""];
-                        _topViewLayer.updateLabel.text = @"CALCULATING...";
+                       [self updateUpdateLabel:@"CALCULATING..." showHeart:NO];
                     }
                 }
             }
@@ -478,12 +483,12 @@ float fps = 0;
                 oldbpm = bpm;
                 if(nil == _topViewLayer.heart)
                 {
-                    _topViewLayer.updateLabel.text =  [NSString stringWithFormat:@"♥ %zu bpm",(size_t)(bpm)];
+                   [self updateUpdateLabel:  [NSString stringWithFormat:@"%zu bpm",(size_t)(bpm)]  showHeart:YES];
                 }
                 else {
                     _topViewLayer.heart.text = @"♥";
                     _topViewLayer.bPMResult.text =  [NSString stringWithFormat:@"%zu\nbpm",(size_t)(bpm)];
-                   _topViewLayer.updateLabel.text = @"";
+                  [self updateUpdateLabel:@""  showHeart:NO];
                 }
             }
         }
@@ -533,8 +538,28 @@ float fps = 0;
     return t;
 }
 
-
-
+-(void)updateUpdateLabel:(NSString*)value showHeart:(BOOL)showHeart
+{
+    
+    if(nil == _topViewLayer.updateHeartLabel)
+    {
+        _topViewLayer.updateLabel.text =  value;
+    }
+    else
+    {
+         _topViewLayer.updateHeartLabel.label.text=value;
+        if( [value isEqualToString:@""])
+            _topViewLayer.updateHeartLabel.heart.text=@"";
+        else
+        {
+            if(showHeart)
+                _topViewLayer.updateHeartLabel.heart.text=@"♥";
+            else
+                _topViewLayer.updateHeartLabel.heart.text=@"";
+        }
+    }
+   
+}
 -(void)addTopViewLayer
 {
     CGRect screenFrame = [[UIScreen mainScreen] bounds];
@@ -560,6 +585,10 @@ float fps = 0;
         {
             _topViewLayer = [[TopViewLayerLandScapeRight alloc] initWithFrame:screenFrame];
         }
+        else if ([[UIDevice currentDevice] orientation] == UIDeviceOrientationPortraitUpsideDown)
+        {
+            _topViewLayer = [[TopViewLayerPortraitUpSideDown alloc] initWithFrame:screenFrame];
+        }
     }
     [self.view addSubview:_topViewLayer];
     [self.view bringSubviewToFront:_topViewLayer];
@@ -578,6 +607,7 @@ float fps = 0;
         case UIDeviceOrientationPortraitUpsideDown:
             /* start special animation */
             NSLog(@"UIDeviceOrientationPortraitUpsideDown");
+             [self addTopViewLayer];
             break;
         case UIDeviceOrientationLandscapeLeft:
             NSLog(@"UIDeviceOrientationLandscapeLeft");

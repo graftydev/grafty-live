@@ -8,12 +8,14 @@
 
 #import <UIKit/UIKit.h>
 #import "KAProgressLabel.h"
+#import "HeartLabel.h"
 
 #define DEGREES_TO_RADIANS(angle) ((angle) / 180.0 * M_PI)
 
 @interface TopViewLayer : UIView
 @property (nonatomic, strong) KAProgressLabel   *circleProgressWithLabel;
 @property (nonatomic, strong) UILabel           *infoLabel;
+@property (nonatomic, strong) HeartLabel           *updateHeartLabel;
 @property (nonatomic, strong) UILabel           *updateLabel;
 @property (nonatomic, strong) UILabel           *bpmLabel;
 @property (nonatomic, strong) UIButton          *closeButton;

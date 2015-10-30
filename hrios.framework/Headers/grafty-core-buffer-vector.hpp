@@ -12,7 +12,7 @@
 #include <stdio.h>
 #include <deque>
 
-
+#endif /* HRBufferVector_hpp */
 
 
 class HRBufferVector {
@@ -38,4 +38,3 @@ public:
     };
 };
 
-#endif /* HRBufferVector_hpp */

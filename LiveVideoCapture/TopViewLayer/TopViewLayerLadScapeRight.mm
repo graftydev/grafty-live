@@ -141,7 +141,7 @@
     
     self.updateLabel.text = @"...";//default value
     self.updateLabel.textAlignment = NSTextAlignmentCenter;
-    self.updateLabel.font = [TopViewLayerSettings labelFontWithSize:25.0F];
+    self.updateLabel.font = [TopViewLayerSettings labelFontWithSize:23.0F];
     self.updateLabel.numberOfLines =1;
     self.updateLabel.textColor =[TopViewLayerSettings labelColor];
     self.updateLabel.transform= CGAffineTransformMakeRotation(DEGREES_TO_RADIANS(270));

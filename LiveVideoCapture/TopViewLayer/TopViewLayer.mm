@@ -50,8 +50,12 @@
     padingFromCenter = -40;
     
     centerAdjusted = CGPointMake(self.center.x, self.center.y-40);
-    
-    self.circleProgressWithLabel = [[KAProgressLabel alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width-20, self.frame.size.width-20)];
+    float w = 25;
+    if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad )
+    {
+        w=320;
+    }
+    self.circleProgressWithLabel = [[KAProgressLabel alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width-w, self.frame.size.width-w)];
     
     self.circleProgressWithLabel.center = centerAdjusted;
     
@@ -98,7 +102,7 @@
     
     //set infoLabel
     //calculating y possition based on circle width
-    float y= centerAdjusted.y - self.circleProgressWithLabel.frame.size.height/2.0 -35.0 ;
+    float y= self.circleProgressWithLabel.frame.origin.y/2 ;
     if(y<0)
         y=0;
     
@@ -115,22 +119,22 @@
     y= centerAdjusted.y + self.circleProgressWithLabel.frame.size.height/2.0 +5 ;
     if(y>self.frame.size.height)
         y= self.frame.size.height- 120;
-    self.updateLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, y, self.frame.size.width, 120)];
-    self.updateLabel.text = @"...";//default value
-    self.updateLabel.textAlignment = NSTextAlignmentCenter;
-    self.updateLabel.font = [TopViewLayerSettings labelFontWithSize:30.0F];
-    self.updateLabel.numberOfLines =2;
-    self.updateLabel.textColor =[TopViewLayerSettings labelColor];
-    
+    self.updateHeartLabel = [[HeartLabel alloc] initWithFrame:CGRectMake(0, y, self.frame.size.width, 120)];
+    self.updateHeartLabel.label.text = @"...";//default value
+    self.updateHeartLabel.label.textAlignment = NSTextAlignmentCenter;
+    self.updateHeartLabel.label.font = [TopViewLayerSettings labelFontWithSize:30.0F];
+    self.updateHeartLabel.label.numberOfLines =2;
+    self.updateHeartLabel.label.textColor =[TopViewLayerSettings labelColor];
+    self.updateHeartLabel.heart.font=[TopViewLayerSettings labelFontWithSize:30.0F];
     //add to view
-    [self addSubview:self.updateLabel];
+    [self addSubview:self.updateHeartLabel];
     
     //add close button
     CGRect bounds = [[UIScreen mainScreen] bounds];
-    y=bounds.size.height -  self.updateLabel.frame.origin.y + self.updateLabel.frame.size.height;
+    y=bounds.size.height -  self.updateHeartLabel.frame.origin.y + self.updateHeartLabel.frame.size.height;
     y= y/2.0 -160;
     
-      self.closeButton =[[UIButton alloc] initWithFrame:CGRectMake(bounds.size.width/4.0, y/2.0 +self.updateLabel.frame.origin.y + self.updateLabel.frame.size.height , bounds.size.width/2.0 , 40 )];
+      self.closeButton =[[UIButton alloc] initWithFrame:CGRectMake(bounds.size.width/4.0, y/2.0 +self.updateHeartLabel.frame.origin.y + self.updateHeartLabel.frame.size.height , bounds.size.width/2.0 , 40 )];
     
     [self.closeButton setTitle:@"CLOSE" forState:UIControlStateNormal];
     [self.closeButton addTarget:self action:@selector(closeAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -141,112 +145,7 @@
     
     [self addSubview:self.closeButton];
 }
--(void)portraitView
-{
-    padingFromCenter = -40;
-    
-    centerAdjusted = CGPointMake(self.center.x, self.center.y+padingFromCenter);
-    
-    self.circleProgressWithLabel.frame=CGRectMake(0, 0, self.frame.size.width-20, self.frame.size.width-20);
-    self.circleProgressWithLabel.center = centerAdjusted;
-    
-    //Adding Mask that will clear the inside color of the Circle.
-    int radius = self.circleProgressWithLabel.frame.size.width;
-    UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(0, 0, self.bounds.size.width, self.bounds.size.height) cornerRadius:0];
-    UIBezierPath *circlePath = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(self.circleProgressWithLabel.frame.origin.x, self.circleProgressWithLabel.frame.origin.y, radius, radius) cornerRadius:radius];
-    [path appendPath:circlePath];
-    [path setUsesEvenOddFillRule:YES];
-    
-     fillLayer = [CAShapeLayer layer];
-    fillLayer.path = path.CGPath;
-    fillLayer.fillRule = kCAFillRuleEvenOdd;
-    fillLayer.fillColor = [TopViewLayerSettings backGroundColor].CGColor;
-    fillLayer.opacity = 1;
-   [fillLayer didChangeValueForKey:@"path"];
-   
-    self.backgroundColor    =[UIColor clearColor];
-    
-    //set infoLabel
-    //calculating y possition based on circle width
-    float y= centerAdjusted.y - self.circleProgressWithLabel.frame.size.height/2.0 -35.0 ;
-    if(y<0)
-        y=0;
-    
-    self.infoLabel.frame=CGRectMake(0,y, self.frame.size.width, 40);
-    
-    //set updateLabel
-    //calculating y possition based on circle width
-    y= centerAdjusted.y + self.circleProgressWithLabel.frame.size.height/2.0 +5 ;
-    if(y>self.frame.size.height)
-        y= self.frame.size.height- 120;
-    [self.updateLabel setFrame:CGRectMake(0, y, self.frame.size.width, 120)];
-    
-    
-    //add close button
-    CGRect bounds = [[UIScreen mainScreen] bounds];
-    y=bounds.size.height -  self.updateLabel.frame.origin.y + self.updateLabel.frame.size.height;
-    y= y/2.0 -160;
-    
-    [self.closeButton setFrame:CGRectMake(bounds.size.width/4.0, y/2.0 +self.updateLabel.frame.origin.y + self.updateLabel.frame.size.height , bounds.size.width/2.0 , 40 )];
-    
-    
-    
-    
-}
--(void)landScapeLeft
-{
-    padingFromCenter = 0;
-    centerAdjusted = CGPointMake(self.center.x, self.center.y-padingFromCenter);
-    
-    self.circleProgressWithLabel.frame = CGRectMake(0, 0, self.frame.size.width-20, self.frame.size.width-20);
-    
-    self.circleProgressWithLabel.center = centerAdjusted;
-    
-    //Adding Mask that will clear the inside color of the Circle.
-    int radius = self.circleProgressWithLabel.frame.size.width;
-    UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(0, 0, self.bounds.size.width, self.bounds.size.height) cornerRadius:0];
-    UIBezierPath *circlePath = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(self.circleProgressWithLabel.frame.origin.x, self.circleProgressWithLabel.frame.origin.y, radius, radius) cornerRadius:radius];
-    [path appendPath:circlePath];
-    [path setUsesEvenOddFillRule:YES];
-    
-    
-    fillLayer.path = path.CGPath;
-    fillLayer.fillRule = kCAFillRuleEvenOdd;
-    fillLayer.fillColor = [TopViewLayerSettings backGroundColor].CGColor;
-    fillLayer.opacity = 1;
-    [fillLayer removeFromSuperlayer];
-    
-    self.backgroundColor    =[UIColor clearColor];
-    
-    //set infoLabel
-    //calculating y possition based on circle width
-    float y= centerAdjusted.y - self.circleProgressWithLabel.frame.size.height/2.0 -35.0 ;
-    if(y<0)
-        y=0;
-    
-    [self.infoLabel setFrame:CGRectMake(0,y, self.frame.size.width, 40)];
-    
-    //set updateLabel
-    //calculating y possition based on circle width
-    y= centerAdjusted.y + self.circleProgressWithLabel.frame.size.height/2.0 +5 ;
-    if(y>self.frame.size.height)
-        y= self.frame.size.height- 120;
-    [self.updateLabel setFrame:CGRectMake(0, y, self.frame.size.width, 120)];
-    
-    
-    //add close button
-    CGRect bounds = [[UIScreen mainScreen] bounds];
-    y=bounds.size.height -  self.updateLabel.frame.origin.y + self.updateLabel.frame.size.height;
-    y= y/2.0 -160;
-    
-    self.closeButton =[[UIButton alloc] initWithFrame:CGRectMake(bounds.size.width/4.0, y/2.0 +self.updateLabel.frame.origin.y + self.updateLabel.frame.size.height , bounds.size.width/2.0 , 40 )];
 
-    
-}
--(void)landScapeRight
-{
-    
-}
 #pragma -mark Actions
 -(void)startBeatAnimation:(UILabel*)label{
     

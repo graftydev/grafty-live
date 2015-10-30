@@ -16,37 +16,16 @@
 #include <opencv2/objdetect/objdetect.hpp>
 #include <opencv2/video/tracking.hpp>
 
-#if TARGET_OS_IPHONE
 
-#define GRAFTY_DISPLAY_68            false //true
-#define  GRAFTY_DEBUG                false //true
-
-#define GRAFTY_DISPLAY_BPM_RAW           false //true
-#define GRAFTY_DISPLAY_BPM_AUG           false //true
-#define GRAFTY_DISPLAY_BPM_FILTERED      false //true
-
-#define GRAFTY_DISPLAY_RPM_RAW           false //true
-#define GRAFTY_DISPLAY_RPM_AUG           false //true
-#define GRAFTY_DISPLAY_RPM_FILTERED      false //true
-
-#else
-
-#define GRAFTY_DISPLAY_68            false //true
-#define  GRAFTY_DEBUG                false //true
-
-#define GRAFTY_DISPLAY_BPM_RAW           false
-#define GRAFTY_DISPLAY_BPM_AUG           false //true
-#define GRAFTY_DISPLAY_BPM_FILTERED      false //true
-
-#define GRAFTY_DISPLAY_RPM_RAW           false //true
-#define GRAFTY_DISPLAY_RPM_AUG           false //true
-#define GRAFTY_DISPLAY_RPM_FILTERED      false //true
-
-#endif
+#define GRAFTY_DISPLAY_68            false
+#define  GRAFTY_DEBUG                false
+#define GRAFTY_DISPLAY_RAW           false
+#define GRAFTY_DISPLAY_AUG           false
+#define GRAFTY_DISPLAY_FILTERED      false
+#define GRAFTY_DISPLAY_FFT           false
 
 #define TIME_BUFFER_INTERVAL   5 //5
 
-static bool Camera = true;
 
 extern void create_bounding_box_from_points(std::vector<cv::Point2f>& in, cv::Rect_<float>& out);
 //extern void cleansePoints(const std::vector<cv::Point2f>& points, std::vector<cv::Point2f> filtered);
@@ -123,13 +102,11 @@ bool writeVectorEveryFrame(std::string fileName, std::vector<float> x);
 bool writeDequeEveryFrame(std::string fileName, std::deque<float> x);
 bool writeValueEveryFrame(std::string fileName, float x);
 
-float median(std::vector<size_t> scores);
-float median(std::deque<size_t> scores);
+float median(std::vector<size_t>& scores);
+float median(std::deque<size_t>& scores);
 float interpolateCVMat(cv::Mat Img, cv::Point2f p);
 std::vector<cv::Point2f> goodFeaturesAroundPoints(cv::Mat& Img, std::vector<cv::Point2f>& Points, float distanceThreshold);
 bool filter(const std::vector<float>& b, const std::vector<float>& a, std::vector<float>& X, std::vector<float> & Y);
 std::vector<float> augmentSignalForFFT(std::vector<float>& S, size_t filterDelay, size_t NFFT);
 float mean(std::deque<float> X);
-float mean(std::vector<float> X);
-void print(std::deque<size_t> scores);
 #endif /* defined(__grafty_vp__grafty_core_utils__) */

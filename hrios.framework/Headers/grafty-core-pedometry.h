@@ -31,7 +31,7 @@ class Pedometer {
     int                positiveBufferCount = 0;
     int                bufferVectorLength  = 0;
     
-    bool               spm_inited = false;
+    bool               fft_inited = false;
     
     float              HzPerBin    = 0;
     float              frequencyBinIndexes[2];

@@ -11,5 +11,4 @@
 #import "TopViewLayer.h"
 
 @interface TopViewLayerLandScapeRight : TopViewLayer
-
 @end

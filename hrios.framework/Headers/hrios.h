@@ -25,7 +25,6 @@ FOUNDATION_EXPORT const unsigned char hriosVersionString[];
 #import <hrios/grafty-face-class.h>
 #import <hrios/grafty-core-buffer-vector.hpp>
 #import <hrios/grafty-trigger-hr.h>
-#import <hrios/grafty-core-breath-rate.h>
 
 
 
