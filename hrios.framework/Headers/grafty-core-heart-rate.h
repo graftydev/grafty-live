@@ -25,10 +25,11 @@
 #define LOWEST_BPM      55.0f //40.0f
 #define HIGHEST_BPM     200.0f
 
-
 #define NUM_OF_FEATURES 3  //7
 
-#define NUM_OF_FFT_TO_AVERAGE 300
+#define NUM_OF_SAMPLE_TO_AVERAGE 300 //90 //300
+
+extern bool Camera;
 
 
 class HeartRate {
@@ -36,19 +37,25 @@ class HeartRate {
     int                bufferVectorIndex   = 0;
     int                positiveBufferCount = 0;
     int                bufferVectorLength  = 0;
-    int                filterDelay = 644; // 224 for a 2 sec buffer length, and augmented 8 times.
+    int                filterDelay = 600; //600; // 224 for a 2 sec buffer length, and augmented 8 times.
     
-    bool               fft_inited = false;
+    bool               bpm_inited = false;
     
     float              HzPerBin    = 0;
     float              frequencyBinIndexes[2];
     
     size_t             numFramesPerHeartRate;
     
-    size_t             numHRCalculationsPerSec = 2;
+    size_t             numHRCalculationsPerSec = 4;
+    
+    //thresholds
+    float rejection_threshold = 10;
+    float std_coefficient = 0.3; //0.8; //0.6; //0.3; //0.2;  //0.075; //0.2
+    
     
     std::deque<size_t> bpmHistory;
-
+    std::vector<size_t> bpmHistogram;
+    
     std::vector<float> fAxis;
     HRBufferVector  bufferVector;
     
@@ -60,7 +67,7 @@ class HeartRate {
 //    std::vector<float> variance;
     std::vector<size_t> sorted_variance_idx;
     
-    size_t numOfFFTToAverage = NUM_OF_FFT_TO_AVERAGE;
+    size_t numOfSampleToAverage = NUM_OF_SAMPLE_TO_AVERAGE;
 
     
     
@@ -78,13 +85,14 @@ public:
         bufferVector.clear();
         clockVector.clear();
         bpmHistory.clear();
+        bpmHistogram.clear();
         
         bufferFeatures.clear();
         numFeatures = NUM_OF_FEATURES;
     }
     
     void    initBpm(GraftySystem& gsys);
-    RStatus findHeartRate(HRBufferVector& bufferVector, size_t& stepBin, float& responseValue);
+    RStatus findHeartRate(HRBufferVector& bufferVector, size_t& HR);
     //RStatus findHeartRate(std::vector<std::deque<float>>& bufferFeatures, size_t& stepBin, float& responseValue);
     void    getBpm(std::vector<std::vector<cv::Point2f>>& nosePoints, GraftySystem& gsys, size_t& BPM);
 
