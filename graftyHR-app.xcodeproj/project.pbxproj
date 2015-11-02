@@ -157,10 +157,10 @@
 				137E0AF51BE67BED007A5523 /* Libraries */,
 				137E0AFB1BE67BED007A5523 /* TopViewLayer.h */,
 				137E0AFC1BE67BED007A5523 /* TopViewLayer.mm */,
-				137E0AFD1BE67BED007A5523 /* TopViewLayerLadScapeLeft.mm */,
-				137E0AFE1BE67BED007A5523 /* TopViewLayerLadScapeRight.mm */,
 				137E0AFF1BE67BED007A5523 /* TopViewLayerLandScapeLeft.h */,
+				137E0AFD1BE67BED007A5523 /* TopViewLayerLadScapeLeft.mm */,
 				137E0B001BE67BED007A5523 /* TopViewLayerLandScapeRight.h */,
+				137E0AFE1BE67BED007A5523 /* TopViewLayerLadScapeRight.mm */,
 				137E0B011BE67BED007A5523 /* TopViewLayerPortraitUpSideDown.h */,
 				137E0B021BE67BED007A5523 /* TopViewLayerPortraitUpSideDown.mm */,
 				137E0B031BE67BED007A5523 /* TopViewLayerSettings.h */,
@@ -286,7 +286,7 @@
 				ORGANIZATIONNAME = Grafty;
 				TargetAttributes = {
 					B5AE3CEA184E1D0300EA702C = {
-						DevelopmentTeam = BYR9KF79WW;
+						DevelopmentTeam = TYUT8V5JX8;
 					};
 					B5AE3D0B184E1D0300EA702C = {
 						TestTargetID = B5AE3CEA184E1D0300EA702C;
@@ -495,7 +495,7 @@
 					"$(PROJECT_DIR)/",
 				);
 				INFOPLIST_FILE = "graftyHR-app/graftyHR-app-info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_CPLUSPLUSFLAGS = "$(OTHER_CFLAGS) ";
@@ -535,7 +535,7 @@
 					"$(PROJECT_DIR)/GraftyResources",
 				);
 				INFOPLIST_FILE = "graftyHR-app/graftyHR-app-info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_CPLUSPLUSFLAGS = (

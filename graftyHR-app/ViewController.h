@@ -32,4 +32,7 @@
 @property (nonatomic, assign) NSString * const qualityPreset;
 @property (nonatomic, assign) BOOL             captureGrayscale;
 
+
+// misc
+@property (nonatomic, assign) BOOL canStartProcessing;
 @end

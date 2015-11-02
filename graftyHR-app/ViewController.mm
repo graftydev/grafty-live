@@ -18,7 +18,7 @@
 #include <numeric>
 #endif
 
-@interface ViewController ()
+@interface ViewController ()<TopViewLayerDelegate>
 
 @property (nonatomic, strong) AVCaptureSession *session;
 @property (nonatomic, strong) dispatch_queue_t sampleQueue;
@@ -38,6 +38,8 @@
 @synthesize videoOutput       = _videoOutput;
 @synthesize videoPreviewLayer = _videoPreviewLayer;
 @synthesize topViewLayer      =_topViewLayer;
+@synthesize canStartProcessing=_canStartProcessing;
+
 cv::VideoCapture   cap;
 dlib::shape_predictor pose_model;
 
@@ -261,6 +263,10 @@ float fps = 0;
 
 - (void)processFrame:(cv::Mat &)mat videoRect:(CGRect)rect videoOrientation:(AVCaptureVideoOrientation)videoOrientation
 {
+    //if user didn't click on circle to start processing or user click to stop processing, we should stop processing the frames.
+    if(!_canStartProcessing)
+        return;
+    
     switch (videoOrientation) {
         case AVCaptureVideoOrientationPortrait:
         {
@@ -590,6 +596,7 @@ float fps = 0;
             _topViewLayer = [[TopViewLayerPortraitUpSideDown alloc] initWithFrame:screenFrame];
         }
     }
+    _topViewLayer.delegate  = self;
     [self.view addSubview:_topViewLayer];
     [self.view bringSubviewToFront:_topViewLayer];
 }
@@ -622,5 +629,60 @@ float fps = 0;
     };
 }
 
+#pragma -mark TopViewLayer Delegate
+-(void)circleProgressClicked:(id)sender{
+    _canStartProcessing = !_canStartProcessing;
+    //add the tost to infor user to what to do to either start or stop the processing.
+    if(_canStartProcessing)
+    {
+        [UIView animateWithDuration:0.5 animations:^{
+            //hid tap me to start
+             _topViewLayer.tapToStartLabel.hidden=YES;
+        } completion:^(BOOL finished) {
+            [self performSelector:@selector(showTapAgainToStop) withObject:nil afterDelay:0.5];
+            
+        }];
+    }
+    else
+    {
+        [self showTapMeToStart];
+    }
+    
+}
+-(void)showTapAgainToStop
+{
+    //show tap again to stop
+    [UIView animateWithDuration:0.5 delay:0.0 options:UIViewAnimationOptionRepeat animations:^{
+        _topViewLayer.tapToStartLabel.text=@"Tap again to stop";
+        _topViewLayer.tapToStartLabel.hidden=NO;
+        [_topViewLayer.tapToStartLabel setNeedsDisplay];
+    } completion:^(BOOL finished) {
+        [self performSelector:@selector(hideTapAgainToStop) withObject:nil afterDelay:1];
+    }];
+
+}
+-(void)hideTapAgainToStop
+{
+    //
+    [UIView animateWithDuration:0.5 delay:1.0 options:UIViewAnimationOptionRepeat animations:^{
+        
+        _topViewLayer.tapToStartLabel.hidden=YES;
+        [_topViewLayer.tapToStartLabel setNeedsDisplay];
+    } completion:^(BOOL finished) {
+        
+    }];
+}
+-(void)showTapMeToStart
+{
+    //show tap me to start
+    [UIView animateWithDuration:0.5 delay:0.0 options:UIViewAnimationOptionRepeat animations:^{
+        _topViewLayer.tapToStartLabel.text=@"Tap me to start...";
+        _topViewLayer.tapToStartLabel.hidden=NO;
+        [_topViewLayer.tapToStartLabel setNeedsDisplay];
+    } completion:^(BOOL finished) {
+        //
+    }];
+
+}
 
 @end

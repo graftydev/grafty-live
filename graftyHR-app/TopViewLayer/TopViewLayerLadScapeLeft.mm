@@ -61,6 +61,14 @@
     self.circleProgressWithLabel.progress = 0.0;
     self.circleProgressWithLabel.startLabel.text = @"test";
     self.circleProgressWithLabel.transform= CGAffineTransformMakeRotation(DEGREES_TO_RADIANS(-270));
+    
+    
+    //Adding tap gesture to the circle
+    UITapGestureRecognizer *tap=[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(circleTapAction:)];
+    [tap setNumberOfTapsRequired:1];
+    [self.circleProgressWithLabel addGestureRecognizer:tap];
+    
+    
     //Adding Mask that will clear the inside color of the Circle.
     int radius = self.circleProgressWithLabel.frame.size.width;
     UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(0, 0, self.bounds.size.width, self.bounds.size.height) cornerRadius:0];
@@ -193,7 +201,19 @@
     //add to view
     [self addSubview:self.bPMResult];
     
-   
+    //Adding tapToStartlabel
+    self.tapToStartLabel = [[UILabel alloc] init];
+    self.tapToStartLabel.frame = CGRectMake(self.circleProgressWithLabel.frame.origin.x+30, self.circleProgressWithLabel.center.y-35/2, self.circleProgressWithLabel.frame.size.width-60, 35);
+    self.tapToStartLabel.backgroundColor = [UIColor blackColor];
+    self.tapToStartLabel.alpha = 0.8;
+    self.tapToStartLabel.textAlignment  = NSTextAlignmentCenter;
+    self.tapToStartLabel.font = [TopViewLayerSettings labelFont];
+    self.tapToStartLabel.textColor = [UIColor whiteColor];
+    self.tapToStartLabel.layer.cornerRadius = 5.0;
+    self.tapToStartLabel.text=@"Tap me to start...";
+    self.tapToStartLabel.transform= CGAffineTransformMakeRotation(DEGREES_TO_RADIANS(-270));
+    [self addSubview:self.tapToStartLabel];
+    [self bringSubviewToFront:self.tapToStartLabel];
     
 }
 

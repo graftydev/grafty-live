@@ -16,6 +16,7 @@
     CGPoint centerAdjusted;
     CAShapeLayer *fillLayer ;
 }
+@synthesize delegate=_delegate, tapToStartLabel = _tapToStartLabel;
 /*
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.
@@ -29,8 +30,11 @@
     {
         self.frame=[[UIScreen mainScreen] bounds];
         
-        [self setupView];
         
+        
+       
+        
+        [self setupView];
         self.alpha = 1;
         
 
@@ -40,7 +44,6 @@
 -(id)initWithFrame:(CGRect)frame
 {
     self  = [super initWithFrame:frame];
-    
     return self;
 }
 
@@ -53,7 +56,7 @@
     float w = 25;
     if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad )
     {
-        w=320;
+        w=400;
     }
     self.circleProgressWithLabel = [[KAProgressLabel alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width-w, self.frame.size.width-w)];
     
@@ -68,6 +71,17 @@
     self.circleProgressWithLabel.roundedCornersWidth = 0; // Defaults to 0
     self.circleProgressWithLabel.progress = 0.0;
     self.circleProgressWithLabel.startLabel.text = @"test";
+    
+ 
+    
+    
+    
+    //Adding tap gesture to the circle
+    UITapGestureRecognizer *tap=[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(circleTapAction:)];
+    [tap setNumberOfTapsRequired:1];
+    [self.circleProgressWithLabel addGestureRecognizer:tap];
+    
+    
     //Adding Mask that will clear the inside color of the Circle.
     int radius = self.circleProgressWithLabel.frame.size.width;
     UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(0, 0, self.bounds.size.width, self.bounds.size.height) cornerRadius:0];
@@ -144,6 +158,22 @@
     self.closeButton.layer.borderWidth = 0.0F;
     
     [self addSubview:self.closeButton];
+    
+    
+    //tap me to start
+    //Adding tapToStartlabel
+    self.tapToStartLabel = [[UILabel alloc] init];
+    self.tapToStartLabel.frame = CGRectMake(self.circleProgressWithLabel.frame.origin.x+30, self.circleProgressWithLabel.center.y-35/2, self.circleProgressWithLabel.frame.size.width-60, 35);
+    self.tapToStartLabel.backgroundColor = [UIColor blackColor];
+    self.tapToStartLabel.alpha = 0.8;
+    self.tapToStartLabel.textAlignment  = NSTextAlignmentCenter;
+    self.tapToStartLabel.font = [TopViewLayerSettings labelFont];
+    self.tapToStartLabel.textColor = [UIColor whiteColor];
+    self.tapToStartLabel.layer.cornerRadius = 5.0;
+    self.tapToStartLabel.text=@"Tap me to start...";
+    [self addSubview:self.tapToStartLabel];
+    [self bringSubviewToFront:self.tapToStartLabel];
+    
 }
 
 #pragma -mark Actions
@@ -163,7 +193,14 @@
 {
     [label.layer removeAllAnimations];
 }
-
+-(void)circleTapAction:(id)sender
+{
+    if(_delegate)
+        [_delegate circleProgressClicked:sender];
+}
+-(IBAction)startButtonAction:(id)sender{
+    
+}
 -(void)closeAction:(id)sender
 {
     exit(0);
