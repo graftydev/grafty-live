@@ -13,6 +13,15 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+    
+    NSUserDefaults * defaultUser = [NSUserDefaults standardUserDefaults];
+    
+    if( nil == [defaultUser objectForKey:@"showFaceOutLine"])
+    {
+        [defaultUser setObject:[NSNumber numberWithBool:YES] forKey:@"showFaceOutLine"];
+        [defaultUser synchronize];
+    }
+    
     return YES;
 }
 							

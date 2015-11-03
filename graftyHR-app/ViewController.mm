@@ -631,13 +631,23 @@ float fps = 0;
 
 #pragma -mark TopViewLayer Delegate
 -(void)circleProgressClicked:(id)sender{
+    
+    NSUserDefaults * defaultUser = [NSUserDefaults standardUserDefaults];
+    
+    if( nil != [defaultUser objectForKey:@"showFaceOutLine"])
+    {
+        [defaultUser setObject:[NSNumber numberWithBool:NO] forKey:@"showFaceOutLine"];
+        [defaultUser synchronize];
+    }
+    
     _canStartProcessing = !_canStartProcessing;
     //add the tost to infor user to what to do to either start or stop the processing.
     if(_canStartProcessing)
     {
         [UIView animateWithDuration:0.5 animations:^{
             //hid tap me to start
-             _topViewLayer.tapToStartLabel.hidden=YES;
+            
+             _topViewLayer.middleCircleView.hidden=YES;
         } completion:^(BOOL finished) {
             [self performSelector:@selector(showTapAgainToStop) withObject:nil afterDelay:0.5];
             
@@ -654,7 +664,8 @@ float fps = 0;
     //show tap again to stop
     [UIView animateWithDuration:0.5 delay:0.0 options:UIViewAnimationOptionRepeat animations:^{
         _topViewLayer.tapToStartLabel.text=@"Tap again to stop";
-        _topViewLayer.tapToStartLabel.hidden=NO;
+        //_topViewLayer.middleCircleView.backgroundColor =[UIColor clearColor];
+        _topViewLayer.middleCircleView.hidden=NO;
         [_topViewLayer.tapToStartLabel setNeedsDisplay];
     } completion:^(BOOL finished) {
         [self performSelector:@selector(hideTapAgainToStop) withObject:nil afterDelay:1];
@@ -666,8 +677,8 @@ float fps = 0;
     //
     [UIView animateWithDuration:0.5 delay:1.0 options:UIViewAnimationOptionRepeat animations:^{
         
-        _topViewLayer.tapToStartLabel.hidden=YES;
-        [_topViewLayer.tapToStartLabel setNeedsDisplay];
+        _topViewLayer.middleCircleView.hidden=YES;
+        [_topViewLayer.tapToStartLabel setNeedsDisplay]; 
     } completion:^(BOOL finished) {
         
     }];
@@ -677,7 +688,7 @@ float fps = 0;
     //show tap me to start
     [UIView animateWithDuration:0.5 delay:0.0 options:UIViewAnimationOptionRepeat animations:^{
         _topViewLayer.tapToStartLabel.text=@"Tap me to start...";
-        _topViewLayer.tapToStartLabel.hidden=NO;
+        _topViewLayer.middleCircleView.hidden=NO;
         [_topViewLayer.tapToStartLabel setNeedsDisplay];
     } completion:^(BOOL finished) {
         //

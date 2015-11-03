@@ -29,7 +29,7 @@
 @property (nonatomic, strong) UILabel           *heart;
 @property (nonatomic, strong) UIButton          *startButton;
 @property (nonatomic, strong) UILabel           *tapToStartLabel;
-
+@property (nonatomic, strong) UIView            *middleCircleView;
 //TopViewLayer Delegate declaration
 @property (nonatomic, strong) id<TopViewLayerDelegate> delegate;
 

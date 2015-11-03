@@ -162,17 +162,46 @@
     
     //tap me to start
     //Adding tapToStartlabel
+    self.middleCircleView =[[UIView alloc] initWithFrame:CGRectMake(self.circleProgressWithLabel.frame.origin.x, self.circleProgressWithLabel.center.y, self.circleProgressWithLabel.frame.size.width-17, self.circleProgressWithLabel.frame.size.width-15)];
+    self.middleCircleView.backgroundColor = [UIColor blueColor];
+    self.middleCircleView.center = self.circleProgressWithLabel.center;
+    
+    
+    // Create the colors
+    UIColor *topColor = [UIColor grayColor];
+    UIColor *bottomColor = [UIColor blackColor];
+    
+    // Create the gradient
+    CAGradientLayer *theViewGradient = [CAGradientLayer layer];
+    theViewGradient.colors = [NSArray arrayWithObjects: (id)topColor.CGColor, (id)bottomColor.CGColor, nil];
+    theViewGradient.frame =  self.middleCircleView.bounds;
+    
+    //Add gradient to view
+    [ self.middleCircleView.layer insertSublayer:theViewGradient atIndex:0];
+    
+    [self addSubview:self.middleCircleView];
     self.tapToStartLabel = [[UILabel alloc] init];
-    self.tapToStartLabel.frame = CGRectMake(self.circleProgressWithLabel.frame.origin.x+30, self.circleProgressWithLabel.center.y-35/2, self.circleProgressWithLabel.frame.size.width-60, 35);
-    self.tapToStartLabel.backgroundColor = [UIColor blackColor];
+    self.tapToStartLabel.frame = CGRectMake(0,self.middleCircleView.frame.size.height/2.0 - 35/2.0, self.middleCircleView.frame.size.width, 35);
+    
+    self.tapToStartLabel.backgroundColor = [UIColor clearColor];
     self.tapToStartLabel.alpha = 0.8;
     self.tapToStartLabel.textAlignment  = NSTextAlignmentCenter;
     self.tapToStartLabel.font = [TopViewLayerSettings labelFont];
     self.tapToStartLabel.textColor = [UIColor whiteColor];
     self.tapToStartLabel.layer.cornerRadius = 5.0;
     self.tapToStartLabel.text=@"Tap me to start...";
-    [self addSubview:self.tapToStartLabel];
-    [self bringSubviewToFront:self.tapToStartLabel];
+    [self.middleCircleView addSubview:self.tapToStartLabel];
+    [self bringSubviewToFront:self.middleCircleView];
+    
+    
+    self.middleCircleView.layer.cornerRadius = self.middleCircleView.frame.size.width/2.0;
+    self.middleCircleView.layer.masksToBounds = YES;
+    self.middleCircleView.clipsToBounds = YES;
+    
+    //Adding tap gesture to the circle
+     tap=[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(circleTapAction:)];
+    [tap setNumberOfTapsRequired:1];
+    [self.middleCircleView addGestureRecognizer:tap];
     
 }
 

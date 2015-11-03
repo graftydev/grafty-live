@@ -116,6 +116,17 @@
     
     [self.startLabel addObserver:self forKeyPath:@"text"   options:NSKeyValueObservingOptionNew context:nil];
     [self.endLabel addObserver:self forKeyPath:@"text"    options:NSKeyValueObservingOptionNew context:nil];
+    
+    //add faceoutline
+    UIImage * img =[UIImage imageNamed:@"face-out-line"];
+    img=[self imageWithImage:img scaledToWidth:self.frame.size.width/1.5];
+    UIImageView * imgView = [[UIImageView alloc] initWithImage:img];
+    if([[[NSUserDefaults standardUserDefaults] valueForKey:@"showFaceOutLine"] boolValue])
+    {
+        [self addSubview:imgView];
+        imgView.center = self.center;
+        
+    }
 }
 
 -(void)drawRect:(CGRect)rect
@@ -366,5 +377,18 @@
     CGPoint circleCenter = CGPointMake(CGRectGetMidX(rect), CGRectGetMidY(rect));
     return CGRectMake(circleCenter.x - circleRadius, circleCenter.y - circleRadius, 2 * circleRadius, 2 * circleRadius);
 }
-
+-(UIImage*)imageWithImage: (UIImage*) sourceImage scaledToWidth: (float) i_width
+{
+    float oldWidth = sourceImage.size.width;
+    float scaleFactor = i_width / oldWidth;
+    
+    float newHeight = sourceImage.size.height * scaleFactor;
+    float newWidth = oldWidth * scaleFactor;
+    
+    UIGraphicsBeginImageContext(CGSizeMake(newWidth, newHeight));
+    [sourceImage drawInRect:CGRectMake(0, 0, newWidth, newHeight)];
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return newImage;
+}
 @end
