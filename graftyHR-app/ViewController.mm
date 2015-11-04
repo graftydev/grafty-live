@@ -29,6 +29,8 @@
 @implementation ViewController
 {
     size_t oldbpm;
+    NSTimer *timeToStopTimer;
+    
 }
 @synthesize camera            = _camera;
 @synthesize captureGrayscale  = _captureGrayscale;
@@ -266,6 +268,7 @@ float fps = 0;
     //if user didn't click on circle to start processing or user click to stop processing, we should stop processing the frames.
     if(!_canStartProcessing)
         return;
+    
     
     switch (videoOrientation) {
         case AVCaptureVideoOrientationPortrait:
@@ -628,7 +631,34 @@ float fps = 0;
             break;
     };
 }
-
+-(void)toggleStartStopProcess
+{
+    _canStartProcessing = !_canStartProcessing;
+    //add the tost to infor user to what to do to either start or stop the processing.
+    if(_canStartProcessing)
+    {
+        [UIView animateWithDuration:0.5 animations:^{
+            //hid tap me to start
+            
+            _topViewLayer.middleCircleView.hidden=YES;
+        } completion:^(BOOL finished) {
+            //[self performSelector:@selector(showTapAgainToStop) withObject:nil afterDelay:0.5];
+             timeToStopTimer = [NSTimer  scheduledTimerWithTimeInterval:30 target:self selector:@selector(toggleStartStopProcess) userInfo:nil repeats:NO];
+        }];
+    }
+    else
+    {
+        if(timeToStopTimer)
+        {
+            if([timeToStopTimer isValid])
+            {
+                [timeToStopTimer invalidate];
+                timeToStopTimer = nil;
+            }
+        }
+        [self showTapMeToStart];
+    }
+}
 #pragma -mark TopViewLayer Delegate
 -(void)circleProgressClicked:(id)sender{
     
@@ -639,24 +669,16 @@ float fps = 0;
         [defaultUser setObject:[NSNumber numberWithBool:NO] forKey:@"showFaceOutLine"];
         [defaultUser synchronize];
     }
-    
-    _canStartProcessing = !_canStartProcessing;
-    //add the tost to infor user to what to do to either start or stop the processing.
-    if(_canStartProcessing)
+   
+    if(timeToStopTimer)
     {
-        [UIView animateWithDuration:0.5 animations:^{
-            //hid tap me to start
-            
-             _topViewLayer.middleCircleView.hidden=YES;
-        } completion:^(BOOL finished) {
-            [self performSelector:@selector(showTapAgainToStop) withObject:nil afterDelay:0.5];
-            
-        }];
+        if([timeToStopTimer isValid])
+        {
+            [timeToStopTimer invalidate];
+            timeToStopTimer = nil;
+        }
     }
-    else
-    {
-        [self showTapMeToStart];
-    }
+    [self toggleStartStopProcess];
     
 }
 -(void)showTapAgainToStop
