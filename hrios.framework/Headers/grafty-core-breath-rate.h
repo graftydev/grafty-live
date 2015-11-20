@@ -26,7 +26,6 @@
 
 #define NUM_OF_FEATURES 3  //7
 
-#define NUM_OF_SAMPLE_TO_AVERAGE 600
 
 
 class BreathRate {
@@ -50,8 +49,8 @@ class BreathRate {
     
     size_t numFeatures =NUM_OF_FEATURES;
     
-    size_t numOfSampleToAverage = NUM_OF_SAMPLE_TO_AVERAGE;
-
+    float normalize_value;
+    
     
     
     float              rpm2Hz[2]    = { LOWEST_RPM/60.0f, HIGHEST_RPM/60.0f }; // Define the bandpass frequencies

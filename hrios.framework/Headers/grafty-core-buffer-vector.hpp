@@ -16,7 +16,8 @@
 
 
 class HRBufferVector {
-private:
+//private:
+public:
     std::deque<float>  bufferVector;
     float maxIdx;
     float minIdx;

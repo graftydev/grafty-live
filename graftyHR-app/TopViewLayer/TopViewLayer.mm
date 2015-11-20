@@ -29,11 +29,6 @@
     if(self)
     {
         self.frame=[[UIScreen mainScreen] bounds];
-        
-        
-        
-       
-        
         [self setupView];
         self.alpha = 1;
         
@@ -168,7 +163,7 @@
     
     
     // Create the colors
-    UIColor *topColor = [UIColor grayColor];
+    UIColor *topColor = [UIColor blueColor];
     UIColor *bottomColor = [UIColor blackColor];
     
     // Create the gradient
@@ -189,7 +184,7 @@
     self.tapToStartLabel.font = [TopViewLayerSettings labelFont];
     self.tapToStartLabel.textColor = [UIColor whiteColor];
     self.tapToStartLabel.layer.cornerRadius = 5.0;
-    self.tapToStartLabel.text=@"Tap me to start...";
+    self.tapToStartLabel.text=@"Tap to start...";
     [self.middleCircleView addSubview:self.tapToStartLabel];
     [self bringSubviewToFront:self.middleCircleView];
     

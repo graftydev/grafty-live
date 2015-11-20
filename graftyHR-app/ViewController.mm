@@ -1,24 +1,24 @@
 //
 //  ViewController.m
-//  GraftyVPDemo
+//  GraftyHR-APP
 //
 //  Created by ben on 12/3/13.
 //  Copyright (c) 2013 NSScreencast. All rights reserved.
 //
 
+#import <ImageIO/ImageIO.h>
 #import "ViewController.h"
-#import "TopViewLayerSettings.h"
-
 #include "dlib/image_processing/frontal_face_detector.h"
-#include "dlib/image_processing/render_face_detections.h"
+
 
 #ifdef __cplusplus
+#import <opencv2/core/core_c.h>
 #import <opencv2/opencv.hpp>
 #include <hrios/hrios.h>
 #include <numeric>
 #endif
 
-@interface ViewController ()<TopViewLayerDelegate>
+@interface ViewController () <TopViewLayerDelegate>
 
 @property (nonatomic, strong) AVCaptureSession *session;
 @property (nonatomic, strong) dispatch_queue_t sampleQueue;
@@ -28,10 +28,10 @@
 
 @implementation ViewController
 {
-    size_t oldbpm;
-    NSTimer *timeToStopTimer;
-    
+        size_t oldbpm;
+        NSTimer *timeToStopTimer;
 }
+
 @synthesize camera            = _camera;
 @synthesize captureGrayscale  = _captureGrayscale;
 @synthesize qualityPreset     = _qualityPreset;
@@ -39,11 +39,13 @@
 @synthesize captureDevice     = _captureDevice;
 @synthesize videoOutput       = _videoOutput;
 @synthesize videoPreviewLayer = _videoPreviewLayer;
-@synthesize topViewLayer      =_topViewLayer;
-@synthesize canStartProcessing=_canStartProcessing;
+@synthesize topViewLayer      = _topViewLayer;
+@synthesize canStartProcessing= _canStartProcessing;
 
-cv::VideoCapture   cap;
+cv::VideoCapture      cap;
 dlib::shape_predictor pose_model;
+
+extern bool Camera;
 
 
 - (void)viewDidLoad
@@ -52,8 +54,8 @@ dlib::shape_predictor pose_model;
     
     // Load the face Haar cascade from resources
     
-    NSString * const kFaceCascadeFilename = @"GraftyResources/haarcascade_frontalface_alt2";
-    NSString * const kNoseCascadeFilename = @"GraftyResources/haarcascade_mcs_nose";
+    NSString * const kFaceCascadeFilename    = @"GraftyResources/haarcascade_frontalface_alt2";
+    NSString * const kNoseCascadeFilename    = @"GraftyResources/haarcascade_mcs_nose";
     NSString * const kShapePredictorFileName = @"GraftyResources/shape_predictor_68_face_landmarks";
 
     
@@ -71,19 +73,19 @@ dlib::shape_predictor pose_model;
     if (!gsys.loadNoseCascade(noseCascadeFname)) {
         NSLog(@"Could not load nose cascade: %@", noseCascadePath);
     }
+
+    gsys.setFrameRate(30);
+    gsys.setProgramState(DETECT);
     
     std::string *predictor_fname = new std::string([shapePredictorPath UTF8String]);
     dlib::deserialize((const std::string) *predictor_fname) >> pose_model;
     
-
-    gsys.setFrameRate(30);
-    gsys.setProgramState(DETECT);
     _camera = 1;   //0 = back camera; 1 = front camera
+    _canStartProcessing = false;
     
-    // **************************
-    // these go together ****
-    gsys.imageType = GRAFTY_Y_CB_CR; // GRAFTY_BGRA, GRAFTY_Y_CB_CR;
-    _captureGrayscale = true;        //   false for GRAFTY_BGRA; true to GRAFTY_Y_CB_CR
+    // *** these go together ****
+    gsys.imageType = GRAFTY_Y_CB_CR; // or GRAFTY_BGRA
+    _captureGrayscale = true;
     // **************************
     [self createCaptureSessionForCamera:_camera qualityPreset:_qualityPreset grayscale:_captureGrayscale];
     [_captureSession startRunning];
@@ -94,7 +96,6 @@ dlib::shape_predictor pose_model;
      addObserver:self selector:@selector(orientationChanged:)
      name:UIDeviceOrientationDidChangeNotification
      object:[UIDevice currentDevice]];
-    
 }
 
 
@@ -108,33 +109,42 @@ dlib::shape_predictor pose_model;
     return [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
 }
 
+static int lightSamp = 0;
 - (void)captureOutput:(AVCaptureOutput *)captureOutput
                       didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
                       fromConnection:(AVCaptureConnection *)connection {
     
     
+    CFDictionaryRef metadataDictionary = (CFDictionaryRef) CMGetAttachment(sampleBuffer,
+                                                                           kCGImagePropertyExifDictionary, NULL);
+    NSDictionary *metaDict= (__bridge NSDictionary*)metadataDictionary;
+    NSArray *isoDict =          [ metaDict objectForKey:@"ISOSpeedRatings" ];
+    NSNumber *iso          = [NSNumber numberWithInt:[ [isoDict objectAtIndex:0] intValue]];
+    currentISO = [iso intValue];
+    
+    float shutterSpeed = [[metaDict objectForKey:@"ShutterSpeedValue"] floatValue];
+
+    
+    lightSamp++;
+    if(lightSamp>30){
+        //printf("iso = %2.2f, shutter = %f, lux = %2.2f, temp = %f\n", currentISO, shutterSpeed, gsys.lux, gsys.temperature);
+        lightSamp=0;
+    }
     CVPixelBufferRef pixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer);
     OSType format = CVPixelBufferGetPixelFormatType(pixelBuffer);
     CGRect videoRect = CGRectMake(0.0f, 0.0f, CVPixelBufferGetWidth(pixelBuffer), CVPixelBufferGetHeight(pixelBuffer));
-    AVCaptureVideoOrientation videoOrientation = (AVCaptureVideoOrientation)[UIDevice currentDevice].orientation;
     
-    if (format == kCVPixelFormatType_420YpCbCr8BiPlanarFullRange) {
+    AVCaptureVideoOrientation videoOrientation = (AVCaptureVideoOrientation)[UIDevice currentDevice].orientation;
+
+    if (format == kCVPixelFormatType_420YpCbCr8BiPlanarFullRange){
         // For grayscale mode, the luminance channel of the YUV data is used
         CVPixelBufferLockBaseAddress(pixelBuffer, 0);
         
         void *baseaddress = CVPixelBufferGetBaseAddressOfPlane(pixelBuffer, 0);
-        cv::Mat mat(videoRect.size.height, videoRect.size.width, CV_8UC1, baseaddress, 0);
-        [self processFrame:mat videoRect:videoRect videoOrientation:videoOrientation];
-        
-        CVPixelBufferUnlockBaseAddress(pixelBuffer, 0);
-    }
-    else if (format == kCVPixelFormatType_32BGRA) {
-        // For color mode a 4-channel cv::Mat is created from the BGRA data
-        CVPixelBufferLockBaseAddress(pixelBuffer, 0);
-        
-        void *baseaddress = CVPixelBufferGetBaseAddress(pixelBuffer);
-        cv::Mat mat(videoRect.size.height, videoRect.size.width, CV_8UC4, baseaddress, 0);
-        [self processFrame:mat videoRect:videoRect videoOrientation:videoOrientation];
+        cv::Mat matY(videoRect.size.height, videoRect.size.width, CV_8UC1, baseaddress, 0);
+        baseaddress = CVPixelBufferGetBaseAddressOfPlane(pixelBuffer, 1);
+        cv::Mat matCbCr(videoRect.size.height/2, videoRect.size.width/2, CV_8UC2, baseaddress, 0);
+        [self processFrameY:matY CbCr:matCbCr videoRect:videoRect videoOrientation:videoOrientation];
         
         CVPixelBufferUnlockBaseAddress(pixelBuffer, 0);
     }
@@ -202,8 +212,6 @@ dlib::shape_predictor pose_model;
     // Create the capture session
     _captureSession = [[AVCaptureSession alloc] init];
     _captureSession.sessionPreset = (qualityPreset)? qualityPreset : AVCaptureSessionPreset640x480;
-    //_captureSession.sessionPreset = (qualityPreset)? qualityPreset : AVCaptureSessionPresetMedium;
-
     
     // Create device input
     error = nil;
@@ -241,30 +249,60 @@ dlib::shape_predictor pose_model;
         [_captureSession addOutput:_videoOutput];
     }
     
+    [self createVideoPreviewLayer];
+    [self createTextPreviewLayer];
+    
+    return YES;
+}
+
+- (void) createVideoPreviewLayer
+{
     // Create a video preview layer
     _videoPreviewLayer = [[AVCaptureVideoPreviewLayer alloc] initWithSession:_captureSession];
-    _videoPreviewLayer.delegate = self;
-    
-    //[AN] fixed to take screen bounds
     [_videoPreviewLayer setFrame:[[UIScreen mainScreen] bounds]];
     
     //[AN] change from Aspect to AspectFill
     // AVLayerVideoGravityResizeAspect;
-
-    _videoPreviewLayer.videoGravity = AVLayerVideoGravityResizeAspectFill;
-    
+    _videoPreviewLayer.videoGravity = AVLayerVideoGravityResizeAspect;
     [self.view.layer insertSublayer:_videoPreviewLayer atIndex:0];
-    return YES;
 }
 
+- (void) createTextPreviewLayer
+{
+    //create a text preview layer
+    CATextLayer *tLayer = nil;
+    tLayer = [[CATextLayer alloc] init];
+    tLayer.name = @"bpm";
+    tLayer.string = @"";
+    tLayer.backgroundColor  = [UIColor darkGrayColor].CGColor;
+    tLayer.foregroundColor  = tColor;
+    tLayer.frame = CGRectMake(self.view.bounds.origin.x,self.view.bounds.origin.y+20,self.view.bounds.size.width,20);
+    tLayer.font = (__bridge CFTypeRef)@"AmericanTypewriter-CondensedLight";
+    tLayer.fontSize = 20;
+    tLayer.alignmentMode = kCAAlignmentCenter;
+    tLayer.contentsScale = [[UIScreen mainScreen] scale];
+    [self.view.layer insertSublayer:tLayer above:_videoPreviewLayer];
+}
+
+static CGColorRef tColor = [UIColor whiteColor].CGColor;
 GraftySystem       gsys;
 GraftyFaceList     faces;
-std::deque<float> fpsHist;
 clock_t tin, tout = 0;
-float fps = 0;
+float fps =0;
+std::deque<float> fpsHist;
+static void * const MyAdjustingExposureObservationContext = (void*)&MyAdjustingExposureObservationContext;
 
-- (void)processFrame:(cv::Mat &)mat videoRect:(CGRect)rect videoOrientation:(AVCaptureVideoOrientation)videoOrientation
+CGPoint exposurePoint = CGPointMake(0.5f, 0.5f);
+static bool iso_setting_in_progress = false;
+static bool temperature_setting_in_progress = false;
+static float targetISO        = 0;
+static float currentISO;
+
+
+- (void)processFrameY:(cv::Mat &)matY CbCr:(cv::Mat)matCbCr videoRect:(CGRect)rect videoOrientation:(AVCaptureVideoOrientation)videoOrientation
 {
+    Camera = true;
+    
     //if user didn't click on circle to start processing or user click to stop processing, we should stop processing the frames.
     if(!_canStartProcessing)
         return;
@@ -273,7 +311,8 @@ float fps = 0;
     switch (videoOrientation) {
         case AVCaptureVideoOrientationPortrait:
         {
-            cv::transpose(mat, mat);
+            cv::transpose(matY, matY);
+            cv::transpose(matCbCr, matCbCr);
             break;
         }
         case AVCaptureVideoOrientationLandscapeLeft:
@@ -282,54 +321,107 @@ float fps = 0;
         }
         case AVCaptureVideoOrientationLandscapeRight:
         {
-            cv::flip(mat, mat, -1);
+            cv::flip(matY, matY, -1);
+            cv::flip(matCbCr, matCbCr, -1);
             break;
         }
         case AVCaptureVideoOrientationPortraitUpsideDown:
         {
-            cv::transpose(mat, mat);
-            cv::flip(mat, mat, -1);
+            cv::transpose(matY, matY);
+            cv::flip(matY, matY, -1);
+            cv::transpose(matCbCr, matCbCr);
+            cv::flip(matCbCr, matCbCr, -1);
             break;
         }
             
     }
    
-    //******    Call into Library to get bpm ****
-    gsys.setCurrentFrame(mat);
+    if ( gsys.getProgramState() == DETECT &&
+        [_captureDevice lockForConfiguration:NULL] == YES ) {
+        
+        if ([_captureDevice isExposureModeSupported:AVCaptureExposureModeContinuousAutoExposure]) {
+            [_captureDevice setExposurePointOfInterest:exposurePoint];
+            [_captureDevice setExposureMode:AVCaptureExposureModeContinuousAutoExposure];
+        }
+        
+        if ([_captureDevice isWhiteBalanceModeSupported:AVCaptureWhiteBalanceModeContinuousAutoWhiteBalance])
+        {
+            [_captureDevice setWhiteBalanceMode:AVCaptureWhiteBalanceModeContinuousAutoWhiteBalance];
+        }
+        
+        [_captureDevice unlockForConfiguration];
+        targetISO = currentISO;
+        iso_setting_in_progress = false;
+        calibrate_attempt_count = 0;
+        gsys.camState = CAM_AUTO;
+    }
+
+    //******
+    gsys.setCurrentFrame(matY, matCbCr);
     trigger_hr(gsys, faces, pose_model);
-    //******    Done                         ****
 
     size_t bpm = 0;
+
+    float realFPS = 0;
     if (faces.size())
     {
-        faces[0].getBpm(gsys, bpm);
-        float avgFps = (float)faces[0].getFPS();
-        if (avgFps < 20) {
-            bpm = 0;
-        } else
+        // cancel stopHR timer if any
+        if(timeToStopTimer)
         {
-            if (avgFps > 20 && avgFps <25 ) {
-                bpm = bpm * (25.0f/30.0f);
-            } else {
-                bpm = bpm * ((float)faces[0].getFPS()/30.0f);
+            if([timeToStopTimer isValid])
+            {
+                NSLog(@"face detected..15 sec timer cancelled");
+                [timeToStopTimer invalidate];
+                timeToStopTimer = nil;
             }
+        }
+        
+        if (gsys.getProgramState() == TRACK_UPDATE ||
+            gsys.getProgramState() == TRACK_MAINTAIN)
+        {
+            faces[0].getBpm(gsys, bpm);
+            realFPS = (float)faces[0].getFPS();
+            if (realFPS < 20) {
+                bpm = 0;
+            }
+        }
+        else if (gsys.getProgramState() == TRACK_INIT)
+        {
+            cv::Rect2f bbox;
+            create_bounding_box_from_points(faces[0].nextNosePoints, bbox);
+            bbox = [ self pixelBuffer2Display:bbox pixelFrame:cv::Rect2f(0,0, gsys.nFrame.cols, gsys.nFrame.rows)];
             
-            if (bpm>1 && bpm < 55) {
-                bpm = 55;
-            }
+            cv::Point2f fpoint_cv = cv::Point2f(bbox.x + bbox.width/2.0f, bbox.y + bbox.height/2.0f);
+            
+            
+            // https://developer.apple.com/library/mac/documentation/AudioVideo/Conceptual/AVFoundationPG/Articles/04_MediaCapture.html
+            // CGPoint should be from (0,0) to (1,1) with (0,0) at top left and (1,1) at bottom right in landscape right position
+            // refer to Focus modes in the documentation above
+            CGPoint     fpoint_cg = CGPointMake((float)(fpoint_cv.y/self.view.bounds.size.height),
+                                                (float)(self.view.bounds.size.width - fpoint_cv.x)/self.view.bounds.size.width
+                                                );
+            exposurePoint = fpoint_cg;
+            
+            float lux  = 0.0f;
+            float temperature = 3000.0f;
+            gsys.calculateLux(faces[0].nextGFPoints, lux, temperature);
+            [self calibrateCamera:lux temp:(float)temperature];
+        }
+    }
+    else {
+        //kick off startHR timer since there is no face detected.
+        // if there is no face within 15 sec, shut it down
+        if(!timeToStopTimer)
+        {
+            //NSLog(@"No face ... 15 sec timer started");
+            //timeToStopTimer = [NSTimer  scheduledTimerWithTimeInterval:15.0f target:self selector:@selector( timerHandler:) userInfo:nil repeats:NO];
         }
     }
     
-    int fpsAvg = 0;
-    if (faces.size())
-    {
-        fpsAvg = faces[0].getFPS();
-    }
-    
-    tout = 0;
     cv::Rect2f bbox;
     if (gsys.getProgramState() == TRACK_UPDATE) {
-        create_bounding_box_from_points(faces[0].nextPoints, bbox);
+        create_bounding_box_from_points(faces[0].nextGFPoints, bbox);
+        bbox = [ self pixelBuffer2Display:bbox pixelFrame:cv::Rect2f(0,0, gsys.nFrame.cols, gsys.nFrame.rows) ];
     }
     else {
         bbox.x = bbox.y = 0;
@@ -343,7 +435,8 @@ float fps = 0;
              forVideoRect:rect
          videoOrientation:videoOrientation
                displayBpm:bpm
-               displayFps: (size_t) fpsAvg
+               displayFps: (size_t) realFPS
+
          ];
     });
 }
@@ -378,47 +471,47 @@ float fps = 0;
             featureLayer = currentLayer;
         }
         
-        if ([[currentLayer name] isEqualToString:@"spm"]) {
+        if ([[currentLayer name] isEqualToString:@"bpm"]) {
             tLayer = (CATextLayer *)currentLayer;
         }
     }
-    
-    size_t viewH = self.view.bounds.size.height;
-    size_t viewW = self.view.bounds.size.width;
-    
-    float viewToMatMinRatio = std::min(viewH, viewW)/std::min(rect.size.height, rect.size.width);
-    float viewToMatMaxRatio = std::max(viewH, viewW)/std::max(rect.size.height, rect.size.width);
 
     CGRect faceRect;
-
-    if(bbox.width != 0 )
-    {
-        if (self.view.bounds.size.height >= self.view.bounds.size.width)
-        {
-            faceRect.origin.x    = bbox.x*viewToMatMinRatio;
-            faceRect.origin.y    = bbox.y*viewToMatMaxRatio;
-            faceRect.size.width  = bbox.width*viewToMatMinRatio;
-            faceRect.size.height = bbox.height*viewToMatMaxRatio;
-        }
-        else {
-            faceRect.origin.x    = bbox.x*viewToMatMaxRatio;
-            faceRect.origin.y    = bbox.y*viewToMatMinRatio;
-            faceRect.size.width  = bbox.width*viewToMatMaxRatio;
-            faceRect.size.height = bbox.height*viewToMatMinRatio;
-        }
-        
-        if (!featureLayer) {
-            // Create a new feature marker layer
-            featureLayer = [[CALayer alloc] init];
-            featureLayer.name = @"FaceLayer";
-            featureLayer.borderColor = [[UIColor greenColor] CGColor];
-            featureLayer.borderWidth = 1.0f;
-            [self.view.layer addSublayer:featureLayer];
-        }
-        featureLayer.frame = faceRect;
-        [featureLayer setHidden:YES];//[AN] set to hide
-
+    faceRect.origin.x    = bbox.x;
+    faceRect.origin.y    = bbox.y;
+    faceRect.size.width  = bbox.width;
+    faceRect.size.height = bbox.height;
+    
+    
+    if (!featureLayer) {
+        // Create a new feature marker layer
+        featureLayer = [[CALayer alloc] init];
+        featureLayer.name = @"FaceLayer";
+        featureLayer.borderColor = [[UIColor greenColor] CGColor];
+        featureLayer.borderWidth = 1.0f;
+        [self.view.layer addSublayer:featureLayer];
     }
+    featureLayer.frame = faceRect;
+    [featureLayer setHidden:NO];
+
+    
+    if (!tLayer) {
+        // Create a new bpm marker layer
+        tLayer = [[CATextLayer alloc] init];
+        tLayer.name = @"bpm";
+        tLayer.backgroundColor  = [UIColor darkGrayColor].CGColor;
+        tLayer.foregroundColor  = [UIColor whiteColor].CGColor;
+        tLayer.frame = CGRectMake(self.view.bounds.origin.x,self.view.bounds.origin.y+20,self.view.bounds.size.width,40);
+        tLayer.font = (__bridge CFTypeRef)@"AmericanTypewriter-CondensedLight";
+        tLayer.fontSize = 12;
+        tLayer.alignmentMode = kCAAlignmentLeft;
+        tLayer.contentsScale = [[UIScreen mainScreen] scale];
+        [self.view.layer insertSublayer:tLayer above:_videoPreviewLayer];
+    }
+//    NSString *label = [NSString stringWithFormat:@"BPM:%zu FPS:%zu %s",
+//                       (size_t) (bpm), (size_t) fps, progressString.c_str()];
+//    tLayer.string = label;
+    [tLayer setHidden:YES];
     
     if (gsys.getProgramState() == DETECT) {
         _topViewLayer.circleProgressWithLabel.progressColor = [UIColor orangeColor];
@@ -434,13 +527,12 @@ float fps = 0;
             //_topViewLayer.updateLabel.text =  [NSString stringWithFormat:@"HOLD STILL\n♥ %zu bpm",(size_t)(oldbpm)];
             if(nil == _topViewLayer.heart)
             {
-                
                 [self updateUpdateLabel:[NSString stringWithFormat:@"%zu bpm (last)",(size_t)(oldbpm)] showHeart:YES];
             }
             else {
                 _topViewLayer.heart.text = @"♥";
                 _topViewLayer.bPMResult.text =  [NSString stringWithFormat:@"%zu\nbpm (last)",(size_t)(oldbpm)];
-               [self updateUpdateLabel:@""  showHeart:NO];
+                [self updateUpdateLabel:@""  showHeart:NO];
             }
         }
         //[_topViewLayer updateCircleLabel:@""];
@@ -457,7 +549,6 @@ float fps = 0;
             _topViewLayer.bPMResult.text =  [NSString stringWithFormat:@""];
         }
     }
-    
     if (faces.size())
     {
         float trackingPercentage = faces[0].getHRTrackingPercentage()*100;
@@ -483,7 +574,7 @@ float fps = 0;
                     {
                         //_topViewLayer.heart.text = @"♥";
                         _topViewLayer.bPMResult.text =  [NSString stringWithFormat:@""];
-                       [self updateUpdateLabel:@"CALCULATING..." showHeart:NO];
+                        [self updateUpdateLabel:@"CALCULATING..." showHeart:NO];
                     }
                 }
             }
@@ -492,21 +583,21 @@ float fps = 0;
                 oldbpm = bpm;
                 if(nil == _topViewLayer.heart)
                 {
-                   [self updateUpdateLabel:  [NSString stringWithFormat:@"%zu bpm",(size_t)(bpm)]  showHeart:YES];
+                    [self updateUpdateLabel:  [NSString stringWithFormat:@"%zu bpm",(size_t)(bpm)]  showHeart:YES];
                 }
                 else {
                     _topViewLayer.heart.text = @"♥";
                     _topViewLayer.bPMResult.text =  [NSString stringWithFormat:@"%zu\nbpm",(size_t)(bpm)];
-                  [self updateUpdateLabel:@""  showHeart:NO];
+                    [self updateUpdateLabel:@""  showHeart:NO];
                 }
             }
         }
         _topViewLayer.circleProgressWithLabel.progressColor = [UIColor greenColor];
         _topViewLayer.circleProgressWithLabel.progress = trackingPercentage/100.0;
     }
+    
     [CATransaction commit];
 }
-
 
 - (CGAffineTransform)affineTransformForVideoFrame:(CGRect)videoFrame orientation:(AVCaptureVideoOrientation)videoOrientation
 {
@@ -547,6 +638,190 @@ float fps = 0;
     return t;
 }
 
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+    if (context == MyAdjustingExposureObservationContext)
+    {
+        // Do  stuff
+    }
+
+}
+
+- (cv::Rect2f) pixelBuffer2Display:(cv::Rect2f)inRect pixelFrame:(cv::Rect2f)pixelFrame
+{
+    cv::Rect2f R;
+    
+    size_t viewH = self.view.bounds.size.height;
+    size_t viewW = self.view.bounds.size.width;
+    
+    float viewToMatMinRatio = std::min(viewH, viewW)/std::min(pixelFrame.height, pixelFrame.width);
+    float viewToMatMaxRatio = std::max(viewH, viewW)/std::max(pixelFrame.height, pixelFrame.width);
+    
+    if (self.view.bounds.size.height >= self.view.bounds.size.width)
+    {
+        R.x    = inRect.x*viewToMatMinRatio;
+        R.y    = inRect.y*viewToMatMaxRatio;
+        R.width  = inRect.width*viewToMatMinRatio;
+        R.height = inRect.height*viewToMatMaxRatio;
+    }
+    else {
+        R.x    = inRect.x*viewToMatMaxRatio;
+        R.y    = inRect.y*viewToMatMinRatio;
+        R.width  = inRect.width*viewToMatMaxRatio;
+        R.height = inRect.height*viewToMatMinRatio;
+    }
+    return R;
+}
+
+#define MIN_ISO              40   // must be greater than activeFormat.minISO
+#define MAX_ISO             800   // must be less than activeFormat.maxISO
+
+// match up the vector below with the values above
+//standard ISO values: 50, 64, 80, 100, 125, 160, 200, 250, 320, 400, 500, 640
+static std::vector<float> std_iso = {   40.0f, 50.0f,  64.0f,  80.0f, 100.0f, 125.0f, 160.0f,
+                                       200.0f, 250.0f, 320.0f, 400.0f, 500.0f, 640.0f, 800.0f
+};
+
+#define MIN_SHUTTER_SPEED   125
+#define MAX_SHUTTER_SPEED     1
+
+static int calibrate_attempt_count = 0;
+
+- (void) calibrateCamera:(float)lux temp:(float)temperature
+{
+    if (iso_setting_in_progress || temperature_setting_in_progress)
+    {
+        return;
+    }
+    
+    if (calibrate_attempt_count++ > 30)
+    {
+        printf("Calibration failed.. locking cam anyway\n");
+        tColor = [UIColor yellowColor].CGColor;
+        gsys.camState = CAM_LOCKED;
+    }
+    
+   // CMTime shutterSpeed = CMTimeMake(1,125) ;
+    CMTime shutterSpeed = AVCaptureExposureDurationCurrent ;
+    
+    if (currentISO > MAX_ISO) {
+        targetISO = MAX_ISO;
+    }
+    else if (currentISO < MIN_ISO) {
+        targetISO = MIN_ISO;
+    }
+    else if (lux < 100) {
+        targetISO = [self nextUpISO:currentISO ];
+    }
+    else if (lux > 150)
+    {
+        targetISO = [self nextDownISO:currentISO ];
+    }
+    else if (std::abs(targetISO - currentISO) <= 10)
+    {
+        gsys.camState = CAM_LOCKED;
+    }
+    
+
+    if (
+        [_captureDevice lockForConfiguration:NULL] == YES ) {
+        
+        if ([_captureDevice isExposureModeSupported:AVCaptureExposureModeCustom]) {
+            iso_setting_in_progress = true;
+            [_captureDevice setExposureModeCustomWithDuration:shutterSpeed ISO:targetISO completionHandler:^(CMTime syncTime)
+             
+            {
+                iso_setting_in_progress = false;
+            }
+             
+             ];
+            
+            temperature = 7000 - temperature;
+            
+            if (temperature < 2500) temperature = 2500.0f;
+            if (temperature > 7000) temperature = 7000.0f;
+            
+            AVCaptureWhiteBalanceTemperatureAndTintValues temperatureAndTint = {
+                .temperature = 3000,
+                .tint = 0,
+            };
+            
+            temperature_setting_in_progress = true;
+            [_captureDevice deviceWhiteBalanceGainsForTemperatureAndTintValues:temperatureAndTint];
+            [_captureDevice setWhiteBalanceModeLockedWithDeviceWhiteBalanceGains:[_captureDevice deviceWhiteBalanceGainsForTemperatureAndTintValues:temperatureAndTint] completionHandler:^(CMTime syncTime)
+            {
+                temperature_setting_in_progress = false;
+            }];
+        }
+        [_captureDevice unlockForConfiguration];
+    }
+    else {
+        printf("[NO ACTION] lux = %2.2f, currentISO = %2.2f, targetISO = %2.2f\n", lux, currentISO, targetISO);
+    }
+}
+
+- (void) lockCamera
+{
+    if ( [_captureDevice isExposureModeSupported:AVCaptureExposureModeLocked ] &&
+         [_captureDevice lockForConfiguration:NULL] == YES ) {
+        
+        [_captureDevice setExposureMode:AVCaptureExposureModeLocked];
+        [_captureDevice unlockForConfiguration];
+
+    }
+}
+
+- (float) nextUpISO:(float)inISO
+{
+    float nextISO = inISO;
+    if (inISO < std_iso.front())
+    {
+        nextISO = std_iso.front();
+    }
+    else if (inISO >= std_iso.back())
+    {
+        nextISO = std_iso.back();
+    }
+    else
+    {
+        for (int i = 0; i < std_iso.size() - 1; i++)
+        {
+            if ( inISO >= std_iso[i] && inISO < std_iso[i+1] )
+            {
+                nextISO = std_iso[i+1];
+                break;
+            }
+        }
+    }
+    return (nextISO);
+}
+
+- (float) nextDownISO:(float)inISO
+{
+
+    float nextISO = inISO;
+    if (inISO <= std_iso.front())
+    {
+        nextISO = std_iso.front();
+    }
+    else if (inISO > std_iso.back())
+    {
+        nextISO = std_iso.back();
+    }
+    else
+    {
+        for (int i = 0; i < std_iso.size() - 1; i++)
+        {
+            if ( inISO <= std_iso[i+1] && inISO > std_iso[i] )
+            {
+                nextISO = std_iso[i];
+                break;
+            }
+        }
+    }
+    return (nextISO);
+}
+
 -(void)updateUpdateLabel:(NSString*)value showHeart:(BOOL)showHeart
 {
     
@@ -556,7 +831,7 @@ float fps = 0;
     }
     else
     {
-         _topViewLayer.updateHeartLabel.label.text=value;
+        _topViewLayer.updateHeartLabel.label.text=value;
         if( [value isEqualToString:@""])
             _topViewLayer.updateHeartLabel.heart.text=@"";
         else
@@ -567,8 +842,9 @@ float fps = 0;
                 _topViewLayer.updateHeartLabel.heart.text=@"";
         }
     }
-   
+    
 }
+
 -(void)addTopViewLayer
 {
     CGRect screenFrame = [[UIScreen mainScreen] bounds];
@@ -587,8 +863,8 @@ float fps = 0;
         }
         else if ([[UIDevice currentDevice] orientation] == UIDeviceOrientationLandscapeLeft)
         {
-        _topViewLayer = [[TopViewLayerLandScapeLeft alloc] initWithFrame:screenFrame];
-        
+            _topViewLayer = [[TopViewLayerLandScapeLeft alloc] initWithFrame:screenFrame];
+            
         }
         else if ([[UIDevice currentDevice] orientation] == UIDeviceOrientationLandscapeRight)
         {
@@ -617,59 +893,96 @@ float fps = 0;
         case UIDeviceOrientationPortraitUpsideDown:
             /* start special animation */
             NSLog(@"UIDeviceOrientationPortraitUpsideDown");
-             [self addTopViewLayer];
+            [self addTopViewLayer];
             break;
         case UIDeviceOrientationLandscapeLeft:
             NSLog(@"UIDeviceOrientationLandscapeLeft");
-             [self addTopViewLayer];
+            [self addTopViewLayer];
             break;
         case UIDeviceOrientationLandscapeRight:
             NSLog(@"UIDeviceOrientationLandscapeRight");
-             [self addTopViewLayer];
+            [self addTopViewLayer];
             break;
         default:
             break;
     };
 }
+
 -(void)toggleStartStopProcess
 {
+    NSLog(@"canstart toggled from %d to %d", _canStartProcessing, !_canStartProcessing);
     _canStartProcessing = !_canStartProcessing;
-    //add the tost to infor user to what to do to either start or stop the processing.
+    //add the toast to infor user to what to do to either start or stop the processing.
     if(_canStartProcessing)
     {
-        [UIView animateWithDuration:0.5 animations:^{
-            //hid tap me to start
-            
-            _topViewLayer.middleCircleView.hidden=YES;
-        } completion:^(BOOL finished) {
-            //[self performSelector:@selector(showTapAgainToStop) withObject:nil afterDelay:0.5];
-             timeToStopTimer = [NSTimer  scheduledTimerWithTimeInterval:30 target:self selector:@selector(toggleStartStopProcess) userInfo:nil repeats:NO];
-        }];
+        [ self startHR ];
     }
     else
     {
-        if(timeToStopTimer)
-        {
-            if([timeToStopTimer isValid])
-            {
-                [timeToStopTimer invalidate];
-                timeToStopTimer = nil;
-            }
-        }
-        [self showTapMeToStart];
+        [ self stopHR ];
     }
 }
+
+
+-(void)timerHandler:(NSTimer*)theTimer
+{
+    [self stopHR];
+}
+
+-(void)stopHR
+{
+    gsys.setProgramState(DETECT);
+    _canStartProcessing = false;
+    _topViewLayer.circleProgressWithLabel.progress = 1;
+
+    if(timeToStopTimer)
+    {
+        if([timeToStopTimer isValid])
+        {
+            //NSLog(@"timer canceled from stopHR");
+            [timeToStopTimer invalidate];
+            timeToStopTimer = nil;
+        }
+    }
+    [self showTapMeToStart];
+}
+
+-(void)startHR
+{
+    _canStartProcessing = true;
+
+    //stop any previous timer running.
+    if(timeToStopTimer)
+    {
+        if([timeToStopTimer isValid])
+        {
+            [timeToStopTimer invalidate];
+            timeToStopTimer = nil;
+        }
+    }
+    
+    // hide middle circle..
+    [UIView animateWithDuration:0.5 animations:^{
+        _topViewLayer.middleCircleView.hidden=YES;
+    } completion:^(BOOL finished) {
+        //[self performSelector:@selector(showTapAgainToStop) withObject:nil afterDelay:0.5];
+        //            timeToStopTimer = [NSTimer  scheduledTimerWithTimeInterval:30 target:self selector:@selector(toggleStartStopProcess) userInfo:nil repeats:NO];
+    }];
+}
+
+
+
 #pragma -mark TopViewLayer Delegate
 -(void)circleProgressClicked:(id)sender{
     
-    NSUserDefaults * defaultUser = [NSUserDefaults standardUserDefaults];
+//    NSUserDefaults * defaultUser = [NSUserDefaults standardUserDefaults];
     
-    if( nil != [defaultUser objectForKey:@"showFaceOutLine"])
-    {
-        [defaultUser setObject:[NSNumber numberWithBool:NO] forKey:@"showFaceOutLine"];
-        [defaultUser synchronize];
-    }
-   
+//    if( nil != [defaultUser objectForKey:@"showFaceOutLine"])
+//    {
+//        [defaultUser setObject:[NSNumber numberWithBool:NO] forKey:@"showFaceOutLine"];
+//        [defaultUser synchronize];
+//    }
+    
     if(timeToStopTimer)
     {
         if([timeToStopTimer isValid])
@@ -681,6 +994,7 @@ float fps = 0;
     [self toggleStartStopProcess];
     
 }
+
 -(void)showTapAgainToStop
 {
     //show tap again to stop
@@ -692,30 +1006,32 @@ float fps = 0;
     } completion:^(BOOL finished) {
         [self performSelector:@selector(hideTapAgainToStop) withObject:nil afterDelay:1];
     }];
-
+    
 }
+
 -(void)hideTapAgainToStop
 {
     //
     [UIView animateWithDuration:0.5 delay:1.0 options:UIViewAnimationOptionRepeat animations:^{
         
         _topViewLayer.middleCircleView.hidden=YES;
-        [_topViewLayer.tapToStartLabel setNeedsDisplay]; 
+        [_topViewLayer.tapToStartLabel setNeedsDisplay];
     } completion:^(BOOL finished) {
         
     }];
 }
+
 -(void)showTapMeToStart
 {
     //show tap me to start
     [UIView animateWithDuration:0.5 delay:0.0 options:UIViewAnimationOptionRepeat animations:^{
-        _topViewLayer.tapToStartLabel.text=@"Tap me to start...";
+        _topViewLayer.tapToStartLabel.text=@"Tap to start...";
         _topViewLayer.middleCircleView.hidden=NO;
         [_topViewLayer.tapToStartLabel setNeedsDisplay];
     } completion:^(BOOL finished) {
         //
     }];
-
+    
 }
 
 @end

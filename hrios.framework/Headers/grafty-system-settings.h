@@ -24,8 +24,22 @@ enum GraftyImageType
 {
     GRAFTY_BGRA = 1,
     GRAFTY_BGR = 2,
-    GRAFTY_Y_CB_CR = 3
+    GRAFTY_Y_CB_CR = 3,
+    GRAFTY_MAC_Y_CB_CR = 4
 };
+
+enum PState {
+    DETECT         = 1,
+    TRACK_INIT     = 2,
+    TRACK_UPDATE   = 3,
+    TRACK_MAINTAIN = 4
+};
+
+enum CameraState {
+    CAM_AUTO = 1,
+    CAM_LOCKED
+};
+
 class GraftySystem {
 
 private:
@@ -34,6 +48,9 @@ private:
     cv::Ptr<cv::CLAHE> clahe;
     
 public:
+    CameraState camState;
+    float lux;
+    float temperature;
     GraftyImageType imageType;
     float   frameRate;
     size_t  frameCount;
@@ -48,6 +65,9 @@ public:
     cv::Mat pGreenFrame;
     cv::Mat nGreenFrame;
     
+    cv::Mat nCbCr;
+    char dummy[300];
+    
     PState programState;
     
     //added another programStage for good featurs tracker
@@ -61,6 +81,7 @@ public:
     float getFrameRate (void);
                         
     void     setCurrentFrame(cv::Mat& frame);
+    void    setCurrentFrame(cv::Mat& frame, cv::Mat& CbCr );
     size_t   getFrameCount(void);
     cv::Mat& getCurrentFrame();
     
@@ -80,8 +101,7 @@ public:
     bool loadFaceCascade(std::string& s);
     bool loadNoseCascade(std::string& s);
     inline cv::Ptr<cv::CLAHE> getClahe() { return (this->clahe); }
-    
-    
+    void calculateLux(std::vector<cv::Point2f>& points, float& lux, float& temperature);
 };
 
 #endif /* defined(__grafty_vp__grafty_system_settings__) */

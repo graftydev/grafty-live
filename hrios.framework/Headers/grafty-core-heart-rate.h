@@ -27,7 +27,6 @@
 
 #define NUM_OF_FEATURES 3  //7
 
-#define NUM_OF_SAMPLE_TO_AVERAGE 300 //90 //300
 
 extern bool Camera;
 
@@ -46,17 +45,15 @@ class HeartRate {
     
     size_t             numFramesPerHeartRate;
     
-    size_t             numHRCalculationsPerSec = 4;
+    size_t             numHRCalculationsPerSec = 30;
     
     //thresholds
     float rejection_threshold = 10;
-    float std_coefficient = 0.3; //0.8; //0.6; //0.3; //0.2;  //0.075; //0.2
-    
     
     std::deque<size_t> bpmHistory;
-    std::vector<size_t> bpmHistogram;
+    //std::vector<size_t> bpmHistogram;
+    size_t prev_bpm;
     
-    std::vector<float> fAxis;
     HRBufferVector  bufferVector;
     
     std::vector<std::deque<float>> bufferFeatures;
@@ -67,7 +64,7 @@ class HeartRate {
 //    std::vector<float> variance;
     std::vector<size_t> sorted_variance_idx;
     
-    size_t numOfSampleToAverage = NUM_OF_SAMPLE_TO_AVERAGE;
+    
 
     
     
@@ -77,6 +74,8 @@ class HeartRate {
     
     std::deque<float>  FPS_30;
     
+    float              normalize_value;
+    
 public:
     
     HeartRate(void);
@@ -85,7 +84,7 @@ public:
         bufferVector.clear();
         clockVector.clear();
         bpmHistory.clear();
-        bpmHistogram.clear();
+//        bpmHistogram.clear();
         
         bufferFeatures.clear();
         numFeatures = NUM_OF_FEATURES;

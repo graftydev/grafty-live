@@ -14,7 +14,8 @@
 +(UIColor*)backGroundColor{
     //R: 243 G: 253 B: 255
     //R: 241 G: 251 B: 255
-    return [UIColor colorWithRed:241/255.0 green:251/255.0 blue:255/255.0 alpha:0.9];
+//    return [UIColor colorWithRed:241/255.0 green:251/255.0 blue:255/255.0 alpha:0.9];
+    return [UIColor colorWithRed:0/255.0 green:0/255.0 blue:0/255.0 alpha:0.9];
 }
 +(UIColor*)labelColor{
     //R: 66 G: 182 B: 255

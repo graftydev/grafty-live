@@ -7,7 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1011B78E1BE8F2090066C03A /* face-out-line.png in Resources */ = {isa = PBXBuildFile; fileRef = 1011B78D1BE8F2090066C03A /* face-out-line.png */; settings = {ASSET_TAGS = (); }; };
+		1011B78E1BE8F2090066C03A /* face-out-line.png in Resources */ = {isa = PBXBuildFile; fileRef = 1011B78D1BE8F2090066C03A /* face-out-line.png */; };
+		134AA3741BFEE2DE00DFAE26 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 134AA3711BFEE23900DFAE26 /* ImageIO.framework */; };
 		136AFE951B79BBEC008E2953 /* GraftyResources in Resources */ = {isa = PBXBuildFile; fileRef = 136AFE941B79BBEC008E2953 /* GraftyResources */; };
 		136AFE971B79BC06008E2953 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 136AFE961B79BC06008E2953 /* AVFoundation.framework */; };
 		136AFE9E1B79BDDA008E2953 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 136AFE9D1B79BDDA008E2953 /* CoreMedia.framework */; };
@@ -34,20 +35,7 @@
 		B5AE3CEF184E1D0300EA702C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5AE3CEE184E1D0300EA702C /* Foundation.framework */; };
 		B5AE3CF1184E1D0300EA702C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5AE3CF0184E1D0300EA702C /* CoreGraphics.framework */; };
 		B5AE3CF3184E1D0300EA702C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5AE3CF2184E1D0300EA702C /* UIKit.framework */; };
-		B5AE3D0E184E1D0300EA702C /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5AE3D0D184E1D0300EA702C /* XCTest.framework */; };
-		B5AE3D0F184E1D0300EA702C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5AE3CEE184E1D0300EA702C /* Foundation.framework */; };
-		B5AE3D10184E1D0300EA702C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5AE3CF2184E1D0300EA702C /* UIKit.framework */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		B5AE3D11184E1D0300EA702C /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = B5AE3CE3184E1D0300EA702C /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = B5AE3CEA184E1D0300EA702C;
-			remoteInfo = LiveVideoCapture;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		137E0AE01BE676D0007A5523 /* Embed Frameworks */ = {
@@ -65,6 +53,7 @@
 
 /* Begin PBXFileReference section */
 		1011B78D1BE8F2090066C03A /* face-out-line.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "face-out-line.png"; sourceTree = "<group>"; };
+		134AA3711BFEE23900DFAE26 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
 		136AFE941B79BBEC008E2953 /* GraftyResources */ = {isa = PBXFileReference; lastKnownFileType = folder; path = GraftyResources; sourceTree = "<group>"; };
 		136AFE961B79BC06008E2953 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		136AFE9D1B79BDDA008E2953 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
@@ -103,7 +92,6 @@
 		B5AE3CEE184E1D0300EA702C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		B5AE3CF0184E1D0300EA702C /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		B5AE3CF2184E1D0300EA702C /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
-		B5AE3D0C184E1D0300EA702C /* LiveVideoCaptureTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LiveVideoCaptureTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5AE3D0D184E1D0300EA702C /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 /* End PBXFileReference section */
 
@@ -112,6 +100,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				134AA3741BFEE2DE00DFAE26 /* ImageIO.framework in Frameworks */,
 				137E0AD61BE6726C007A5523 /* opencv2.framework in Frameworks */,
 				137AB4BC1BACFAEF00A6DC41 /* CoreImage.framework in Frameworks */,
 				137E0B1E1BE69090007A5523 /* hrios.framework in Frameworks */,
@@ -120,16 +109,6 @@
 				B5AE3CF1184E1D0300EA702C /* CoreGraphics.framework in Frameworks */,
 				B5AE3CF3184E1D0300EA702C /* UIKit.framework in Frameworks */,
 				B5AE3CEF184E1D0300EA702C /* Foundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		B5AE3D09184E1D0300EA702C /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				B5AE3D0E184E1D0300EA702C /* XCTest.framework in Frameworks */,
-				B5AE3D10184E1D0300EA702C /* UIKit.framework in Frameworks */,
-				B5AE3D0F184E1D0300EA702C /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -235,7 +214,6 @@
 			isa = PBXGroup;
 			children = (
 				B5AE3CEB184E1D0300EA702C /* graftyHR-app.app */,
-				B5AE3D0C184E1D0300EA702C /* LiveVideoCaptureTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -243,6 +221,7 @@
 		B5AE3CED184E1D0300EA702C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				134AA3711BFEE23900DFAE26 /* ImageIO.framework */,
 				137E0AD51BE6726C007A5523 /* opencv2.framework */,
 				137AB4BB1BACFAEF00A6DC41 /* CoreImage.framework */,
 				13DE901A1BACB17F00A6CAA9 /* opencv2.framework */,
@@ -277,24 +256,6 @@
 			productReference = B5AE3CEB184E1D0300EA702C /* graftyHR-app.app */;
 			productType = "com.apple.product-type.application";
 		};
-		B5AE3D0B184E1D0300EA702C /* LiveVideoCaptureTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = B5AE3D20184E1D0300EA702C /* Build configuration list for PBXNativeTarget "LiveVideoCaptureTests" */;
-			buildPhases = (
-				B5AE3D08184E1D0300EA702C /* Sources */,
-				B5AE3D09184E1D0300EA702C /* Frameworks */,
-				B5AE3D0A184E1D0300EA702C /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				B5AE3D12184E1D0300EA702C /* PBXTargetDependency */,
-			);
-			name = LiveVideoCaptureTests;
-			productName = LiveVideoCaptureTests;
-			productReference = B5AE3D0C184E1D0300EA702C /* LiveVideoCaptureTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -305,10 +266,7 @@
 				ORGANIZATIONNAME = Grafty;
 				TargetAttributes = {
 					B5AE3CEA184E1D0300EA702C = {
-						DevelopmentTeam = TYUT8V5JX8;
-					};
-					B5AE3D0B184E1D0300EA702C = {
-						TestTargetID = B5AE3CEA184E1D0300EA702C;
+						DevelopmentTeam = BYR9KF79WW;
 					};
 				};
 			};
@@ -326,7 +284,6 @@
 			projectRoot = "";
 			targets = (
 				B5AE3CEA184E1D0300EA702C /* graftyHR-app */,
-				B5AE3D0B184E1D0300EA702C /* LiveVideoCaptureTests */,
 			);
 		};
 /* End PBXProject section */
@@ -342,13 +299,6 @@
 				137E0B0A1BE67BED007A5523 /* Images.xcassets in Resources */,
 				137E0B091BE67BED007A5523 /* InfoPlist.strings in Resources */,
 				137E0B081BE67BED007A5523 /* Main.storyboard in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		B5AE3D0A184E1D0300EA702C /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -374,22 +324,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		B5AE3D08184E1D0300EA702C /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		B5AE3D12184E1D0300EA702C /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = B5AE3CEA184E1D0300EA702C /* graftyHR-app */;
-			targetProxy = B5AE3D11184E1D0300EA702C /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		137E0AE81BE67BED007A5523 /* Main.storyboard */ = {
@@ -571,50 +506,6 @@
 			};
 			name = Release;
 		};
-		B5AE3D21184E1D0300EA702C /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/LiveVideoCapture.app/LiveVideoCapture";
-				ENABLE_BITCODE = NO;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "LiveVideoCapture/LiveVideoCapture-Prefix.pch";
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = "LiveVideoCaptureTests/LiveVideoCaptureTests-Info.plist";
-				PRODUCT_NAME = LiveVideoCaptureTests;
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = xctest;
-			};
-			name = Debug;
-		};
-		B5AE3D22184E1D0300EA702C /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/LiveVideoCapture.app/LiveVideoCapture";
-				ENABLE_BITCODE = NO;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "LiveVideoCapture/LiveVideoCapture-Prefix.pch";
-				INFOPLIST_FILE = "LiveVideoCaptureTests/LiveVideoCaptureTests-Info.plist";
-				PRODUCT_NAME = LiveVideoCaptureTests;
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = xctest;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -632,15 +523,6 @@
 			buildConfigurations = (
 				B5AE3D1E184E1D0300EA702C /* Debug */,
 				B5AE3D1F184E1D0300EA702C /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		B5AE3D20184E1D0300EA702C /* Build configuration list for PBXNativeTarget "LiveVideoCaptureTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				B5AE3D21184E1D0300EA702C /* Debug */,
-				B5AE3D22184E1D0300EA702C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

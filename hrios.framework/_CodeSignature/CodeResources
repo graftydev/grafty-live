@@ -6,15 +6,15 @@
 	<dict>
 		<key>Headers/grafty-core-breath-rate.h</key>
 		<data>
-		HDF0UiqWbbOss/kpcIM5IbLo5qQ=
+		C4R9ealCW+9ZuOC9L5YJCJCwcbQ=
 		</data>
 		<key>Headers/grafty-core-buffer-vector.hpp</key>
 		<data>
-		igH6XrUCqXM57otVsV3tURucg08=
+		bk2s9oMrf+rTnQVgiZkz7ece5dI=
 		</data>
 		<key>Headers/grafty-core-heart-rate.h</key>
 		<data>
-		QriMcEcIQbG9614J0cT9bUKt54Y=
+		U1qu7NjgjvjMJBsZxyWIgeDweVU=
 		</data>
 		<key>Headers/grafty-core-pedometry.h</key>
 		<data>
@@ -22,7 +22,7 @@
 		</data>
 		<key>Headers/grafty-core-utils.h</key>
 		<data>
-		IgLCyZ7MZtNdCq0XHRIozCAYTIs=
+		+tB3LAQbh8FGDRNIIsMazlSnd4g=
 		</data>
 		<key>Headers/grafty-face-class.h</key>
 		<data>
@@ -30,7 +30,7 @@
 		</data>
 		<key>Headers/grafty-system-settings.h</key>
 		<data>
-		BMtgWmfvyP1l45+tNWZAQL1qeOc=
+		TtzU0oPNk8NPwQPs3JCUOm8fSSo=
 		</data>
 		<key>Headers/grafty-trigger-hr.h</key>
 		<data>
@@ -46,7 +46,7 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		89j3XtLcAkzvhmXs/R3rh0kBeB0=
+		vD/1OOKY2Lt3siVduVgGaQQM7Uc=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -57,15 +57,15 @@
 	<dict>
 		<key>Headers/grafty-core-breath-rate.h</key>
 		<data>
-		HDF0UiqWbbOss/kpcIM5IbLo5qQ=
+		C4R9ealCW+9ZuOC9L5YJCJCwcbQ=
 		</data>
 		<key>Headers/grafty-core-buffer-vector.hpp</key>
 		<data>
-		igH6XrUCqXM57otVsV3tURucg08=
+		bk2s9oMrf+rTnQVgiZkz7ece5dI=
 		</data>
 		<key>Headers/grafty-core-heart-rate.h</key>
 		<data>
-		QriMcEcIQbG9614J0cT9bUKt54Y=
+		U1qu7NjgjvjMJBsZxyWIgeDweVU=
 		</data>
 		<key>Headers/grafty-core-pedometry.h</key>
 		<data>
@@ -73,7 +73,7 @@
 		</data>
 		<key>Headers/grafty-core-utils.h</key>
 		<data>
-		IgLCyZ7MZtNdCq0XHRIozCAYTIs=
+		+tB3LAQbh8FGDRNIIsMazlSnd4g=
 		</data>
 		<key>Headers/grafty-face-class.h</key>
 		<data>
@@ -81,7 +81,7 @@
 		</data>
 		<key>Headers/grafty-system-settings.h</key>
 		<data>
-		BMtgWmfvyP1l45+tNWZAQL1qeOc=
+		TtzU0oPNk8NPwQPs3JCUOm8fSSo=
 		</data>
 		<key>Headers/grafty-trigger-hr.h</key>
 		<data>
