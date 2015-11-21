@@ -411,10 +411,17 @@ static float currentISO;
     else {
         //kick off startHR timer since there is no face detected.
         // if there is no face within 15 sec, shut it down
-        if(!timeToStopTimer)
-        {
-            //NSLog(@"No face ... 15 sec timer started");
-            //timeToStopTimer = [NSTimer  scheduledTimerWithTimeInterval:15.0f target:self selector:@selector( timerHandler:) userInfo:nil repeats:NO];
+        if (!timeToStopTimer) {
+            
+            if (![NSThread isMainThread]) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    timeToStopTimer = [NSTimer scheduledTimerWithTimeInterval:15.0f target:self selector:@selector(timerHandler:) userInfo:nil repeats:NO];
+                });
+            }
+            else {
+                timeToStopTimer = [NSTimer  scheduledTimerWithTimeInterval:15.0f target:self selector:@selector( timerHandler:) userInfo:nil repeats:NO];
+            }
+            //[ self performSelectorOnMainThread:@selector(timerHandler:) withObject:nil waitUntilDone:NO];
         }
     }
     
@@ -880,28 +887,48 @@ static int calibrate_attempt_count = 0;
     [self.view bringSubviewToFront:_topViewLayer];
 }
 
+NSInteger orientation = UIDeviceOrientationFaceDown;
+
 -(void)orientationChanged:(NSNotification*)notification
 {
     UIDevice * device = notification.object;
+
     switch(device.orientation)
     {
         case UIDeviceOrientationPortrait:
             /* start special animation */
-            [self addTopViewLayer];
+            NSLog(@"UIDeviceOrientationPortrait");
+            if (orientation != device.orientation)
+            {
+                orientation = device.orientation;
+                [self addTopViewLayer];
+            }
             break;
             
         case UIDeviceOrientationPortraitUpsideDown:
             /* start special animation */
             NSLog(@"UIDeviceOrientationPortraitUpsideDown");
-            [self addTopViewLayer];
+            if (orientation != device.orientation)
+            {
+                orientation = device.orientation;
+                [self addTopViewLayer];
+            }
             break;
         case UIDeviceOrientationLandscapeLeft:
             NSLog(@"UIDeviceOrientationLandscapeLeft");
-            [self addTopViewLayer];
+            if (orientation != device.orientation)
+            {
+                orientation = device.orientation;
+                [self addTopViewLayer];
+            }
             break;
         case UIDeviceOrientationLandscapeRight:
             NSLog(@"UIDeviceOrientationLandscapeRight");
-            [self addTopViewLayer];
+            if (orientation != device.orientation)
+            {
+                orientation = device.orientation;
+                [self addTopViewLayer];
+            }
             break;
         default:
             break;
@@ -924,6 +951,7 @@ static int calibrate_attempt_count = 0;
 }
 
 
+
 -(void)timerHandler:(NSTimer*)theTimer
 {
     [self stopHR];
@@ -939,7 +967,7 @@ static int calibrate_attempt_count = 0;
     {
         if([timeToStopTimer isValid])
         {
-            //NSLog(@"timer canceled from stopHR");
+            NSLog(@"timer canceled from stopHR");
             [timeToStopTimer invalidate];
             timeToStopTimer = nil;
         }

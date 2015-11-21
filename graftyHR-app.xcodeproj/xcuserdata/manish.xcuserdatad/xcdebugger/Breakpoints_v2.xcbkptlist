@@ -152,27 +152,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "graftyHR-app/ViewController.mm"
-            timestampString = "469698149.902993"
+            timestampString = "469759762.200482"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "307"
-            endingLineNumber = "307"
-            landmarkName = "-processFrameY:CbCr:videoRect:videoOrientation:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "graftyHR-app/ViewController.mm"
-            timestampString = "469698515.789429"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1027"
-            endingLineNumber = "1027"
+            startingLineNumber = "1055"
+            endingLineNumber = "1055"
             landmarkName = "-showTapMeToStart"
             landmarkType = "5">
             <Locations>
@@ -216,11 +200,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "graftyHR-app/ViewController.mm"
-            timestampString = "469698728.482584"
+            timestampString = "469759762.200482"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "850"
-            endingLineNumber = "850"
+            startingLineNumber = "857"
+            endingLineNumber = "857"
             landmarkName = "-addTopViewLayer"
             landmarkType = "5">
          </BreakpointContent>
@@ -232,12 +216,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "graftyHR-app/ViewController.mm"
-            timestampString = "469699068.323929"
+            timestampString = "469759762.200482"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "884"
-            endingLineNumber = "884"
-            landmarkName = "-orientationChanged:"
+            startingLineNumber = "955"
+            endingLineNumber = "955"
+            landmarkName = "-timerHandler:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
