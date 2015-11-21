@@ -359,7 +359,7 @@ static float currentISO;
         [_captureDevice unlockForConfiguration];
         targetISO = currentISO;
         iso_setting_in_progress = false;
-        calibrate_attempt_count = 0;
+        //calibrate_attempt_count = 0;
         gsys.camState = CAM_AUTO;
     }
 
@@ -581,7 +581,7 @@ static float currentISO;
         _topViewLayer.infoLabel.text =  @"Estimating BPM..";
 
             //[_topViewLayer updateCircleLabel:[NSString stringWithFormat:@"%zu",(size_t) (bpm)]];
-            if(bpm <= 0)//we don't need to show zero bpm for user so instead we will say Still Calculating
+            if(bpm <= 0)//we don't need to show zero bpm for user so instead we will say "Estimating.."
             {
                 if(oldbpm > 0)
                 {
@@ -599,9 +599,11 @@ static float currentISO;
                 oldbpm = bpm;
                 if(nil == _topViewLayer.heart)
                 {
+                    _topViewLayer.infoLabel.text =  @"Estimating BPM..";
                     [self updateUpdateLabel:  [NSString stringWithFormat:@"%zu bpm",(size_t)(bpm)]  showHeart:YES];
                 }
                 else {
+                    _topViewLayer.infoLabel.text =  @"Estimating BPM..";
                     _topViewLayer.heart.text = @"♥";
                     _topViewLayer.bPMResult.text =  [NSString stringWithFormat:@"%zu\nbpm",(size_t)(bpm)];
                     [self updateUpdateLabel:@""  showHeart:NO];
@@ -713,7 +715,7 @@ static int calibrate_attempt_count = 0;
     }
     
     NSLog(@"Calibrate attempt count = %d", calibrate_attempt_count);
-    if (calibrate_attempt_count++ > 30)
+    if (calibrate_attempt_count++ >= 30)
     {
         printf("Calibration failed.. locking cam anyway\n");
         _topViewLayer.infoLabel.text =  @"sub-optimal lighting, reading may not be accurate";
