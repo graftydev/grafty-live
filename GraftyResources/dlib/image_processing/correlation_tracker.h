@@ -78,21 +78,21 @@ namespace dlib
 
 
         unsigned long get_filter_size (
-        ) const { return 128/4; } // must be power of 2; original 128/2
+        ) const { return 128/2; } // must be power of 2
 
         unsigned long get_num_scale_levels(
-        ) const { return 32/8; }  // must be power of 2; original 32; faster speed with 32/16
+        ) const { return 32; }  // must be power of 2
 
         unsigned long get_scale_window_size (
-        ) const { return 23; }  // original 23
+        ) const { return 23; }
 
         double get_regularizer_space (
-        ) const { return 0.1; } //original 0.001
+        ) const { return 0.001; }
         inline double get_nu_space (
         ) const { return 0.025;}
 
         double get_regularizer_scale (
-        ) const { return 0.1; }  //original 0.001
+        ) const { return 0.001; }
         double get_nu_scale (
         ) const { return 0.025;}
 

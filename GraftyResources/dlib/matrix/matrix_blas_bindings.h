@@ -408,6 +408,9 @@ namespace dlib
         template <typename T, long NR, long NC, typename MM>
         int get_ld (const assignable_sub_matrix<T,NR,NC,MM,column_major_layout>& m) { return m.m.nr(); }
 
+        template <typename T>
+        int get_ld (const assignable_ptr_matrix<T>& m) { return m.nc(); }
+
         template <typename T, typename MM>
         int get_ld (const matrix_op<op_array2d_to_mat<array2d<T,MM> > >& m) { return m.nc(); }
         template <typename T, typename MM>
@@ -422,6 +425,10 @@ namespace dlib
         int get_ld (const matrix_op<op_pointer_to_mat<T> >& m) { return m.nc(); }
 
         // --------
+
+        // get_inc() returns the offset from one element to another.  If an object has a
+        // non-uniform offset between elements then returns 0 (e.g. a subm() view could
+        // have a non-uniform offset between elements).
 
         template <typename T, typename MM>
         int get_inc (const matrix_op<op_array2d_to_mat<array2d<T,MM> > >& ) { return 1; }
@@ -438,6 +445,46 @@ namespace dlib
 
         template <typename T, long NR, long NC, typename MM, typename L>
         int get_inc (const matrix<T,NR,NC,MM,L>& ) { return 1; }
+
+        template <typename T, long NR, long NC, typename MM>
+        int get_inc (const matrix_op<op_subm<matrix<T,NR,NC,MM,row_major_layout> > >& m) 
+        { 
+            // if the sub-view doesn't cover all the columns then it can't have a uniform
+            // layout.
+            if (m.nc() < m.op.m.nc())
+                return 0;
+            else
+                return 1;
+        }
+
+        template <typename T, long NR, long NC, typename MM>
+        int get_inc (const matrix_op<op_subm<matrix<T,NR,NC,MM,column_major_layout> > >& m) 
+        { 
+            if (m.nr() < m.op.m.nr())
+                return 0;
+            else
+                return 1;
+        }
+
+        template <typename T, long NR, long NC, typename MM>
+        int get_inc (const assignable_sub_matrix<T,NR,NC,MM,row_major_layout>& m) 
+        { 
+            if (m.nc() < m.m.nc())
+                return 0;
+            else
+                return 1;
+        }
+        template <typename T, long NR, long NC, typename MM>
+        int get_inc (const assignable_sub_matrix<T,NR,NC,MM,column_major_layout>& m) 
+        {
+            if (m.nr() < m.m.nr())
+                return 0;
+            else
+                return 1;
+        }
+
+        template <typename T>
+        int get_inc (const assignable_ptr_matrix<T>& ) { return 1; }
 
         template <typename T, long NR, long NC, typename MM>
         int get_inc(const matrix_op<op_colm<matrix<T,NR,NC,MM,row_major_layout> > >& m)
@@ -548,6 +595,9 @@ namespace dlib
         template <typename T, long NR, long NC, typename MM, typename L>
         T* get_ptr (assignable_sub_matrix<T,NR,NC,MM,L>& m) { return &m(0,0); }
 
+        template <typename T>
+        T* get_ptr (assignable_ptr_matrix<T>& m) { return m.ptr; }
+
         template <typename T, typename MM>
         const T* get_ptr (const matrix_op<op_array2d_to_mat<array2d<T,MM> > >& m) { return &m.op.array[0][0]; }
         template <typename T, typename MM>
@@ -589,18 +639,17 @@ namespace dlib
             {
                 if (add_to)
                 {
-                    cblas_axpy(N, alpha, get_ptr(src), 1, get_ptr(dest), 1);
+                    if (get_inc(src) && get_inc(dest))
+                        cblas_axpy(N, alpha, get_ptr(src), get_inc(src), get_ptr(dest), get_inc(dest));
+                    else
+                        matrix_assign_default(dest, src, alpha, add_to);
                 }
                 else
                 {
                     if (get_ptr(src) == get_ptr(dest))
-                    {
                         cblas_scal(N, alpha, get_ptr(dest));
-                    }
                     else
-                    {
                         matrix_assign_default(dest, src, alpha, add_to);
-                    }
                 }
             }
             else
@@ -618,18 +667,17 @@ namespace dlib
             {
                 if (add_to)
                 {
-                    cblas_axpy(N, alpha, get_ptr(src), 1, get_ptr(dest), 1);
+                    if (get_inc(src) && get_inc(dest))
+                        cblas_axpy(N, alpha, get_ptr(src), get_inc(src), get_ptr(dest), get_inc(dest));
+                    else
+                        matrix_assign_default(dest, src, alpha, add_to);
                 }
                 else
                 {
                     if (get_ptr(src) == get_ptr(dest))
-                    {
                         cblas_scal(N, alpha, get_ptr(dest));
-                    }
                     else
-                    {
                         matrix_assign_default(dest, src, alpha, add_to);
-                    }
                 }
             }
             else
@@ -647,18 +695,17 @@ namespace dlib
             {
                 if (add_to)
                 {
-                    cblas_axpy(N, alpha, get_ptr(src), 1, get_ptr(dest), 1);
+                    if (get_inc(src) && get_inc(dest))
+                        cblas_axpy(N, alpha, get_ptr(src), get_inc(src), get_ptr(dest), get_inc(dest));
+                    else
+                        matrix_assign_default(dest, src, alpha, add_to);
                 }
                 else
                 {
                     if (get_ptr(src) == get_ptr(dest))
-                    {
                         cblas_scal(N, alpha, get_ptr(dest));
-                    }
                     else
-                    {
                         matrix_assign_default(dest, src, alpha, add_to);
-                    }
                 }
             }
             else

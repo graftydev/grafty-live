@@ -184,7 +184,6 @@ typedef unsigned int JDIMENSION;
 #endif
 
 
-
 /* This macro is used to declare a "method", that is, a function pointer.
  * We want to supply prototype parameters if the compiler can cope.
  * Note that the arglist parameter must be parenthesized!

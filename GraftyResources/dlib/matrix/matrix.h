@@ -957,6 +957,11 @@ namespace dlib
 // ----------------------------------------------------------------------------------------
 // ----------------------------------------------------------------------------------------
 
+    template <typename T>
+    struct op_pointer_to_mat;
+    template <typename T>
+    struct op_pointer_to_col_vect;
+
     template <
         typename T,
         long num_rows,
@@ -1549,6 +1554,13 @@ namespace dlib
             const matrix_exp<U>& 
         ) const { return false; }
 
+        // These two aliases() routines are defined in matrix_mat.h
+        bool aliases (
+            const matrix_exp<matrix_op<op_pointer_to_mat<T> > >& item
+        ) const;
+        bool aliases (
+            const matrix_exp<matrix_op<op_pointer_to_col_vect<T> > >& item
+        ) const;
 
         iterator begin() 
         {
@@ -1593,7 +1605,7 @@ namespace dlib
 
             literal_assign_helper(const literal_assign_helper& item) : m(item.m), r(item.r), c(item.c), has_been_used(false) {}
             explicit literal_assign_helper(matrix* m_): m(m_), r(0), c(0),has_been_used(false) {next();}
-            ~literal_assign_helper()
+            ~literal_assign_helper() throw (std::exception)
             {
                 DLIB_CASSERT(!has_been_used || r == m->nr(),
                              "You have used the matrix comma based assignment incorrectly by failing to\n"

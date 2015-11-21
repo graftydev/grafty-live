@@ -1,7 +1,8 @@
 #ifndef DLIB_REVISION_H
-// Version:  18.16
-// Date:     Wed Jun 3 20:15:28 EDT 2015
-// Mercurial Revision ID:  42a25c606cf9
+// Version:  18.18
+// Date:     Wed Oct 28 20:26:06 EDT 2015
+// Mercurial Revision ID:  cea7cff961e1
 #define DLIB_MAJOR_VERSION  18
-#define DLIB_MINOR_VERSION  16
+#define DLIB_MINOR_VERSION  18
+#define DLIB_PATCH_VERSION  0
 #endif

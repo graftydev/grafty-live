@@ -1,4 +1,7 @@
 # This is a CMake file meant to be included via include()
+# It will trigger a compilation of dlib *in the project* 
+# including it
+set(DLIB_IN_PROJECT_BUILD true)
 
 cmake_minimum_required(VERSION 2.6.4)
 
@@ -11,12 +14,13 @@ endif()
 
 # Determine the path to dlib.
 string(REGEX REPLACE "cmake$" "" dlib_path ${CMAKE_CURRENT_LIST_FILE})
+include(${dlib_path}/add_global_compiler_switch.cmake)
 
 if (CMAKE_COMPILER_IS_GNUCXX)
     # By default, g++ won't warn or error if you forget to return a value in a
     # function which requires you to do so.  This option makes it give a warning
-    # for doing this. 
-    add_definitions("-Wreturn-type")
+    # for doing this.
+    add_global_compiler_switch(-Wreturn-type)
 endif()
 
 # Setup some options to allow a user to enable SSE and AVX instruction use.  
@@ -28,10 +32,13 @@ if (CMAKE_COMPILER_IS_GNUCXX OR "${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang"
     option(USE_AVX_INSTRUCTIONS  "Compile your program with AVX instructions"  OFF)
     if(USE_AVX_INSTRUCTIONS)
         add_definitions(-mavx)
+        message(STATUS "Enabling AVX instructions")
     elseif (USE_SSE4_INSTRUCTIONS)
         add_definitions(-msse4)
+        message(STATUS "Enabling SSE4 instructions")
     elseif(USE_SSE2_INSTRUCTIONS)
         add_definitions(-msse2)
+        message(STATUS "Enabling SSE2 instructions")
     endif()
 elseif (MSVC OR "${CMAKE_CXX_COMPILER_ID}" STREQUAL "MSVC") # else if using Visual Studio 
     # Use SSE2 by default when using Visual Studio.
@@ -48,12 +55,14 @@ elseif (MSVC OR "${CMAKE_CXX_COMPILER_ID}" STREQUAL "MSVC") # else if using Visu
     check_type_size( "void*" SIZE_OF_VOID_PTR)
     if(USE_AVX_INSTRUCTIONS)
         add_definitions(/arch:AVX)
+        message(STATUS "Enabling AVX instructions")
     elseif (USE_SSE4_INSTRUCTIONS)
         # Visual studio doesn't have an /arch:SSE2 flag when building in 64 bit modes.
         # So only give it when we are doing a 32 bit build.
         if (SIZE_OF_VOID_PTR EQUAL 4)
             add_definitions(/arch:SSE2)  
         endif()
+        message(STATUS "Enabling SSE4 instructions")
         add_definitions(-DDLIB_HAVE_SSE2)
         add_definitions(-DDLIB_HAVE_SSE3)
         add_definitions(-DDLIB_HAVE_SSE41)
@@ -63,6 +72,7 @@ elseif (MSVC OR "${CMAKE_CXX_COMPILER_ID}" STREQUAL "MSVC") # else if using Visu
         if (SIZE_OF_VOID_PTR EQUAL 4)
             add_definitions(/arch:SSE2)
         endif()
+        message(STATUS "Enabling SSE2 instructions")
         add_definitions(-DDLIB_HAVE_SSE2)
     endif()
 endif()
