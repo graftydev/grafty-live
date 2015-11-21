@@ -901,6 +901,7 @@ NSInteger orientation = UIDeviceOrientationFaceDown;
             if (orientation != device.orientation)
             {
                 orientation = device.orientation;
+                [self stopHR];
                 [self addTopViewLayer];
             }
             break;
@@ -911,6 +912,7 @@ NSInteger orientation = UIDeviceOrientationFaceDown;
             if (orientation != device.orientation)
             {
                 orientation = device.orientation;
+                [self stopHR];
                 [self addTopViewLayer];
             }
             break;
@@ -919,6 +921,7 @@ NSInteger orientation = UIDeviceOrientationFaceDown;
             if (orientation != device.orientation)
             {
                 orientation = device.orientation;
+                [self stopHR];
                 [self addTopViewLayer];
             }
             break;
@@ -927,6 +930,7 @@ NSInteger orientation = UIDeviceOrientationFaceDown;
             if (orientation != device.orientation)
             {
                 orientation = device.orientation;
+                [self stopHR];
                 [self addTopViewLayer];
             }
             break;
@@ -960,6 +964,7 @@ NSInteger orientation = UIDeviceOrientationFaceDown;
 -(void)stopHR
 {
     gsys.setProgramState(DETECT);
+    faces.clear();
     _canStartProcessing = false;
     _topViewLayer.circleProgressWithLabel.progress = 1;
 

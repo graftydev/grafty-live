@@ -52,7 +52,7 @@
     self.circleProgressWithLabel.center = centerAdjusted;
     
     self.circleProgressWithLabel.fillColor = [UIColor clearColor];
-    self.circleProgressWithLabel.trackColor = [UIColor grayColor];
+    self.circleProgressWithLabel.trackColor = [UIColor orangeColor];
     self.circleProgressWithLabel.progressColor = [UIColor greenColor];
     
     self.circleProgressWithLabel.trackWidth = 15.0;         // Defaults to 5.0
@@ -161,15 +161,15 @@
     //tap me to start
     //Adding tapToStartlabel
     self.middleCircleView =[[UIView alloc] initWithFrame:CGRectMake(self.circleProgressWithLabel.frame.origin.x, self.circleProgressWithLabel.center.y, self.circleProgressWithLabel.frame.size.width-17, self.circleProgressWithLabel.frame.size.width-15)];
-    self.middleCircleView.backgroundColor = [UIColor blueColor];
+    self.middleCircleView.backgroundColor = [UIColor clearColor];
     self.middleCircleView.center = self.circleProgressWithLabel.center;
     self.middleCircleView.layer.cornerRadius = self.middleCircleView.frame.size.width/2.0;
     self.middleCircleView.layer.masksToBounds = YES;
     self.middleCircleView.clipsToBounds = YES;
     
     // Create the colors
-    UIColor *topColor = [UIColor grayColor];
-    UIColor *bottomColor = [UIColor blackColor];
+    UIColor *topColor = [UIColor clearColor];
+    UIColor *bottomColor = [UIColor clearColor];
     
     // Create the gradient
     CAGradientLayer *theViewGradient = [CAGradientLayer layer];
