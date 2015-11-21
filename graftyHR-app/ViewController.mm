@@ -305,7 +305,14 @@ static float currentISO;
     
     //if user didn't click on circle to start processing or user click to stop processing, we should stop processing the frames.
     if(!_canStartProcessing)
+    {
+        _topViewLayer.circleProgressWithLabel.progress = 0.0f;
+        _topViewLayer.circleProgressWithLabel.progressColor = [UIColor orangeColor];
+        _topViewLayer.infoLabel.text =  @"Position face in the circle..";
+
+        faces.clear();
         return;
+    }
     
     
     switch (videoOrientation) {
@@ -524,7 +531,7 @@ static float currentISO;
         _topViewLayer.circleProgressWithLabel.progressColor = [UIColor orangeColor];
         _topViewLayer.circleProgressWithLabel.progress = 1;
         
-        _topViewLayer.infoLabel.text =  @"POSITION FACE IN THE CIRCLE";
+        _topViewLayer.infoLabel.text =  @"Position face in the circle..";
         
         
         [self updateUpdateLabel:@"" showHeart:NO];
@@ -547,8 +554,8 @@ static float currentISO;
         _topViewLayer.circleProgressWithLabel.progressColor = [UIColor orangeColor];
         _topViewLayer.circleProgressWithLabel.progress = 1;
         
-        _topViewLayer.infoLabel.text =  @"";
-        [self updateUpdateLabel:@"HOLD STILL"  showHeart:NO];
+        _topViewLayer.infoLabel.text =  @"Hold Still..";
+        [self updateUpdateLabel:@""  showHeart:NO];
         
         if(nil != _topViewLayer.heart)
         {
@@ -556,32 +563,35 @@ static float currentISO;
             _topViewLayer.bPMResult.text =  [NSString stringWithFormat:@""];
         }
     }
-    if (faces.size())
+    else if (gsys.getProgramState() == TRACK_INIT){
+        _topViewLayer.circleProgressWithLabel.progressColor = [UIColor orangeColor];
+        _topViewLayer.circleProgressWithLabel.progress = 1;
+        
+        _topViewLayer.infoLabel.text =  @"Calibrating..";
+        [self updateUpdateLabel:@""  showHeart:NO];
+        
+        if(nil != _topViewLayer.heart)
+        {
+            _topViewLayer.heart.text = @"";
+            _topViewLayer.bPMResult.text =  [NSString stringWithFormat:@""];
+        }
+    }
+    else if (gsys.getProgramState() == TRACK_UPDATE)
     {
         float trackingPercentage = faces[0].getHRTrackingPercentage()*100;
-        if(trackingPercentage < 100)
-        {
-            
-            [self updateUpdateLabel:@"HOLD STILL"  showHeart:NO];
-            if(nil != _topViewLayer.heart)
-            {
-                _topViewLayer.heart.text = @"";
-                _topViewLayer.bPMResult.text =  [NSString stringWithFormat:@""];
-            }
-        }
-        else{
+        _topViewLayer.infoLabel.text =  @"Estimating BPM..";
+
             //[_topViewLayer updateCircleLabel:[NSString stringWithFormat:@"%zu",(size_t) (bpm)]];
             if(bpm <= 0)//we don't need to show zero bpm for user so instead we will say Still Calculating
             {
-                [self updateUpdateLabel:@"CALCULATING..."  showHeart:NO];
-                
                 if(oldbpm > 0)
                 {
                     if(nil != _topViewLayer.heart)
                     {
                         //_topViewLayer.heart.text = @"♥";
                         _topViewLayer.bPMResult.text =  [NSString stringWithFormat:@""];
-                        [self updateUpdateLabel:@"CALCULATING..." showHeart:NO];
+                        _topViewLayer.infoLabel.text =  @"Estimating BPM..";
+                        //[self updateUpdateLabel:@"CALCULATING..." showHeart:NO];
                     }
                 }
             }
@@ -598,9 +608,11 @@ static float currentISO;
                     [self updateUpdateLabel:@""  showHeart:NO];
                 }
             }
-        }
         _topViewLayer.circleProgressWithLabel.progressColor = [UIColor greenColor];
         _topViewLayer.circleProgressWithLabel.progress = trackingPercentage/100.0;
+    }
+    else {
+        _topViewLayer.infoLabel.text =  @"Error, try again..";
     }
     
     [CATransaction commit];
@@ -964,9 +976,7 @@ NSInteger orientation = UIDeviceOrientationFaceDown;
 -(void)stopHR
 {
     gsys.setProgramState(DETECT);
-    faces.clear();
     _canStartProcessing = false;
-    _topViewLayer.circleProgressWithLabel.progress = 1;
 
     if(timeToStopTimer)
     {
