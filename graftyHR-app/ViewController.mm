@@ -428,7 +428,6 @@ static float currentISO;
             else {
                 timeToStopTimer = [NSTimer  scheduledTimerWithTimeInterval:15.0f target:self selector:@selector( timerHandler:) userInfo:nil repeats:NO];
             }
-            //[ self performSelectorOnMainThread:@selector(timerHandler:) withObject:nil waitUntilDone:NO];
         }
     }
     
@@ -713,9 +712,12 @@ static int calibrate_attempt_count = 0;
         return;
     }
     
+    NSLog(@"Calibrate attempt count = %d", calibrate_attempt_count);
     if (calibrate_attempt_count++ > 30)
     {
         printf("Calibration failed.. locking cam anyway\n");
+        _topViewLayer.infoLabel.text =  @"sub-optimal lighting, reading may not be accurate";
+        
         tColor = [UIColor yellowColor].CGColor;
         gsys.camState = CAM_LOCKED;
     }

@@ -114,7 +114,7 @@
         y=0;
     
     self.infoLabel = [[UILabel alloc] initWithFrame:CGRectMake(x ,bounds.size.height/2.0-20, bounds.size.height, 40)];
-    self.infoLabel.text = @"POSITION FACE IN THE CIRCLE"; //default value
+    self.infoLabel.text = @"Position face in the circle"; //default value
     self.infoLabel.textAlignment = NSTextAlignmentCenter;
     
     float fsize = 23.0F;

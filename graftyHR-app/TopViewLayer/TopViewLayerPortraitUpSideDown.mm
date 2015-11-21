@@ -105,7 +105,7 @@
     float yToCircle =(self.circleProgressWithLabel.frame.origin.y + self.circleProgressWithLabel.frame.size.width);
     float y= yToCircle + (self.frame.size.height - yToCircle)/2;
     self.infoLabel = [[UILabel alloc] initWithFrame:CGRectMake(0,y, self.frame.size.width, 40)];
-    self.infoLabel.text = @"POSITION FACE IN THE CIRCLE"; //default value
+    self.infoLabel.text = @"Position face in the circle"; //default value
     self.infoLabel.textAlignment = NSTextAlignmentCenter;
     self.infoLabel.font = [TopViewLayerSettings labelFont];
     self.infoLabel.textColor =[TopViewLayerSettings labelColor];
