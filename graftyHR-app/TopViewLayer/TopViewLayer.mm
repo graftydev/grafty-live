@@ -103,7 +103,7 @@
         label.text = @"";//[NSString stringWithFormat:@"TRACKING %.0f%%", (label.progress * 100)];
         if( label.progress>0)
         {
-            __self.infoLabel.text = @"Estimating..";//[NSString stringWithFormat:@"TRACKING %.0f%%", (label.progress * 100)];
+            //__self.infoLabel.text = @"Estimating..";//[NSString stringWithFormat:@"TRACKING %.0f%%", (label.progress * 100)];
         }
         
     };

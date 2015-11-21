@@ -981,6 +981,20 @@ NSInteger orientation = UIDeviceOrientationFaceDown;
 {
     gsys.setProgramState(DETECT);
     _canStartProcessing = false;
+    
+    
+    CALayer     *featureLayer = nil;
+    NSArray *sublayers = [NSArray arrayWithArray:[self.view.layer sublayers]];
+    NSUInteger sublayersCount = [sublayers count];
+    NSUInteger currentSublayer = 0;
+    while (!featureLayer && (currentSublayer < sublayersCount)) {
+        CALayer *currentLayer = [sublayers objectAtIndex:currentSublayer++];
+        if ([[currentLayer name] isEqualToString:@"FaceLayer"]) {
+            featureLayer = currentLayer;
+        }
+    }
+    [featureLayer setHidden:YES];
+
 
     if(timeToStopTimer)
     {
