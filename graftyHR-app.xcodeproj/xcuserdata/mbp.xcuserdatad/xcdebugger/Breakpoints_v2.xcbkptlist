@@ -253,7 +253,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "681"
             endingLineNumber = "681"
-            landmarkName = "-circleProgressClicked:"
+            landmarkName = "-pixelBuffer2Display:pixelFrame:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -269,7 +269,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "272"
             endingLineNumber = "272"
-            landmarkName = "-processFrame:videoRect:videoOrientation:"
+            landmarkName = "-createTextPreviewLayer"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
