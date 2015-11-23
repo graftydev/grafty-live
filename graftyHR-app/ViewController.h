@@ -14,6 +14,8 @@
 #import "TopViewLayerLandScapeRight.h"
 #import "TopViewLayerPortraitUpSideDown.h"
 
+#define DEGREES_TO_RADIANS(angle) ((angle) / 180.0 * M_PI)
+
 @interface ViewController : UIViewController <AVCaptureVideoDataOutputSampleBufferDelegate>
 
 // AVFoundation components

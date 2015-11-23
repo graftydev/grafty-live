@@ -47,7 +47,7 @@
     {
         w=320;
     }
-    self.circleProgressWithLabel = [[KAProgressLabel alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width-w, self.frame.size.width-w)];
+    self.circleProgressWithLabel = [[KAProgressLabel alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.height-w, self.frame.size.height-w)];
     
     self.circleProgressWithLabel.center = centerAdjusted;
     
@@ -60,7 +60,7 @@
     self.circleProgressWithLabel.roundedCornersWidth = 0; // Defaults to 0
     self.circleProgressWithLabel.progress = 0.0;
     self.circleProgressWithLabel.startLabel.text = @"test";
-    self.circleProgressWithLabel.transform= CGAffineTransformMakeRotation(DEGREES_TO_RADIANS(-270));
+    //self.circleProgressWithLabel.transform= CGAffineTransformMakeRotation(DEGREES_TO_RADIANS(-270));
     
     
     //Adding tap gesture to the circle
@@ -103,7 +103,7 @@
     
     
     //set infoLabel
-    float x=17;
+    float x=0;
     if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad )
     {
         x=237;
@@ -113,7 +113,7 @@
     if(y<0)
         y=0;
     
-    self.infoLabel = [[UILabel alloc] initWithFrame:CGRectMake(x ,bounds.size.height/2.0-20, bounds.size.height, 40)];
+    self.infoLabel = [[UILabel alloc] initWithFrame:CGRectMake(bounds.size.height/2.0-20 ,x, bounds.size.height, 40)];
     self.infoLabel.text = @"Position face in the circle"; //default value
     self.infoLabel.textAlignment = NSTextAlignmentCenter;
     
@@ -124,24 +124,23 @@
     }
     self.infoLabel.font = [TopViewLayerSettings labelFontWithSize:fsize];
     self.infoLabel.textColor =[TopViewLayerSettings labelColor];
-    self.infoLabel.transform= CGAffineTransformMakeRotation(DEGREES_TO_RADIANS(-270));
+    //self.infoLabel.transform= CGAffineTransformMakeRotation(DEGREES_TO_RADIANS(-270));
     //self.infoLabel.backgroundColor=[UIColor redColor];
     //add to view
     [self addSubview:self.infoLabel];
     
     //set updateLabel
-    x=-self.frame.size.width+15+40;
+    x=self.frame.size.width-15-40;
     
     //calculating y possition based on circle width
-    y= centerAdjusted.y-20;
-    if(y>self.frame.size.height)
-        y= self.frame.size.height- 20;
+    y= self.frame.size.height- 40;
+    
     if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad )
     {
-        x=-self.frame.size.width/1.5 +80;
+        x=self.frame.size.width/1.5 -80;
         NSLog(@"width: %f", self.frame.size.width);
     }
-    self.updateLabel = [[UILabel alloc] initWithFrame:CGRectMake(x, y, self.frame.size.height, 40)];
+    self.updateLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, y, self.frame.size.width, 40)];
     self.updateLabel.text = @"...";//default value
     self.updateLabel.textAlignment = NSTextAlignmentCenter;
      fsize = 23.0F;
@@ -152,7 +151,7 @@
     self.updateLabel.font = [TopViewLayerSettings labelFontWithSize:fsize];
     self.updateLabel.numberOfLines =1;
     self.updateLabel.textColor =[TopViewLayerSettings labelColor];
-    self.updateLabel.transform= CGAffineTransformMakeRotation(DEGREES_TO_RADIANS(-270));
+    //self.updateLabel.transform= CGAffineTransformMakeRotation(DEGREES_TO_RADIANS(-270));
     //self.updateLabel.backgroundColor=[UIColor redColor];
     //add to view
     [self addSubview:self.updateLabel];
@@ -161,7 +160,7 @@
     
     y=0;
     
-    self.closeButton =[[UIButton alloc] initWithFrame:CGRectMake(bounds.size.width-60, bounds.size.height-60 , 60 , 60 )];
+    self.closeButton =[[UIButton alloc] initWithFrame:CGRectMake(0, bounds.size.height-60 , 60 , 60 )];
     
     [self.closeButton setTitle:@"CLOSE" forState:UIControlStateNormal];
     [self.closeButton addTarget:self action:@selector(closeAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -174,30 +173,33 @@
     self.closeButton.layer.cornerRadius = self.closeButton.frame.size.width/2;
     self.closeButton.layer.masksToBounds = YES;
     self.closeButton.clipsToBounds = YES;
-    self.closeButton.transform= CGAffineTransformMakeRotation(DEGREES_TO_RADIANS(-270));
+    //self.closeButton.transform= CGAffineTransformMakeRotation(DEGREES_TO_RADIANS(-270));
     
     [self addSubview:self.closeButton];
     
     
     //Heart
-    self.heart=[[UILabel alloc] initWithFrame:CGRectMake(bounds.size.width/2.0,  centerAdjusted.y + bounds.size.height/4.0+50,  80, 40 )];
+    float l=self.circleProgressWithLabel.frame.size.width/2.0+self.circleProgressWithLabel.center.x;
+    float w_l=self.frame.size.width - l;
+    
+    self.heart=[[UILabel alloc] initWithFrame:CGRectMake((self.frame.size.width-w_l),  bounds.size.height/2.0-25,  w_l, 40 )];
     self.heart.text=@"";
     self.heart.textAlignment = NSTextAlignmentCenter;
     self.heart.font = [TopViewLayerSettings labelFontWithSize:30.0F];
-    self.heart.transform= CGAffineTransformMakeRotation(DEGREES_TO_RADIANS(-270));
+    //self.heart.transform= CGAffineTransformMakeRotation(DEGREES_TO_RADIANS(-270));
     [self addSubview:self.heart];
     
     
     //bPMResult
-    self.bPMResult =[[UILabel alloc] initWithFrame:CGRectMake(bounds.size.width/4.0-30,  centerAdjusted.y + bounds.size.height/4.0+10 ,  140, 120 )];
+    self.bPMResult =[[UILabel alloc] initWithFrame:CGRectMake((self.frame.size.width-w_l),  bounds.size.height/2.0-20,  w_l, 120 )];
     
     self.bPMResult.text = @"";//default value
     self.bPMResult.textAlignment = NSTextAlignmentCenter;
     self.bPMResult.font = [TopViewLayerSettings labelFontWithSize:30.0F];
     self.bPMResult.numberOfLines =3;
     self.bPMResult.textColor =[TopViewLayerSettings labelColor];
-    self.bPMResult.transform= CGAffineTransformMakeRotation(DEGREES_TO_RADIANS(-270));
-    //self.bPMResult.backgroundColor=[TopViewLayerSettings backGroundColor];
+   // self.bPMResult.transform= CGAffineTransformMakeRotation(DEGREES_TO_RADIANS(-270));
+    //self.bPMResult.backgroundColor=[UIColor redColor];
     //add to view
     [self addSubview:self.bPMResult];
     
@@ -235,7 +237,7 @@
     self.tapToStartLabel.textColor = [UIColor whiteColor];
     self.tapToStartLabel.layer.cornerRadius = 5.0;
     self.tapToStartLabel.text=@"Tap me to start...";
-    self.middleCircleView.transform= CGAffineTransformMakeRotation(DEGREES_TO_RADIANS(-270));
+    //self.middleCircleView.transform= CGAffineTransformMakeRotation(DEGREES_TO_RADIANS(-270));
     [self.middleCircleView addSubview:self.tapToStartLabel];
     [self bringSubviewToFront:self.middleCircleView];
     

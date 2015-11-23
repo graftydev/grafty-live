@@ -891,11 +891,11 @@ static int calibrate_attempt_count = 0;
         }
         else if ([[UIDevice currentDevice] orientation] == UIDeviceOrientationLandscapeRight)
         {
-            _topViewLayer = [[TopViewLayerLandScapeRight alloc] initWithFrame:screenFrame];
+            _topViewLayer = [[TopViewLayerLandScapeLeft alloc] initWithFrame:screenFrame];
         }
         else if ([[UIDevice currentDevice] orientation] == UIDeviceOrientationPortraitUpsideDown)
         {
-            _topViewLayer = [[TopViewLayerPortraitUpSideDown alloc] initWithFrame:screenFrame];
+            _topViewLayer = [[TopViewLayerLandScapeLeft alloc] initWithFrame:screenFrame];
         }
     }
     _topViewLayer.delegate  = self;
@@ -908,7 +908,7 @@ NSInteger orientation = UIDeviceOrientationFaceDown;
 -(void)orientationChanged:(NSNotification*)notification
 {
     UIDevice * device = notification.object;
-
+    
     switch(device.orientation)
     {
         case UIDeviceOrientationPortrait:
@@ -917,8 +917,9 @@ NSInteger orientation = UIDeviceOrientationFaceDown;
             if (orientation != device.orientation)
             {
                 orientation = device.orientation;
+                [self viewWillLayoutSubviews];
                 [self stopHR];
-                [self addTopViewLayer];
+               [self addTopViewLayer];
             }
             break;
             
@@ -928,6 +929,7 @@ NSInteger orientation = UIDeviceOrientationFaceDown;
             if (orientation != device.orientation)
             {
                 orientation = device.orientation;
+                [self viewWillLayoutSubviews];
                 [self stopHR];
                 [self addTopViewLayer];
             }
@@ -937,6 +939,7 @@ NSInteger orientation = UIDeviceOrientationFaceDown;
             if (orientation != device.orientation)
             {
                 orientation = device.orientation;
+                [self viewWillLayoutSubviews];
                 [self stopHR];
                 [self addTopViewLayer];
             }
@@ -946,6 +949,8 @@ NSInteger orientation = UIDeviceOrientationFaceDown;
             if (orientation != device.orientation)
             {
                 orientation = device.orientation;
+                [self viewWillLayoutSubviews];
+                
                 [self stopHR];
                 [self addTopViewLayer];
             }
@@ -1093,6 +1098,32 @@ NSInteger orientation = UIDeviceOrientationFaceDown;
         //
     }];
     
+}
+
+#pragma -mark Fixing camera orientation
+
+- (void)viewWillLayoutSubviews {
+    _videoPreviewLayer.frame = self.view.bounds;
+    if (_videoPreviewLayer.connection.supportsVideoOrientation) {
+        _videoPreviewLayer.connection.videoOrientation = [self interfaceOrientationToVideoOrientation:[UIApplication sharedApplication].statusBarOrientation];
+    }
+}
+
+- (AVCaptureVideoOrientation)interfaceOrientationToVideoOrientation:(UIInterfaceOrientation)orientation {
+    switch (orientation) {
+        case UIInterfaceOrientationPortrait:
+            return AVCaptureVideoOrientationPortrait;
+        case UIInterfaceOrientationPortraitUpsideDown:
+            return AVCaptureVideoOrientationPortraitUpsideDown;
+        case UIInterfaceOrientationLandscapeLeft:
+            return AVCaptureVideoOrientationLandscapeLeft;
+        case UIInterfaceOrientationLandscapeRight:
+            return AVCaptureVideoOrientationLandscapeRight;
+        default:
+            break;
+    }
+    NSLog(@"Warning - Didn't recognise interface orientation (%d)",orientation);
+    return AVCaptureVideoOrientationPortrait;
 }
 
 @end

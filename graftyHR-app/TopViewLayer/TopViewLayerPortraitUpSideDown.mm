@@ -47,7 +47,7 @@
     {
         w=400;
     }
-    self.circleProgressWithLabel = [[KAProgressLabel alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width-w, self.frame.size.width-w)];
+    self.circleProgressWithLabel = [[KAProgressLabel alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.height-w, self.frame.size.height-w)];
     
     self.circleProgressWithLabel.center = centerAdjusted;
     
@@ -60,7 +60,7 @@
     self.circleProgressWithLabel.roundedCornersWidth = 0; // Defaults to 0
     self.circleProgressWithLabel.progress = 0.0;
     self.circleProgressWithLabel.startLabel.text = @"test";
-    self.circleProgressWithLabel.transform= CGAffineTransformMakeRotation(DEGREES_TO_RADIANS(270*2));
+    //self.circleProgressWithLabel.transform= CGAffineTransformMakeRotation(DEGREES_TO_RADIANS(270*2));
     
     
     //Adding tap gesture to the circle
@@ -109,7 +109,7 @@
     self.infoLabel.textAlignment = NSTextAlignmentCenter;
     self.infoLabel.font = [TopViewLayerSettings labelFont];
     self.infoLabel.textColor =[TopViewLayerSettings labelColor];
-    self.infoLabel.transform= CGAffineTransformMakeRotation(DEGREES_TO_RADIANS(270*2));
+    //self.infoLabel.transform= CGAffineTransformMakeRotation(DEGREES_TO_RADIANS(270*2));
     //add to view
     [self addSubview:self.infoLabel];
     
@@ -122,7 +122,7 @@
     self.updateHeartLabel.label.font = [TopViewLayerSettings labelFontWithSize:30.0F];
     self.updateHeartLabel.label.numberOfLines =2;
     self.updateHeartLabel.label.textColor =[TopViewLayerSettings labelColor];
-     self.updateHeartLabel.transform= CGAffineTransformMakeRotation(DEGREES_TO_RADIANS(270*2));
+     //self.updateHeartLabel.transform= CGAffineTransformMakeRotation(DEGREES_TO_RADIANS(270*2));
     self.updateHeartLabel.heart.font=[TopViewLayerSettings labelFontWithSize:30.0F];
     //add to view
     [self addSubview:self.updateHeartLabel];
@@ -138,7 +138,7 @@
     [self.closeButton setBackgroundColor:[UIColor redColor]];
     self.closeButton.layer.cornerRadius = 5.0F;
     self.closeButton.layer.borderColor = [[TopViewLayerSettings labelColor] CGColor];
-    self.closeButton.transform= CGAffineTransformMakeRotation(DEGREES_TO_RADIANS(270*2));
+   // self.closeButton.transform= CGAffineTransformMakeRotation(DEGREES_TO_RADIANS(270*2));
     self.closeButton.layer.borderWidth = 0.0F;
     
     [self addSubview:self.closeButton];
@@ -190,7 +190,7 @@
     self.tapToStartLabel.textColor = [UIColor whiteColor];
     self.tapToStartLabel.layer.cornerRadius = 5.0;
     self.tapToStartLabel.text=@"Tap me to start...";
-    self.middleCircleView.transform= CGAffineTransformMakeRotation(DEGREES_TO_RADIANS(270*2));
+    //self.middleCircleView.transform= CGAffineTransformMakeRotation(DEGREES_TO_RADIANS(270*2));
     [self.middleCircleView addSubview:self.tapToStartLabel];
     [self bringSubviewToFront:self.middleCircleView];
     
