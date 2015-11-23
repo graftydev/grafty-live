@@ -880,30 +880,34 @@ static int calibrate_attempt_count = 0;
     
     if(nil == _topViewLayer)
     {
-        if ([[UIDevice currentDevice] orientation] == UIDeviceOrientationPortrait)
+        if([[UIDevice currentDevice] orientation] == UIDeviceOrientationPortrait || [[UIDevice currentDevice] orientation] == UIDeviceOrientationFaceUp || [[UIDevice currentDevice] orientation] == UIDeviceOrientationPortraitUpsideDown || [[UIDevice currentDevice] orientation] == UIDeviceOrientationFaceDown)
         {
-            _topViewLayer = [[TopViewLayer alloc] init];
-        }
-        else if ([[UIDevice currentDevice] orientation] == UIDeviceOrientationLandscapeLeft)
-        {
-            _topViewLayer = [[TopViewLayerLandScapeLeft alloc] initWithFrame:screenFrame];
+            //CGRect frm = screenFrame;
+            if(screenFrame.size.width>screenFrame.size.height)
+            {
+                //screenFrame=CGRectMake(frm.origin.x, frm.origin.y, frm.size.height, frm.size.width);
+                 _topViewLayer = [[TopViewLayerLandScapeLeft alloc] initWithFrame:screenFrame];
+            }
+            else{
+                 _topViewLayer = [[TopViewLayer alloc] init];
+            }
+           
             
         }
-        else if ([[UIDevice currentDevice] orientation] == UIDeviceOrientationLandscapeRight)
+        else if ([[UIDevice currentDevice] orientation] == UIDeviceOrientationLandscapeLeft || [[UIDevice currentDevice] orientation] == UIDeviceOrientationLandscapeRight)
         {
+           
             _topViewLayer = [[TopViewLayerLandScapeLeft alloc] initWithFrame:screenFrame];
+
         }
-        else if ([[UIDevice currentDevice] orientation] == UIDeviceOrientationPortraitUpsideDown)
-        {
-            _topViewLayer = [[TopViewLayerLandScapeLeft alloc] initWithFrame:screenFrame];
-        }
+        
     }
     _topViewLayer.delegate  = self;
     [self.view addSubview:_topViewLayer];
     [self.view bringSubviewToFront:_topViewLayer];
 }
 
-NSInteger orientation = UIDeviceOrientationFaceDown;
+NSInteger orientation = UIDeviceOrientationUnknown;
 
 -(void)orientationChanged:(NSNotification*)notification
 {
@@ -911,6 +915,19 @@ NSInteger orientation = UIDeviceOrientationFaceDown;
     
     switch(device.orientation)
     {
+        
+        case UIDeviceOrientationFaceUp:
+            /* start special animation */
+            NSLog(@"UIDeviceOrientationFaceUp");
+            if (orientation != device.orientation)
+            {
+                orientation = device.orientation;
+                [self viewWillLayoutSubviews];
+                [self stopHR];
+                [self addTopViewLayer];
+            }
+            break;
+
         case UIDeviceOrientationPortrait:
             /* start special animation */
             NSLog(@"UIDeviceOrientationPortrait");
@@ -922,7 +939,7 @@ NSInteger orientation = UIDeviceOrientationFaceDown;
                [self addTopViewLayer];
             }
             break;
-            
+        case UIDeviceOrientationFaceDown:
         case UIDeviceOrientationPortraitUpsideDown:
             /* start special animation */
             NSLog(@"UIDeviceOrientationPortraitUpsideDown");
@@ -1101,7 +1118,18 @@ NSInteger orientation = UIDeviceOrientationFaceDown;
 }
 
 #pragma -mark Fixing camera orientation
-
+-(BOOL)shouldAutorotate
+{
+    return YES;
+}
+-(UIInterfaceOrientationMask)supportedInterfaceOrientations
+{
+    return UIInterfaceOrientationMaskAll;
+}
+-(void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+{
+    
+}
 - (void)viewWillLayoutSubviews {
     _videoPreviewLayer.frame = self.view.bounds;
     if (_videoPreviewLayer.connection.supportsVideoOrientation) {
@@ -1111,8 +1139,10 @@ NSInteger orientation = UIDeviceOrientationFaceDown;
 
 - (AVCaptureVideoOrientation)interfaceOrientationToVideoOrientation:(UIInterfaceOrientation)orientation {
     switch (orientation) {
+        case UIDeviceOrientationFaceUp:
         case UIInterfaceOrientationPortrait:
             return AVCaptureVideoOrientationPortrait;
+        case UIDeviceOrientationFaceDown:
         case UIInterfaceOrientationPortraitUpsideDown:
             return AVCaptureVideoOrientationPortraitUpsideDown;
         case UIInterfaceOrientationLandscapeLeft:

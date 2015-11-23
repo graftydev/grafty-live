@@ -29,6 +29,8 @@
     if(self)
     {
         self.frame=[[UIScreen mainScreen] bounds];
+        
+        
         [self setupView];
         self.alpha = 1;
         

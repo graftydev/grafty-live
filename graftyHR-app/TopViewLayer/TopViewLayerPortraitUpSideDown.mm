@@ -47,7 +47,7 @@
     {
         w=400;
     }
-    self.circleProgressWithLabel = [[KAProgressLabel alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.height-w, self.frame.size.height-w)];
+    self.circleProgressWithLabel = [[KAProgressLabel alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width-w, self.frame.size.width-w)];
     
     self.circleProgressWithLabel.center = centerAdjusted;
     
