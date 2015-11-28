@@ -506,7 +506,7 @@ static float currentISO;
         [self.view.layer addSublayer:featureLayer];
     }
     featureLayer.frame = faceRect;
-    [featureLayer setHidden:NO];
+    [featureLayer setHidden:YES];
 
     
     if (!tLayer) {
