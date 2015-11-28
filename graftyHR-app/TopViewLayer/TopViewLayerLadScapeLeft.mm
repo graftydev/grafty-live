@@ -45,7 +45,7 @@
     float w=65;
     if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad )
     {
-        w=320;
+        w=200;
     }
     self.circleProgressWithLabel = [[KAProgressLabel alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.height-w, self.frame.size.height-w)];
     
@@ -106,14 +106,14 @@
     float x=0;
     if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad )
     {
-        x=237;
+        x=20; //237
     }
     //calculating y possition based on circle width
     float y= centerAdjusted.y - self.circleProgressWithLabel.frame.size.height/2.0 -35.0 ;
     if(y<0)
         y=0;
     
-    self.infoLabel = [[UILabel alloc] initWithFrame:CGRectMake(bounds.size.height/2.0-20 ,x, bounds.size.height, 40)];
+    self.infoLabel = [[UILabel alloc] initWithFrame:CGRectMake(bounds.size.height/2.0-250 ,x, bounds.size.height, 40)];
     self.infoLabel.text = @"Position face in the circle"; //default value
     self.infoLabel.textAlignment = NSTextAlignmentCenter;
     

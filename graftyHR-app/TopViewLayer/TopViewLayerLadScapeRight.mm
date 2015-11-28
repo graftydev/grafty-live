@@ -49,7 +49,7 @@
     float w=65;
     if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad )
     {
-        w=400;
+        w=200;
     }
     self.circleProgressWithLabel = [[KAProgressLabel alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width-w, self.frame.size.width-w)];
     
