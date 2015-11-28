@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1011B78E1BE8F2090066C03A /* face-out-line.png in Resources */ = {isa = PBXBuildFile; fileRef = 1011B78D1BE8F2090066C03A /* face-out-line.png */; };
 		134AA3741BFEE2DE00DFAE26 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 134AA3711BFEE23900DFAE26 /* ImageIO.framework */; };
 		136AFE951B79BBEC008E2953 /* GraftyResources in Resources */ = {isa = PBXBuildFile; fileRef = 136AFE941B79BBEC008E2953 /* GraftyResources */; };
 		136AFE971B79BC06008E2953 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 136AFE961B79BC06008E2953 /* AVFoundation.framework */; };
@@ -32,6 +31,7 @@
 		137E0B1A1BE67DF9007A5523 /* graftyHR-app-info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 137E0B191BE67DF9007A5523 /* graftyHR-app-info.plist */; };
 		137E0B1E1BE69090007A5523 /* hrios.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 137E0B1D1BE69090007A5523 /* hrios.framework */; };
 		137E0B1F1BE69090007A5523 /* hrios.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 137E0B1D1BE69090007A5523 /* hrios.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		13F81BC81C04390300E4777C /* face-outline.png in Resources */ = {isa = PBXBuildFile; fileRef = 13F81BC71C04390300E4777C /* face-outline.png */; };
 		B5AE3CEF184E1D0300EA702C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5AE3CEE184E1D0300EA702C /* Foundation.framework */; };
 		B5AE3CF1184E1D0300EA702C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5AE3CF0184E1D0300EA702C /* CoreGraphics.framework */; };
 		B5AE3CF3184E1D0300EA702C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5AE3CF2184E1D0300EA702C /* UIKit.framework */; };
@@ -52,7 +52,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		1011B78D1BE8F2090066C03A /* face-out-line.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "face-out-line.png"; sourceTree = "<group>"; };
 		134AA3711BFEE23900DFAE26 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
 		136AFE941B79BBEC008E2953 /* GraftyResources */ = {isa = PBXFileReference; lastKnownFileType = folder; path = GraftyResources; sourceTree = "<group>"; };
 		136AFE961B79BC06008E2953 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
@@ -88,6 +87,7 @@
 		137E0B191BE67DF9007A5523 /* graftyHR-app-info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "graftyHR-app-info.plist"; path = "graftyHR-app/graftyHR-app-info.plist"; sourceTree = "<group>"; };
 		137E0B1D1BE69090007A5523 /* hrios.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = hrios.framework; sourceTree = "<group>"; };
 		13DE901A1BACB17F00A6CAA9 /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = opencv2.framework; path = ../hrios/opencv2.framework; sourceTree = "<group>"; };
+		13F81BC71C04390300E4777C /* face-outline.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "face-outline.png"; sourceTree = "<group>"; };
 		B5AE3CEB184E1D0300EA702C /* graftyHR-app.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "graftyHR-app.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5AE3CEE184E1D0300EA702C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		B5AE3CF0184E1D0300EA702C /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -126,7 +126,7 @@
 		1011B78C1BE8F2090066C03A /* Images */ = {
 			isa = PBXGroup;
 			children = (
-				1011B78D1BE8F2090066C03A /* face-out-line.png */,
+				13F81BC71C04390300E4777C /* face-outline.png */,
 			);
 			path = Images;
 			sourceTree = "<group>";
@@ -266,7 +266,7 @@
 				ORGANIZATIONNAME = Grafty;
 				TargetAttributes = {
 					B5AE3CEA184E1D0300EA702C = {
-						DevelopmentTeam = TYUT8V5JX8;
+						DevelopmentTeam = BYR9KF79WW;
 					};
 				};
 			};
@@ -294,7 +294,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				136AFE951B79BBEC008E2953 /* GraftyResources in Resources */,
-				1011B78E1BE8F2090066C03A /* face-out-line.png in Resources */,
+				13F81BC81C04390300E4777C /* face-outline.png in Resources */,
 				137E0B1A1BE67DF9007A5523 /* graftyHR-app-info.plist in Resources */,
 				137E0B0A1BE67BED007A5523 /* Images.xcassets in Resources */,
 				137E0B091BE67BED007A5523 /* InfoPlist.strings in Resources */,

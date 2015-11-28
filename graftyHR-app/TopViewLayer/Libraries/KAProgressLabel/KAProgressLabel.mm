@@ -118,14 +118,13 @@
     [self.endLabel addObserver:self forKeyPath:@"text"    options:NSKeyValueObservingOptionNew context:nil];
     
     //add faceoutline
-    UIImage * img =[UIImage imageNamed:@"face-out-line"];
-    img=[self imageWithImage:img scaledToWidth:self.frame.size.width/1.5];
+    UIImage * img =[UIImage imageNamed:@"face-outline"];
+    img=[self imageWithImage:img scaledToWidth:self.frame.size.width/1.4];
     UIImageView * imgView = [[UIImageView alloc] initWithImage:img];
     if([[[NSUserDefaults standardUserDefaults] valueForKey:@"showFaceOutLine"] boolValue])
     {
         [self addSubview:imgView];
         imgView.center = self.center;
-        
     }
 }
 

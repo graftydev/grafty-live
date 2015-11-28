@@ -388,6 +388,7 @@ static float currentISO;
         {
             faces[0].getBpm(gsys, bpm);
             realFPS = (float)faces[0].getFPS();
+            NSLog(@"realFPS = %f", realFPS);
             if (realFPS < 20) {
                 bpm = 0;
             }
