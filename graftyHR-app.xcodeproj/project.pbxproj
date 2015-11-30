@@ -24,8 +24,6 @@
 		137E0B101BE67BED007A5523 /* TPPropertyAnimation.mm in Sources */ = {isa = PBXBuildFile; fileRef = 137E0AFA1BE67BED007A5523 /* TPPropertyAnimation.mm */; };
 		137E0B111BE67BED007A5523 /* TopViewLayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 137E0AFC1BE67BED007A5523 /* TopViewLayer.mm */; };
 		137E0B121BE67BED007A5523 /* TopViewLayerLadScapeLeft.mm in Sources */ = {isa = PBXBuildFile; fileRef = 137E0AFD1BE67BED007A5523 /* TopViewLayerLadScapeLeft.mm */; };
-		137E0B131BE67BED007A5523 /* TopViewLayerLadScapeRight.mm in Sources */ = {isa = PBXBuildFile; fileRef = 137E0AFE1BE67BED007A5523 /* TopViewLayerLadScapeRight.mm */; };
-		137E0B141BE67BED007A5523 /* TopViewLayerPortraitUpSideDown.mm in Sources */ = {isa = PBXBuildFile; fileRef = 137E0B021BE67BED007A5523 /* TopViewLayerPortraitUpSideDown.mm */; };
 		137E0B151BE67BED007A5523 /* TopViewLayerSettings.mm in Sources */ = {isa = PBXBuildFile; fileRef = 137E0B041BE67BED007A5523 /* TopViewLayerSettings.mm */; };
 		137E0B161BE67BED007A5523 /* ViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 137E0B061BE67BED007A5523 /* ViewController.mm */; };
 		137E0B1A1BE67DF9007A5523 /* graftyHR-app-info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 137E0B191BE67DF9007A5523 /* graftyHR-app-info.plist */; };
@@ -112,11 +110,7 @@
 		137E0AFB1BE67BED007A5523 /* TopViewLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TopViewLayer.h; sourceTree = "<group>"; };
 		137E0AFC1BE67BED007A5523 /* TopViewLayer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TopViewLayer.mm; sourceTree = "<group>"; };
 		137E0AFD1BE67BED007A5523 /* TopViewLayerLadScapeLeft.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TopViewLayerLadScapeLeft.mm; sourceTree = "<group>"; };
-		137E0AFE1BE67BED007A5523 /* TopViewLayerLadScapeRight.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TopViewLayerLadScapeRight.mm; sourceTree = "<group>"; };
 		137E0AFF1BE67BED007A5523 /* TopViewLayerLandScapeLeft.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TopViewLayerLandScapeLeft.h; sourceTree = "<group>"; };
-		137E0B001BE67BED007A5523 /* TopViewLayerLandScapeRight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TopViewLayerLandScapeRight.h; sourceTree = "<group>"; };
-		137E0B011BE67BED007A5523 /* TopViewLayerPortraitUpSideDown.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TopViewLayerPortraitUpSideDown.h; sourceTree = "<group>"; };
-		137E0B021BE67BED007A5523 /* TopViewLayerPortraitUpSideDown.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TopViewLayerPortraitUpSideDown.mm; sourceTree = "<group>"; };
 		137E0B031BE67BED007A5523 /* TopViewLayerSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TopViewLayerSettings.h; sourceTree = "<group>"; };
 		137E0B041BE67BED007A5523 /* TopViewLayerSettings.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TopViewLayerSettings.mm; sourceTree = "<group>"; };
 		137E0B051BE67BED007A5523 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
@@ -195,10 +189,6 @@
 				137E0AFC1BE67BED007A5523 /* TopViewLayer.mm */,
 				137E0AFF1BE67BED007A5523 /* TopViewLayerLandScapeLeft.h */,
 				137E0AFD1BE67BED007A5523 /* TopViewLayerLadScapeLeft.mm */,
-				137E0B001BE67BED007A5523 /* TopViewLayerLandScapeRight.h */,
-				137E0AFE1BE67BED007A5523 /* TopViewLayerLadScapeRight.mm */,
-				137E0B011BE67BED007A5523 /* TopViewLayerPortraitUpSideDown.h */,
-				137E0B021BE67BED007A5523 /* TopViewLayerPortraitUpSideDown.mm */,
 				137E0B031BE67BED007A5523 /* TopViewLayerSettings.h */,
 				137E0B041BE67BED007A5523 /* TopViewLayerSettings.mm */,
 			);
@@ -396,7 +386,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				137E0B131BE67BED007A5523 /* TopViewLayerLadScapeRight.mm in Sources */,
 				137E0B0E1BE67BED007A5523 /* HeartLabel.m in Sources */,
 				137E0B151BE67BED007A5523 /* TopViewLayerSettings.mm in Sources */,
 				137E0B111BE67BED007A5523 /* TopViewLayer.mm in Sources */,
@@ -404,7 +393,6 @@
 				137E0B0F1BE67BED007A5523 /* KAProgressLabel.mm in Sources */,
 				137E0B0C1BE67BED007A5523 /* main.m in Sources */,
 				137E0B121BE67BED007A5523 /* TopViewLayerLadScapeLeft.mm in Sources */,
-				137E0B141BE67BED007A5523 /* TopViewLayerPortraitUpSideDown.mm in Sources */,
 				137E0ABB1BE67093007A5523 /* source.cpp in Sources */,
 				137E0B101BE67BED007A5523 /* TPPropertyAnimation.mm in Sources */,
 				137E0B161BE67BED007A5523 /* ViewController.mm in Sources */,
