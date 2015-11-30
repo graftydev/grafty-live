@@ -112,13 +112,13 @@
     float y= centerAdjusted.y - self.circleProgressWithLabel.frame.size.height/2.0 -35.0 ;
     if(y<0)
         y=0;
-    
-    if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad )
+
+    if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
     {
+        
         self.infoLabel = [[UILabel alloc] initWithFrame:CGRectMake(bounds.size.height/2.0-250 ,x, bounds.size.height, 40)];
     }
-    else
-    {
+    else{
         self.infoLabel = [[UILabel alloc] initWithFrame:CGRectMake(bounds.size.height/2.0-20 ,x, bounds.size.height, 40)];
     }
     self.infoLabel.text = @"Position face in the circle"; //default value
