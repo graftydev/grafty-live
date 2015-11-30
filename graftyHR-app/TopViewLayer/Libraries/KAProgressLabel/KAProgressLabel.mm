@@ -118,14 +118,14 @@
     [self.endLabel addObserver:self forKeyPath:@"text"    options:NSKeyValueObservingOptionNew context:nil];
     
     //add faceoutline
-    UIImage * img =[UIImage imageNamed:@"face-outline"];
-    img=[self imageWithImage:img scaledToWidth:self.frame.size.width/1.4];
-    UIImageView * imgView = [[UIImageView alloc] initWithImage:img];
-    if([[[NSUserDefaults standardUserDefaults] valueForKey:@"showFaceOutLine"] boolValue])
-    {
-        [self addSubview:imgView];
-        imgView.center = self.center;
-    }
+//    UIImage * img =[UIImage imageNamed:@"face-outline"];
+//    img=[self imageWithImage:img scaledToWidth:self.frame.size.width/1.4];
+//    UIImageView * imgView = [[UIImageView alloc] initWithImage:img];
+//    if([[[NSUserDefaults standardUserDefaults] valueForKey:@"showFaceOutLine"] boolValue])
+//    {
+//        [self addSubview:imgView];
+//        imgView.center = self.center;
+//    }
 }
 
 -(void)drawRect:(CGRect)rect
@@ -298,6 +298,7 @@
 
 -(void)drawProgressLabelCircleInRect:(CGRect)rect
 {
+    
     CGRect circleRect= [self rectForCircle:rect];
     CGFloat archXPos = rect.size.width/2 + rect.origin.x;
     CGFloat archYPos = rect.size.height/2 + rect.origin.y;

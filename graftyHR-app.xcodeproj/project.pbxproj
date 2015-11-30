@@ -28,6 +28,8 @@
 		137E0B161BE67BED007A5523 /* ViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 137E0B061BE67BED007A5523 /* ViewController.mm */; };
 		137E0B1A1BE67DF9007A5523 /* graftyHR-app-info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 137E0B191BE67DF9007A5523 /* graftyHR-app-info.plist */; };
 		13F81BC81C04390300E4777C /* face-outline.png in Resources */ = {isa = PBXBuildFile; fileRef = 13F81BC71C04390300E4777C /* face-outline.png */; };
+		13F81C491C0BD22600E4777C /* hrios.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 13F81C481C0BD22600E4777C /* hrios.framework */; };
+		13F81C4A1C0BD22600E4777C /* hrios.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 13F81C481C0BD22600E4777C /* hrios.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		B5AE3CEF184E1D0300EA702C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5AE3CEE184E1D0300EA702C /* Foundation.framework */; };
 		B5AE3CF1184E1D0300EA702C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5AE3CF0184E1D0300EA702C /* CoreGraphics.framework */; };
 		B5AE3CF3184E1D0300EA702C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5AE3CF2184E1D0300EA702C /* UIKit.framework */; };
@@ -40,6 +42,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				13F81C4A1C0BD22600E4777C /* hrios.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -78,6 +81,7 @@
 		137E0B191BE67DF9007A5523 /* graftyHR-app-info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "graftyHR-app-info.plist"; path = "graftyHR-app/graftyHR-app-info.plist"; sourceTree = "<group>"; };
 		13DE901A1BACB17F00A6CAA9 /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = opencv2.framework; path = ../hrios/opencv2.framework; sourceTree = "<group>"; };
 		13F81BC71C04390300E4777C /* face-outline.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "face-outline.png"; sourceTree = "<group>"; };
+		13F81C481C0BD22600E4777C /* hrios.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = hrios.framework; sourceTree = "<group>"; };
 		B5AE3CEB184E1D0300EA702C /* graftyHR-app.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "graftyHR-app.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5AE3CEE184E1D0300EA702C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		B5AE3CF0184E1D0300EA702C /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -93,6 +97,7 @@
 				134AA3741BFEE2DE00DFAE26 /* ImageIO.framework in Frameworks */,
 				137E0AD61BE6726C007A5523 /* opencv2.framework in Frameworks */,
 				137AB4BC1BACFAEF00A6DC41 /* CoreImage.framework in Frameworks */,
+				13F81C491C0BD22600E4777C /* hrios.framework in Frameworks */,
 				136AFE971B79BC06008E2953 /* AVFoundation.framework in Frameworks */,
 				136AFE9E1B79BDDA008E2953 /* CoreMedia.framework in Frameworks */,
 				B5AE3CF1184E1D0300EA702C /* CoreGraphics.framework in Frameworks */,
@@ -186,6 +191,7 @@
 		B5AE3CE2184E1D0300EA702C = {
 			isa = PBXGroup;
 			children = (
+				13F81C481C0BD22600E4777C /* hrios.framework */,
 				137E0AE51BE67BED007A5523 /* graftyHR-app */,
 				137E0ABA1BE67093007A5523 /* source.cpp */,
 				136AFE941B79BBEC008E2953 /* GraftyResources */,

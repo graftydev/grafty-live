@@ -288,7 +288,7 @@ static CGColorRef tColor = [UIColor whiteColor].CGColor;
 GraftySystem       gsys;
 GraftyFaceList     faces;
 clock_t tin, tout = 0;
-float fps =0;
+float realFPS = 0;
 std::deque<float> fpsHist;
 static void * const MyAdjustingExposureObservationContext = (void*)&MyAdjustingExposureObservationContext;
 
@@ -369,7 +369,6 @@ static float currentISO;
 
     size_t bpm = 0;
 
-    float realFPS = 0;
     if (faces.size())
     {
         // cancel stopHR timer if any
@@ -455,6 +454,7 @@ static float currentISO;
     });
 }
 
+int displayProgressCount = 0;
 // Update face markers given vector of face rectangles
 - (void)displayFace:(const cv::Rect &)bbox
        forVideoRect:(CGRect)rect
@@ -506,7 +506,7 @@ static float currentISO;
         [self.view.layer addSublayer:featureLayer];
     }
     featureLayer.frame = faceRect;
-    [featureLayer setHidden:NO];
+    [featureLayer setHidden:YES];
 
     
     if (!tLayer) {
@@ -578,8 +578,10 @@ static float currentISO;
     }
     else if (gsys.getProgramState() == TRACK_UPDATE)
     {
+        NSString *lightCondition = subOptimalLight ? @"poor light" : @"good light";
         float trackingPercentage = faces[0].getHRTrackingPercentage()*100;
-        _topViewLayer.infoLabel.text =  @"Estimating BPM..";
+        
+        _topViewLayer.infoLabel.text =  [NSString stringWithFormat:@"Estimating BPM [%2.0f fps, %@]", realFPS, lightCondition];
 
             //[_topViewLayer updateCircleLabel:[NSString stringWithFormat:@"%zu",(size_t) (bpm)]];
             if(bpm <= 0)//we don't need to show zero bpm for user so instead we will say "Estimating.."
@@ -590,7 +592,7 @@ static float currentISO;
                     {
                         //_topViewLayer.heart.text = @"♥";
                         _topViewLayer.bPMResult.text =  [NSString stringWithFormat:@""];
-                        _topViewLayer.infoLabel.text =  @"Estimating BPM..";
+                        _topViewLayer.infoLabel.text =  [NSString stringWithFormat:@"Estimating [%2.0f fps, %@]", realFPS, lightCondition];
                         //[self updateUpdateLabel:@"CALCULATING..." showHeart:NO];
                     }
                 }
@@ -600,18 +602,25 @@ static float currentISO;
                 oldbpm = bpm;
                 if(nil == _topViewLayer.heart)
                 {
-                    _topViewLayer.infoLabel.text =  @"Estimating BPM..";
+                    _topViewLayer.infoLabel.text =  [NSString stringWithFormat:@"Estimating [%2.0f fps, %@]", realFPS, lightCondition];
                     [self updateUpdateLabel:  [NSString stringWithFormat:@"%zu bpm",(size_t)(bpm)]  showHeart:YES];
                 }
                 else {
-                    _topViewLayer.infoLabel.text =  @"Estimating BPM..";
+                    _topViewLayer.infoLabel.text =  [NSString stringWithFormat:@"Estimating [%2.0f fps, %@]", realFPS, lightCondition];
                     _topViewLayer.heart.text = @"♥";
                     _topViewLayer.bPMResult.text =  [NSString stringWithFormat:@"%zu\nbpm",(size_t)(bpm)];
                     [self updateUpdateLabel:@""  showHeart:NO];
                 }
             }
-        _topViewLayer.circleProgressWithLabel.progressColor = [UIColor greenColor];
-        _topViewLayer.circleProgressWithLabel.progress = trackingPercentage/100.0;
+        if (displayProgressCount < 15) {
+            displayProgressCount++;
+        }
+        else
+        {
+            displayProgressCount = 0;
+           _topViewLayer.circleProgressWithLabel.progressColor = [UIColor greenColor];
+           _topViewLayer.circleProgressWithLabel.progress = trackingPercentage/100.0;
+        }
     }
     else {
         _topViewLayer.infoLabel.text =  @"Error, try again..";
@@ -695,7 +704,7 @@ static float currentISO;
 }
 
 #define MIN_ISO              40   // must be greater than activeFormat.minISO
-#define MAX_ISO             800   // must be less than activeFormat.maxISO
+#define MAX_ISO             500   // must be less than activeFormat.maxISO
 
 // match up the vector below with the values above
 //standard ISO values: 50, 64, 80, 100, 125, 160, 200, 250, 320, 400, 500, 640
@@ -707,6 +716,7 @@ static std::vector<float> std_iso = {   40.0f, 50.0f,  64.0f,  80.0f, 100.0f, 12
 #define MAX_SHUTTER_SPEED     1
 
 static int calibrate_attempt_count = 0;
+bool       subOptimalLight = false;
 
 - (void) calibrateCamera:(float)lux temp:(float)temperature
 {
@@ -718,8 +728,8 @@ static int calibrate_attempt_count = 0;
     NSLog(@"Calibrate attempt count = %d", calibrate_attempt_count);
     if (calibrate_attempt_count++ >= 30)
     {
+        subOptimalLight = true;
         printf("Calibration failed.. locking cam anyway\n");
-        _topViewLayer.infoLabel.text =  @"sub-optimal lighting, reading may not be accurate";
         
         tColor = [UIColor yellowColor].CGColor;
         gsys.camState = CAM_LOCKED;
@@ -1032,6 +1042,8 @@ NSInteger orientation = UIDeviceOrientationUnknown;
 {
     gsys.setProgramState(DETECT);
     _canStartProcessing = false;
+    subOptimalLight = false;
+
     
     
     CALayer     *featureLayer = nil;
