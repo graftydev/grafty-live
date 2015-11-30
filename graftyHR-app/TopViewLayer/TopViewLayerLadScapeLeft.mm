@@ -71,7 +71,7 @@
     
     //Adding Mask that will clear the inside color of the Circle.
     int radius = self.circleProgressWithLabel.frame.size.width;
-    UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(0, 0, self.bounds.size.width, self.bounds.size.height) cornerRadius:0];
+    UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height) cornerRadius:0];
     UIBezierPath *circlePath = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(self.circleProgressWithLabel.frame.origin.x, self.circleProgressWithLabel.frame.origin.y, radius, radius) cornerRadius:radius];
     [path appendPath:circlePath];
     [path setUsesEvenOddFillRule:YES];
@@ -84,7 +84,7 @@
     [self.layer addSublayer:fillLayer];
     
     
-    CGRect bounds = [[UIScreen mainScreen] bounds];
+    CGRect bounds = [self frame];
     self.backgroundColor    =[UIColor clearColor];
     
     //Add Progress Circle to the view.
@@ -113,7 +113,14 @@
     if(y<0)
         y=0;
     
-    self.infoLabel = [[UILabel alloc] initWithFrame:CGRectMake(bounds.size.height/2.0-250 ,x, bounds.size.height, 40)];
+    if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad )
+    {
+        self.infoLabel = [[UILabel alloc] initWithFrame:CGRectMake(bounds.size.height/2.0-250 ,x, bounds.size.height, 40)];
+    }
+    else
+    {
+        self.infoLabel = [[UILabel alloc] initWithFrame:CGRectMake(bounds.size.height/2.0-20 ,x, bounds.size.height, 40)];
+    }
     self.infoLabel.text = @"Position face in the circle"; //default value
     self.infoLabel.textAlignment = NSTextAlignmentCenter;
     

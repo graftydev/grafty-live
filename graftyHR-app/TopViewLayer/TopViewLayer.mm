@@ -43,6 +43,12 @@
     self  = [super initWithFrame:frame];
     return self;
 }
+-(id)initWithFixedFrame:(CGRect)frame
+{
+    self  = [super initWithFrame:frame];
+    [self setupView];
+    return self;
+}
 
 #pragma Rotation View
 -(void)setupView
@@ -81,7 +87,7 @@
     
     //Adding Mask that will clear the inside color of the Circle.
     int radius = self.circleProgressWithLabel.frame.size.width;
-    UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(0, 0, self.bounds.size.width, self.bounds.size.height) cornerRadius:0];
+    UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height) cornerRadius:0];
     UIBezierPath *circlePath = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(self.circleProgressWithLabel.frame.origin.x, self.circleProgressWithLabel.frame.origin.y, radius, radius) cornerRadius:radius];
     [path appendPath:circlePath];
     [path setUsesEvenOddFillRule:YES];
@@ -141,7 +147,9 @@
     [self addSubview:self.updateHeartLabel];
     
     //add close button
-    CGRect bounds = [[UIScreen mainScreen] bounds];
+    //CGRect bounds = [[UIScreen mainScreen] bounds];
+    CGRect bounds = [self frame];
+    
     y=bounds.size.height -  self.updateHeartLabel.frame.origin.y + self.updateHeartLabel.frame.size.height;
     y= y/2.0 -160;
     

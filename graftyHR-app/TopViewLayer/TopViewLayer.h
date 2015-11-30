@@ -38,6 +38,7 @@
 @property (nonatomic, strong) UILabel           *bPMResult;
 
 -(id)initWithFrame:(CGRect)frame;
+-(id)initWithFixedFrame:(CGRect)frame;
 -(void)startBeatAnimation:(UILabel*)label;
 -(void)stopBeatAnimation:(UILabel*)label;
 -(void)closeAction:(id)sender;

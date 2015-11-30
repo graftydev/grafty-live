@@ -310,7 +310,7 @@ static float currentISO;
         _topViewLayer.circleProgressWithLabel.progressColor = [UIColor orangeColor];
         _topViewLayer.infoLabel.text =  @"Position face in the circle..";
 
-        faces.clear();
+        [self stopHR];
         return;
     }
     
@@ -506,7 +506,7 @@ static float currentISO;
         [self.view.layer addSublayer:featureLayer];
     }
     featureLayer.frame = faceRect;
-    [featureLayer setHidden:YES];
+    [featureLayer setHidden:NO];
 
     
     if (!tLayer) {
@@ -723,6 +723,7 @@ static int calibrate_attempt_count = 0;
         
         tColor = [UIColor yellowColor].CGColor;
         gsys.camState = CAM_LOCKED;
+        calibrate_attempt_count = 0;
     }
     
    // CMTime shutterSpeed = CMTimeMake(1,125) ;
@@ -744,6 +745,7 @@ static int calibrate_attempt_count = 0;
     else if (std::abs(targetISO - currentISO) <= 10)
     {
         gsys.camState = CAM_LOCKED;
+        calibrate_attempt_count = 0;
     }
     
 
@@ -881,25 +883,51 @@ static int calibrate_attempt_count = 0;
     
     if(nil == _topViewLayer)
     {
-        if([[UIDevice currentDevice] orientation] == UIDeviceOrientationPortrait || [[UIDevice currentDevice] orientation] == UIDeviceOrientationFaceUp || [[UIDevice currentDevice] orientation] == UIDeviceOrientationPortraitUpsideDown || [[UIDevice currentDevice] orientation] == UIDeviceOrientationFaceDown)
+        if( [[UIDevice currentDevice] orientation] == UIDeviceOrientationFaceUp  ||
+            [[UIDevice currentDevice] orientation] == UIDeviceOrientationFaceDown
+          )
         {
-            //CGRect frm = screenFrame;
+            // CGRect frm = screenFrame;
             if(screenFrame.size.width>screenFrame.size.height)
             {
-                //screenFrame=CGRectMake(frm.origin.x, frm.origin.y, frm.size.height, frm.size.width);
+               // screenFrame=CGRectMake(frm.origin.x, frm.origin.y, frm.size.height, frm.size.width);
                  _topViewLayer = [[TopViewLayerLandScapeLeft alloc] initWithFrame:screenFrame];
             }
             else{
                  _topViewLayer = [[TopViewLayer alloc] init];
             }
-           
-            
         }
-        else if ([[UIDevice currentDevice] orientation] == UIDeviceOrientationLandscapeLeft || [[UIDevice currentDevice] orientation] == UIDeviceOrientationLandscapeRight)
+        else if ([[UIDevice currentDevice] orientation] == UIDeviceOrientationLandscapeLeft ||
+                 [[UIDevice currentDevice] orientation] == UIDeviceOrientationLandscapeRight)
         {
            
+            CGRect frm = screenFrame;
+            if(screenFrame.size.height > screenFrame.size.width)
+            {
+                // parameters are x,y,width,height
+                // here we are swapping width and height to gurantee that display is correct in the case where
+                // orientation is updated but screen information is not yet updated
+                screenFrame=CGRectMake(frm.origin.x, frm.origin.y, frm.size.height, frm.size.width);
+            }
             _topViewLayer = [[TopViewLayerLandScapeLeft alloc] initWithFrame:screenFrame];
-
+        }
+        else if ([[UIDevice currentDevice] orientation] == UIDeviceOrientationPortrait ||
+                 [[UIDevice currentDevice] orientation] == UIDeviceOrientationPortraitUpsideDown
+                )
+        {
+            CGRect frm = screenFrame;
+            if(screenFrame.size.width > screenFrame.size.height)
+            {
+                // parameters are x,y,width,height
+                // here we are swapping width and height to gurantee that display is correct in the case where
+                // orientation is updated but screen information is not yet updated
+                screenFrame=CGRectMake(frm.origin.x, frm.origin.y, frm.size.height, frm.size.width);
+                _topViewLayer = [ [TopViewLayer alloc] initWithFixedFrame:screenFrame];
+            }
+            else
+            {
+                _topViewLayer = [[TopViewLayer alloc] init];
+            }
         }
         
     }

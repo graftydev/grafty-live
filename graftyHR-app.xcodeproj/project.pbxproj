@@ -29,22 +29,60 @@
 		137E0B151BE67BED007A5523 /* TopViewLayerSettings.mm in Sources */ = {isa = PBXBuildFile; fileRef = 137E0B041BE67BED007A5523 /* TopViewLayerSettings.mm */; };
 		137E0B161BE67BED007A5523 /* ViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 137E0B061BE67BED007A5523 /* ViewController.mm */; };
 		137E0B1A1BE67DF9007A5523 /* graftyHR-app-info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 137E0B191BE67DF9007A5523 /* graftyHR-app-info.plist */; };
-		137E0B1E1BE69090007A5523 /* hrios.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 137E0B1D1BE69090007A5523 /* hrios.framework */; };
-		137E0B1F1BE69090007A5523 /* hrios.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 137E0B1D1BE69090007A5523 /* hrios.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		13F81BC81C04390300E4777C /* face-outline.png in Resources */ = {isa = PBXBuildFile; fileRef = 13F81BC71C04390300E4777C /* face-outline.png */; };
+		13F81C371C0AE23B00E4777C /* hrios.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 13F81C301C0AE22B00E4777C /* hrios.framework */; };
+		13F81C381C0AE23B00E4777C /* hrios.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 13F81C301C0AE22B00E4777C /* hrios.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		B5AE3CEF184E1D0300EA702C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5AE3CEE184E1D0300EA702C /* Foundation.framework */; };
 		B5AE3CF1184E1D0300EA702C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5AE3CF0184E1D0300EA702C /* CoreGraphics.framework */; };
 		B5AE3CF3184E1D0300EA702C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5AE3CF2184E1D0300EA702C /* UIKit.framework */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		13F81C2F1C0AE22B00E4777C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 13F81C281C0AE22B00E4777C /* hr-framework.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 13DE8F731BAC934300A6CAA9;
+			remoteInfo = hrios;
+		};
+		13F81C311C0AE22B00E4777C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 13F81C281C0AE22B00E4777C /* hr-framework.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 13DE8F7E1BAC934300A6CAA9;
+			remoteInfo = hriosTests;
+		};
+		13F81C331C0AE22B00E4777C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 13F81C281C0AE22B00E4777C /* hr-framework.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 13DE8F941BAC945100A6CAA9;
+			remoteInfo = hrmac;
+		};
+		13F81C351C0AE22B00E4777C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 13F81C281C0AE22B00E4777C /* hr-framework.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 13DE8F9E1BAC945100A6CAA9;
+			remoteInfo = hrmacTests;
+		};
+		13F81C391C0AE23B00E4777C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 13F81C281C0AE22B00E4777C /* hr-framework.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 13DE8F721BAC934300A6CAA9;
+			remoteInfo = hrios;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXCopyFilesBuildPhase section */
-		137E0AE01BE676D0007A5523 /* Embed Frameworks */ = {
+		13F81C3B1C0AE23B00E4777C /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				137E0B1F1BE69090007A5523 /* hrios.framework in Embed Frameworks */,
+				13F81C381C0AE23B00E4777C /* hrios.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -85,9 +123,9 @@
 		137E0B061BE67BED007A5523 /* ViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ViewController.mm; sourceTree = "<group>"; };
 		137E0B181BE67D41007A5523 /* grafty-hr-ios-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "grafty-hr-ios-Prefix.pch"; path = "graftyHR-app/grafty-hr-ios-Prefix.pch"; sourceTree = "<group>"; };
 		137E0B191BE67DF9007A5523 /* graftyHR-app-info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "graftyHR-app-info.plist"; path = "graftyHR-app/graftyHR-app-info.plist"; sourceTree = "<group>"; };
-		137E0B1D1BE69090007A5523 /* hrios.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = hrios.framework; sourceTree = "<group>"; };
 		13DE901A1BACB17F00A6CAA9 /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = opencv2.framework; path = ../hrios/opencv2.framework; sourceTree = "<group>"; };
 		13F81BC71C04390300E4777C /* face-outline.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "face-outline.png"; sourceTree = "<group>"; };
+		13F81C281C0AE22B00E4777C /* hr-framework.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "hr-framework.xcodeproj"; path = "../no-dlib-tracking/hr-framework.xcodeproj"; sourceTree = "<group>"; };
 		B5AE3CEB184E1D0300EA702C /* graftyHR-app.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "graftyHR-app.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5AE3CEE184E1D0300EA702C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		B5AE3CF0184E1D0300EA702C /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -103,7 +141,7 @@
 				134AA3741BFEE2DE00DFAE26 /* ImageIO.framework in Frameworks */,
 				137E0AD61BE6726C007A5523 /* opencv2.framework in Frameworks */,
 				137AB4BC1BACFAEF00A6DC41 /* CoreImage.framework in Frameworks */,
-				137E0B1E1BE69090007A5523 /* hrios.framework in Frameworks */,
+				13F81C371C0AE23B00E4777C /* hrios.framework in Frameworks */,
 				136AFE971B79BC06008E2953 /* AVFoundation.framework in Frameworks */,
 				136AFE9E1B79BDDA008E2953 /* CoreMedia.framework in Frameworks */,
 				B5AE3CF1184E1D0300EA702C /* CoreGraphics.framework in Frameworks */,
@@ -198,10 +236,21 @@
 			path = ..;
 			sourceTree = "<group>";
 		};
+		13F81C291C0AE22B00E4777C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				13F81C301C0AE22B00E4777C /* hrios.framework */,
+				13F81C321C0AE22B00E4777C /* hriosTests.xctest */,
+				13F81C341C0AE22B00E4777C /* hrios.framework */,
+				13F81C361C0AE22B00E4777C /* hrmacTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		B5AE3CE2184E1D0300EA702C = {
 			isa = PBXGroup;
 			children = (
-				137E0B1D1BE69090007A5523 /* hrios.framework */,
+				13F81C281C0AE22B00E4777C /* hr-framework.xcodeproj */,
 				137E0AE51BE67BED007A5523 /* graftyHR-app */,
 				137E0ABA1BE67093007A5523 /* source.cpp */,
 				136AFE941B79BBEC008E2953 /* GraftyResources */,
@@ -245,11 +294,12 @@
 				B5AE3CE7184E1D0300EA702C /* Sources */,
 				B5AE3CE8184E1D0300EA702C /* Frameworks */,
 				B5AE3CE9184E1D0300EA702C /* Resources */,
-				137E0AE01BE676D0007A5523 /* Embed Frameworks */,
+				13F81C3B1C0AE23B00E4777C /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				13F81C3A1C0AE23B00E4777C /* PBXTargetDependency */,
 			);
 			name = "graftyHR-app";
 			productName = LiveVideoCapture;
@@ -281,12 +331,49 @@
 			mainGroup = B5AE3CE2184E1D0300EA702C;
 			productRefGroup = B5AE3CEC184E1D0300EA702C /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 13F81C291C0AE22B00E4777C /* Products */;
+					ProjectRef = 13F81C281C0AE22B00E4777C /* hr-framework.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				B5AE3CEA184E1D0300EA702C /* graftyHR-app */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		13F81C301C0AE22B00E4777C /* hrios.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = hrios.framework;
+			remoteRef = 13F81C2F1C0AE22B00E4777C /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		13F81C321C0AE22B00E4777C /* hriosTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = hriosTests.xctest;
+			remoteRef = 13F81C311C0AE22B00E4777C /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		13F81C341C0AE22B00E4777C /* hrios.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = hrios.framework;
+			remoteRef = 13F81C331C0AE22B00E4777C /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		13F81C361C0AE22B00E4777C /* hrmacTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = hrmacTests.xctest;
+			remoteRef = 13F81C351C0AE22B00E4777C /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		B5AE3CE9184E1D0300EA702C /* Resources */ = {
@@ -325,6 +412,14 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		13F81C3A1C0AE23B00E4777C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = hrios;
+			targetProxy = 13F81C391C0AE23B00E4777C /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		137E0AE81BE67BED007A5523 /* Main.storyboard */ = {

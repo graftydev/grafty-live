@@ -1,6 +1,0 @@
-framework module hrios {
-  umbrella header "hrios.h"
-
-  export *
-  module * { export * }
-}
