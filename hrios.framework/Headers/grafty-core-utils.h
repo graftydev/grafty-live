@@ -32,11 +32,11 @@
 #else
 
 #define GRAFTY_DISPLAY_68            false //true
-#define  GRAFTY_DEBUG                false
+#define  GRAFTY_DEBUG                false //true
 
-#define GRAFTY_DISPLAY_BPM_RAW           false //false
+#define GRAFTY_DISPLAY_BPM_RAW           false //true //false
 #define GRAFTY_DISPLAY_BPM_AUG           false //true
-#define GRAFTY_DISPLAY_BPM_FILTERED      false
+#define GRAFTY_DISPLAY_BPM_FILTERED      false //true //false
 
 #define GRAFTY_DISPLAY_RPM_RAW           false //true
 #define GRAFTY_DISPLAY_RPM_AUG           false //true

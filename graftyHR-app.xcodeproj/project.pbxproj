@@ -256,7 +256,7 @@
 				ORGANIZATIONNAME = Grafty;
 				TargetAttributes = {
 					B5AE3CEA184E1D0300EA702C = {
-						DevelopmentTeam = BYR9KF79WW;
+						DevelopmentTeam = T2NZR42AV9;
 					};
 				};
 			};

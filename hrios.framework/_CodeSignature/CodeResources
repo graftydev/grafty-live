@@ -4,6 +4,10 @@
 <dict>
 	<key>files</key>
 	<dict>
+		<key>.DS_Store</key>
+		<data>
+		pPzjvJAuc+hbjoAjsJu35C/wqfI=
+		</data>
 		<key>Headers/grafty-core-breath-rate.h</key>
 		<data>
 		UlH3fdfv7IWl88TNcQ7deFr+MhQ=
@@ -22,7 +26,7 @@
 		</data>
 		<key>Headers/grafty-core-utils.h</key>
 		<data>
-		BkPFpq7Bh5FFCE+mNniVLS8/bxk=
+		sKqnLmufRoifGaAKYpQB47Pn0K8=
 		</data>
 		<key>Headers/grafty-face-class.h</key>
 		<data>
@@ -46,7 +50,7 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		vD/1OOKY2Lt3siVduVgGaQQM7Uc=
+		SdcygZtBTCpPlMXjiHKJb1qhLvs=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -73,7 +77,7 @@
 		</data>
 		<key>Headers/grafty-core-utils.h</key>
 		<data>
-		BkPFpq7Bh5FFCE+mNniVLS8/bxk=
+		sKqnLmufRoifGaAKYpQB47Pn0K8=
 		</data>
 		<key>Headers/grafty-face-class.h</key>
 		<data>
