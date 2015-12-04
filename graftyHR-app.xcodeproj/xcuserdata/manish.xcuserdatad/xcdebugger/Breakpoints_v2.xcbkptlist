@@ -6,17 +6,65 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../no-dlib-tracking/grafty-hr/grafty-trigger-hr.cpp"
+            timestampString = "470655583.843398"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "236"
+            endingLineNumber = "236"
+            landmarkName = "trigger_hr(GraftySystem&amp; gsys, GraftyFaceList&amp; faces, dlib::shape_predictor&amp; pose_model)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "graftyHR-app/ViewController.mm"
-            timestampString = "470600488.933622"
+            filePath = "../no-dlib-tracking/grafty-hr/grafty-trigger-hr.cpp"
+            timestampString = "470655820.075296"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "994"
-            endingLineNumber = "994"
-            landmarkName = "-orientationChanged:"
-            landmarkType = "5">
+            startingLineNumber = "235"
+            endingLineNumber = "235"
+            landmarkName = "trigger_hr(GraftySystem&amp; gsys, GraftyFaceList&amp; faces, dlib::shape_predictor&amp; pose_model)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../no-dlib-tracking/grafty-hr/grafty-core-tracker.cpp"
+            timestampString = "470656452.97313"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "451"
+            endingLineNumber = "451"
+            landmarkName = "grafty_fast_face_tracker_gf (size_t frameCount, cv::Mat&amp; imgPrev, cv::Mat&amp; imgNext, Face&amp; f, dlib::shape_predictor&amp; pose_model)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../no-dlib-tracking/grafty-hr/grafty-core-tracker.cpp"
+            timestampString = "470656455.684258"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "448"
+            endingLineNumber = "448"
+            landmarkName = "grafty_fast_face_tracker_gf (size_t frameCount, cv::Mat&amp; imgPrev, cv::Mat&amp; imgNext, Face&amp; f, dlib::shape_predictor&amp; pose_model)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

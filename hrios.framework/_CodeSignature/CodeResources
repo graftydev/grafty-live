@@ -22,11 +22,11 @@
 		</data>
 		<key>Headers/grafty-core-utils.h</key>
 		<data>
-		BkPFpq7Bh5FFCE+mNniVLS8/bxk=
+		em9xKp2ZFGJfyDnIdpFiSmPwqgg=
 		</data>
 		<key>Headers/grafty-face-class.h</key>
 		<data>
-		lhMwG22s/oPq167pcydFV0gKt94=
+		etvHRSgD4UXnv6SYLFtAhmf48Cw=
 		</data>
 		<key>Headers/grafty-system-settings.h</key>
 		<data>
@@ -44,13 +44,13 @@
 		<data>
 		TueKZgvPrT96kuPdzKjmWph7oh4=
 		</data>
-		<key>Info.plist</key>
-		<data>
-		vD/1OOKY2Lt3siVduVgGaQQM7Uc=
-		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
 		C+PDy6fTeI049uoqzI4VkvY9Eeo=
+		</data>
+		<key>hrios</key>
+		<data>
+		Daw81ks9FgIv7TO8s/QmvJsoYLg=
 		</data>
 	</dict>
 	<key>files2</key>
@@ -73,11 +73,11 @@
 		</data>
 		<key>Headers/grafty-core-utils.h</key>
 		<data>
-		BkPFpq7Bh5FFCE+mNniVLS8/bxk=
+		em9xKp2ZFGJfyDnIdpFiSmPwqgg=
 		</data>
 		<key>Headers/grafty-face-class.h</key>
 		<data>
-		lhMwG22s/oPq167pcydFV0gKt94=
+		etvHRSgD4UXnv6SYLFtAhmf48Cw=
 		</data>
 		<key>Headers/grafty-system-settings.h</key>
 		<data>
@@ -98,6 +98,10 @@
 		<key>Modules/module.modulemap</key>
 		<data>
 		C+PDy6fTeI049uoqzI4VkvY9Eeo=
+		</data>
+		<key>hrios</key>
+		<data>
+		Daw81ks9FgIv7TO8s/QmvJsoYLg=
 		</data>
 	</dict>
 	<key>rules</key>

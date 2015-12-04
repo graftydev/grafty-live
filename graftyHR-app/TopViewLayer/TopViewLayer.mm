@@ -75,10 +75,6 @@
     self.circleProgressWithLabel.progress = 0.0;
     self.circleProgressWithLabel.startLabel.text = @"test";
     
- 
-    
-    
-    
     //Adding tap gesture to the circle
     UITapGestureRecognizer *tap=[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(circleTapAction:)];
     [tap setNumberOfTapsRequired:1];

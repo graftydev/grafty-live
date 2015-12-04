@@ -159,10 +159,10 @@ public:
     
     bool getFaceBox(cv::Rect2f &rect);
     
-#if GRAFTY_DEBUG == true
+//#if GRAFTY_DEBUG
 public:
     cv::Rect_<float> correlationBox;
-#endif
+//#endif
 };
 
 typedef std::vector<Face> GraftyFaceList;

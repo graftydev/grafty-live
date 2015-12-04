@@ -61,7 +61,7 @@ extern bool Camera;
     
     NSString *faceCascadePath = [[NSBundle mainBundle] pathForResource:kFaceCascadeFilename ofType:@"xml"];
     NSString *noseCascadePath = [[NSBundle mainBundle] pathForResource:kNoseCascadeFilename ofType:@"xml"];
-    NSString *shapePredictorPath = [[NSBundle mainBundle] pathForResource:kShapePredictorFileName ofType:@"dat"];
+    
 
     
     std::string faceCascadeFname = [faceCascadePath UTF8String];
@@ -73,12 +73,16 @@ extern bool Camera;
     if (!gsys.loadNoseCascade(noseCascadeFname)) {
         NSLog(@"Could not load nose cascade: %@", noseCascadePath);
     }
-
+    
+    NSString *shapePredictorPath = [[NSBundle mainBundle] pathForResource:kShapePredictorFileName ofType:@"dat"];
+    std::string *predictor_fname = new std::string([shapePredictorPath UTF8String]);
+    dlib::deserialize((const std::string) *predictor_fname) >> pose_model;
+    
+    
+    
     gsys.setFrameRate(30);
     gsys.setProgramState(DETECT);
     
-    std::string *predictor_fname = new std::string([shapePredictorPath UTF8String]);
-    dlib::deserialize((const std::string) *predictor_fname) >> pose_model;
     
     _camera = 1;   //0 = back camera; 1 = front camera
     _canStartProcessing = false;
@@ -303,19 +307,8 @@ static float currentISO;
 {
     Camera = true;
     
-    //if user didn't click on circle to start processing or user click to stop processing, we should stop processing the frames.
-    if(!_canStartProcessing)
-    {
-        _topViewLayer.circleProgressWithLabel.progress = 0.0f;
-        _topViewLayer.circleProgressWithLabel.progressColor = [UIColor orangeColor];
-        _topViewLayer.infoLabel.text =  @"Position face in the circle..";
-
-        [self stopHR];
-        return;
-    }
-    
-    
     switch (videoOrientation) {
+            NSLog(@"orientation = %ld", (long)videoOrientation);
         case AVCaptureVideoOrientationPortrait:
         {
             cv::transpose(matY, matY);
@@ -324,12 +317,14 @@ static float currentISO;
         }
         case AVCaptureVideoOrientationLandscapeLeft:
         {
+            cv::flip(matY, matY, 1);
+            cv::flip(matCbCr, matCbCr, 1);
             break;
         }
         case AVCaptureVideoOrientationLandscapeRight:
         {
-            cv::flip(matY, matY, -1);
-            cv::flip(matCbCr, matCbCr, -1);
+            cv::flip(matY, matY, 0);
+            cv::flip(matCbCr, matCbCr, 0);
             break;
         }
         case AVCaptureVideoOrientationPortraitUpsideDown:
@@ -343,6 +338,18 @@ static float currentISO;
             
     }
    
+    //if user didn't click on circle to start processing or user click to stop processing, we should stop processing the frames.
+    if(!_canStartProcessing)
+    {
+        _topViewLayer.circleProgressWithLabel.progress = 0.0f;
+        _topViewLayer.circleProgressWithLabel.progressColor = [UIColor orangeColor];
+        _topViewLayer.infoLabel.text =  @"Position face in the circle..";
+        
+        [self stopHR];
+        return;
+    }
+    
+    
     if ( gsys.getProgramState() == DETECT &&
         [_captureDevice lockForConfiguration:NULL] == YES ) {
         
@@ -387,7 +394,7 @@ static float currentISO;
         {
             faces[0].getBpm(gsys, bpm);
             realFPS = (float)faces[0].getFPS();
-            NSLog(@"realFPS = %f", realFPS);
+            //NSLog(@"realFPS = %f", realFPS);
             if (realFPS < 20) {
                 bpm = 0;
             }
@@ -410,7 +417,7 @@ static float currentISO;
             exposurePoint = fpoint_cg;
             
             float lux  = 0.0f;
-            float temperature = 3000.0f;
+            float temperature = 4000.0f;
             gsys.calculateLux(faces[0].nextGFPoints, lux, temperature);
             [self calibrateCamera:lux temp:(float)temperature];
         }
@@ -442,6 +449,7 @@ static float currentISO;
         bbox.height = 0;
     }
     
+    NSLog(@"x = %f, y=%f", bbox.x, bbox.y);
     // Dispatch updating of face markers to main queue
     dispatch_sync(dispatch_get_main_queue(), ^{
         [self displayFace:bbox
@@ -506,7 +514,7 @@ int displayProgressCount = 0;
         [self.view.layer addSublayer:featureLayer];
     }
     featureLayer.frame = faceRect;
-    [featureLayer setHidden:YES];
+    [featureLayer setHidden:NO];
 
     
     if (!tLayer) {

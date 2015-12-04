@@ -16,33 +16,20 @@
 #include <opencv2/objdetect/objdetect.hpp>
 #include <opencv2/video/tracking.hpp>
 
-#ifdef TARGET_OS_IPHONE
 
-#define GRAFTY_DISPLAY_68            false //true
+#define GRAFTY_DISPLAY_68            false //true //true
 #define  GRAFTY_DEBUG                false //true
 
-#define GRAFTY_DISPLAY_BPM_RAW           false //true
+#define GRAFTY_DISPLAY_BPM_RAW           false //true //false
 #define GRAFTY_DISPLAY_BPM_AUG           false //true
-#define GRAFTY_DISPLAY_BPM_FILTERED      true //true
+#define GRAFTY_DISPLAY_BPM_FILTERED      false //true //false
+
+#define GRAFTY_DISPLAY_FFT               false //true
 
 #define GRAFTY_DISPLAY_RPM_RAW           false //true
 #define GRAFTY_DISPLAY_RPM_AUG           false //true
 #define GRAFTY_DISPLAY_RPM_FILTERED      false //true
 
-#else
-
-#define GRAFTY_DISPLAY_68            false //true
-#define  GRAFTY_DEBUG                false
-
-#define GRAFTY_DISPLAY_BPM_RAW           false //false
-#define GRAFTY_DISPLAY_BPM_AUG           false //true
-#define GRAFTY_DISPLAY_BPM_FILTERED      false
-
-#define GRAFTY_DISPLAY_RPM_RAW           false //true
-#define GRAFTY_DISPLAY_RPM_AUG           false //true
-#define GRAFTY_DISPLAY_RPM_FILTERED      false //true
-
-#endif
 
 #define SPM_BUFFER_INTERVAL   5 //5
 #define BPM_BUFFER_INTERVAL   10 //5
